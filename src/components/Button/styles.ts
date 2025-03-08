@@ -10,7 +10,7 @@ export const Container = styled.button<ContainerProps>`
   width: ${({ width }) => (width === 0 ? `100%` : `${width}px`)};
   height: ${({ height }) => (height === 0 ? `100%` : `${height}px`)};
 
-  border-radius: 10px;
+  border-radius: 4px;
   border: 0;
 
   color: ${({ theme }) => theme.COLORS.NEUTRAL_0};

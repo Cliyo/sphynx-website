@@ -32,7 +32,7 @@ export const LogoText = styled.h1`
   ${({ theme }) => css`
     color: ${theme.COLORS.NEUTRAL_0};
     font-size: ${theme.FONT_SIZE.XLARGE}px;
-    font-weight: ${theme.FONT_WEIGHT.NORMAL};
+    font-weight: ${theme.FONT_WEIGHT.REGULAR};
   `}
 `
 

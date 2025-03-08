@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const Title = styled.h1`
   ${({ theme }) => css`
     color: ${theme.COLORS.NEUTRAL_900};
-    font-weight: ${theme.FONT_WEIGHT.BOLDER};
+    font-weight: ${theme.FONT_WEIGHT.EXTRA_BOLD};
     font-size: ${theme.FONT_SIZE.XXLARGE}px;
   `}
   width: 100%;

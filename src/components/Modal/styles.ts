@@ -27,7 +27,7 @@ export const Text = styled.h1`
   ${({ theme }) => css`
     font-size: ${theme.FONT_SIZE.REGULAR}px;
     color: ${theme.COLORS.NEUTRAL_500};
-    font-weight: ${theme.FONT_WEIGHT.NORMAL};
+    font-weight: ${theme.FONT_WEIGHT.REGULAR};
   `}
 `
 

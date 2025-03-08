@@ -17,8 +17,8 @@ export const Container = styled.div`
 export const Label = styled.p`
   ${({ theme }) => css`
     color: ${theme.COLORS.NEUTRAL_900};
-    font-weight: ${theme.FONT_WEIGHT.BOLD};
-    font-size: ${theme.FONT_SIZE.SMALL}px;
+    font-weight: ${theme.FONT_WEIGHT.REGULAR};
+    font-size: ${theme.FONT_SIZE.REGULAR}px;
   `}
 `
 
@@ -30,9 +30,9 @@ export const InputCamp = styled.input<InputCampProps>`
 
   padding: 15px;
 
-  border-radius: 10px;
+  border-radius: 4px;
   border: ${({ hasError, theme }) =>
-    hasError ? `1px solid ${theme.COLORS.ERROR_MAIN}` : `0px`};
+    hasError ? `1px solid ${theme.COLORS.ERROR_MAIN}` : `1px solid ${theme.COLORS.PRIMARY_DARK}`};
 
   &:focus-visible {
     outline: none;
