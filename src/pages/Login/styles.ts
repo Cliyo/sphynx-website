@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 
+import BannerImage from 'assets/banner.png'
+
 export const Container = styled.div`
   display: flex;
 
@@ -13,16 +15,12 @@ export const Banner = styled.div`
   display: flex;
 
   height: 100%;
-  width: 50%;
+  width: 60%;
 
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ theme }) => theme.COLORS.PRIMARY_DARK};
-`
-
-export const Image = styled.img`
-  width: 60%;
+  background-image: url(${BannerImage});
 `
 
 export const ContainerForm = styled.div`
@@ -35,11 +33,33 @@ export const ContainerForm = styled.div`
   align-items: center;
 `
 
+export const IconImage = styled.img`
+  width: 80px;
+  height: 80px;
+`
+
+export const FormHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  gap: 5px;
+`
+
 export const FormTitle = styled.h1`
   ${({ theme }) => css`
     font-size: ${theme.FONT_SIZE.XXLARGE}px;
-    color: ${theme.COLORS.PRIMARY_MAIN};
-    font-weight: ${theme.FONT_WEIGHT.BOLD};
+    color: ${theme.COLORS.NEUTRAL_700};
+    font-weight: ${theme.FONT_WEIGHT.SEMI_BOLD};
+  `}
+`
+
+export const FormText = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.REGULAR}px;
+    color: ${theme.COLORS.NEUTRAL_900};
+    font-weight: ${theme.FONT_WEIGHT.REGULAR};
   `}
 `
 

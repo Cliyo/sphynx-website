@@ -3,22 +3,25 @@ import { Controller, useForm } from 'react-hook-form'
 
 import { useAuth } from 'hooks/useAuth'
 
-import { Button } from 'components/Button'
+import { Line } from 'components/Line'
 import { Input } from 'components/Input'
+import { Button } from 'components/Button'
 
 import { LoginFormData } from './types'
 
 import { REGEX } from 'constants/regex'
 
-import Icon from 'assets/logo.png'
+import Icon from 'assets/icon.svg'
 
 import {
   Banner,
   Container,
   ContainerForm,
   Form,
+  FormHeader,
+  FormText,
   FormTitle,
-  Image,
+  IconImage,
 } from './styles'
 
 export const Login = () => {
@@ -43,12 +46,18 @@ export const Login = () => {
 
   return (
     <Container>
-      <Banner>
-        <Image src={Icon} alt="sphynx-icon" />
-      </Banner>
       <ContainerForm>
         <Form>
-          <FormTitle> Login </FormTitle>
+          <FormHeader>
+            <IconImage alt="sphynx-icon" src={Icon} />
+            <FormTitle> Login </FormTitle>
+            <FormText>
+              Seu sistema inteligente de segurança e controle de acesso
+            </FormText>
+          </FormHeader>
+
+          <Line />
+
           <Controller
             control={control}
             name="user"
@@ -96,6 +105,7 @@ export const Login = () => {
           />
         </Form>
       </ContainerForm>
+      <Banner />
     </Container>
   )
 }
