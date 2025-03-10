@@ -3,7 +3,7 @@ import { MenuOptionProps } from 'components/NavigationBar/types'
 export const routes: MenuOptionProps[] = [
   {
     iconName: 'IoHome',
-    name: 'Home',
+    name: 'Início',
     path: '/',
   },
   {
@@ -25,10 +25,5 @@ export const routes: MenuOptionProps[] = [
     iconName: 'IoPeopleSharp',
     name: 'Grupos',
     path: '/groups',
-  },
-  {
-    iconName: 'IoOptions',
-    name: 'Configurações',
-    path: '/configs',
-  },
+  }
 ]

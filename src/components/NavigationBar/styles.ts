@@ -8,11 +8,10 @@ export const Container = styled.div`
   flex-direction: column;
 
   height: 100%;
-  width: 20%;
+  width: 320px;
+  background: ${({ theme }) => `linear-gradient(${theme.COLORS.PRIMARY_DARKER} 0 70%, ${theme.COLORS.PRIMARY_MAIN})`};
 
-  background-color: ${({ theme }) => theme.COLORS.PRIMARY_DARK};
-
-  padding: 15px;
+  padding: 90px 40px;
 
   gap: 20px;
 `
@@ -22,17 +21,21 @@ export const LogoContainer = styled.div`
 
   align-items: center;
   justify-content: center;
+
+  gap: 10px;
 `
 
 export const LogoImg = styled.img`
-  width: 90px;
+  width: 45px;
+  border: ${({ theme }) => `1px solid ${theme.COLORS.NEUTRAL_0}`};
+  border-radius: 8px;
 `
 
 export const LogoText = styled.h1`
   ${({ theme }) => css`
     color: ${theme.COLORS.NEUTRAL_0};
     font-size: ${theme.FONT_SIZE.XLARGE}px;
-    font-weight: ${theme.FONT_WEIGHT.REGULAR};
+    font-weight: ${theme.FONT_WEIGHT.SEMI_BOLD};
   `}
 `
 

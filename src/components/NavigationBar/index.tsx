@@ -1,4 +1,13 @@
+import { useNavigate } from 'react-router-dom'
 import { Icon } from 'components/Icon'
+import { Line } from 'components/Line'
+
+import { useAuth } from 'hooks/useAuth'
+import { useAlert } from 'hooks/useAlert'
+
+import IconImage from 'assets/icon.svg'
+import { routes } from 'constants/routes'
+
 import {
   Container,
   LogoContainer,
@@ -8,12 +17,6 @@ import {
   MenuOption,
   MenuOptionText,
 } from './styles'
-
-import Logo from 'assets/logo.png'
-import { routes } from 'constants/routes'
-import { useAlert } from 'hooks/useAlert'
-import { useAuth } from 'hooks/useAuth'
-import { useNavigate } from 'react-router-dom'
 
 export const NavigationBar = () => {
   const { alert } = useAlert()
@@ -36,9 +39,11 @@ export const NavigationBar = () => {
   return (
     <Container>
       <LogoContainer>
-        <LogoImg src={Logo} />
+        <LogoImg src={IconImage} />
         <LogoText> Sphynx </LogoText>
       </LogoContainer>
+
+      <Line />
 
       {routes.map((route) => (
         <MenuOption to={route.path} key={route.name}>
@@ -46,6 +51,8 @@ export const NavigationBar = () => {
           <MenuOptionText> {route.name} </MenuOptionText>
         </MenuOption>
       ))}
+
+      <Line />
 
       <MenuLeaveOption onClick={handleLogout}>
         <Icon color={'NEUTRAL_0'} size="20" name={'IoExit'} />
