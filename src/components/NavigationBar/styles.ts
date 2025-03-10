@@ -11,7 +11,7 @@ export const Container = styled.div`
   width: 320px;
   background: ${({ theme }) => `linear-gradient(${theme.COLORS.PRIMARY_DARKER} 0 70%, ${theme.COLORS.PRIMARY_MAIN})`};
 
-  padding: 90px 40px;
+  padding: 70px 40px;
 
   gap: 20px;
 `
