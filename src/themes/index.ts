@@ -4,14 +4,16 @@ export const theme = {
     PRIMARY_DARK: '#003845',
     PRIMARY_MAIN: '#009ABD',
     PRIMARY_LIGHT: '#5CB9CE',
+    
     NEUTRAL_0: '#FAFAFA',
     NEUTRAL_200: '#EEEEEE',
     NEUTRAL_300: '#D2D2D2',
     NEUTRAL_500: '#3E3E3E',
     NEUTRAL_700: '#232323',
     NEUTRAL_900: '#1C1C1C',
-    ERROR_MAIN: '#FF0000',
-    ERROR_LIGHT: '#ff7a7a',
+
+    ERROR_MAIN: '#e33030',
+    ERROR_LIGHT: '#EE7979',
   },
   FONT_SIZE: {
     XSMALL: 6,
