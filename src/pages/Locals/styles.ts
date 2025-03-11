@@ -12,6 +12,15 @@ export const Container = styled.div`
   padding: 20px;
 `
 
+export const ContainerHeader = styled.div`
+  display: flex;
+
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
+`
+
 export const Title = styled.h1`
   ${({ theme }) => css`
     color: ${theme.COLORS.NEUTRAL_900};
@@ -20,10 +29,4 @@ export const Title = styled.h1`
   `}
   width: 100%;
   text-align: left;
-`
-
-export const InputsContainer = styled.div`
-  display: flex;
-
-  gap: 10px;
 `
