@@ -16,7 +16,7 @@ export const NotFound = () => {
         <Icon color="PRIMARY_DARK" size="124" name="IoSkullOutline" />
         <Title> 404 </Title>
         <Text> {t('httpErrors.404')} </Text>
-        <Button text="Voltar" height={50} onClick={handleBack} />
+        <Button text="Voltar" color="PRIMARY_LIGHT" onClick={handleBack} />
       </ErrorContainer>
     </Container>
   )
