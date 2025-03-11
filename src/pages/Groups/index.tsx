@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next'
 
 import { groupsTableHeaders } from 'constants/table'
 
-import { Input } from 'components/Input'
 import { Table } from 'components/Table'
 import { Button } from 'components/Button'
 
 import { useGroup } from 'hooks/useGroup'
-import { Container, InputsContainer, NoRegisterText, Title } from './styles'
+import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
+import { Line } from 'components/Line'
 
 export const Groups = () => {
   const { t } = useTranslation()
@@ -22,14 +22,14 @@ export const Groups = () => {
 
   return (
     <Container>
-      <Title> {t('title.groups')} </Title>
-      <InputsContainer>
-        <Input placeholder={t('placeholder.default')} />
-        <Button text={t('button.filter')} width={90} />
-        <NavLink to={'/groups/new'}>
-          <Button text={t('button.create')} width={90} />
+      <ContainerHeader>
+        <Title> {t('title.users')} </Title>
+        <NavLink to={'/customers/new'}>
+          <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
-      </InputsContainer>
+      </ContainerHeader>
+
+      <Line />
 
       {groupPageData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>
