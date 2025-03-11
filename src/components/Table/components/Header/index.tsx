@@ -9,6 +9,7 @@ export const TableHeader = (props: HeaderProps) => {
       {headers.map((header, index) => (
         <HeaderItem key={index}> {header} </HeaderItem>
       ))}
+      <HeaderItem />
     </Container>
   )
 }
