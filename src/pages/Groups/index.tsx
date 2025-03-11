@@ -24,7 +24,7 @@ export const Groups = () => {
     <Container>
       <ContainerHeader>
         <Title> {t('title.users')} </Title>
-        <NavLink to={'/customers/new'}>
+        <NavLink to={'/groups/new'}>
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
       </ContainerHeader>

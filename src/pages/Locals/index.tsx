@@ -41,7 +41,7 @@ export const Locals = () => {
     <Container>
       <ContainerHeader>
         <Title> {t('title.users')} </Title>
-        <NavLink to={'/customers/new'}>
+        <NavLink to={'/locals/new'}>
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
       </ContainerHeader>
