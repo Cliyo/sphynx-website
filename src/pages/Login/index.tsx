@@ -99,9 +99,9 @@ export const Login = () => {
             )}
           />
           <Button
+            color="PRIMARY_DARK"
             onClick={handleSubmit(onSubmit)}
             text={t('button.login')}
-            height={50}
           />
         </Form>
       </ContainerForm>
