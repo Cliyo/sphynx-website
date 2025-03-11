@@ -7,10 +7,9 @@ import { useEffect } from 'react'
 import { useCustomer } from 'hooks/useCustomer'
 
 import { Table } from 'components/Table'
-import { Input } from 'components/Input'
 import { Button } from 'components/Button'
 
-import { Container, ContainerHeader, InputsContainer, NoRegisterText, Title } from './styles'
+import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
 import { Line } from 'components/Line'
 
 export const Customers = () => {
@@ -24,29 +23,22 @@ export const Customers = () => {
 
   return (
     <Container>
-      {/* <Title> {t('title.users')} </Title>
-      <InputsContainer>
-        <Input placeholder={t('placeholder.default')} />
-        <Button text={t('button.filter')} width={90} />
+      <ContainerHeader>
+        <Title> {t('title.users')} </Title>
         <NavLink to={'/customers/new'}>
-          <Button text={t('button.create')} width={90} />
+          <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
-      </InputsContainer>
+      </ContainerHeader>
 
+      <Line />
       {customerTableData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>
       ) : (
         <Table
           headers={customersTableHeaders}
-          content={customerTableData.map((obj) => Object.values(obj))}
+          content={[['ID', 'Nome', 'RA', 'Tag', 'Grupo']]}
         />
-      )} */}
-      <ContainerHeader>
-        <Title> {t('title.users')} </Title>
-        <Button text={t('button.create')} color={"PRIMARY_LIGHT"} />
-      </ContainerHeader>
-
-      <Line />
+      )}
     </Container>
   )
 }

@@ -9,12 +9,12 @@ export const Container = styled.div`
 
   gap: 15px;
 
-  padding: 70px 16px;
+  padding: 70px 42px;
 `
 
 export const ContainerHeader = styled.div`
   display: flex;
-  
+
   width: 100%;
 
   justify-content: space-between;
@@ -29,12 +29,6 @@ export const Title = styled.h1`
   `}
   width: 100%;
   text-align: left;
-`
-
-export const InputsContainer = styled.div`
-  display: flex;
-
-  gap: 10px;
 `
 
 export const NoRegisterText = styled.p`
