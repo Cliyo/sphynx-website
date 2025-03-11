@@ -1,20 +1,7 @@
-export const customersTableHeaders = [
-  'ID',
-  'Nome',
-  'RA',
-  'Tag',
-  'Grupo',
-  'Ações',
-]
+export const customersTableHeaders = ['ID', 'Nome', 'RA', 'Tag', 'Grupo']
 
-export const localsTableHeaders = ['ID', 'Nome', 'MAC', 'Grupos', 'Ações']
+export const localsTableHeaders = ['ID', 'Nome', 'MAC', 'Grupos']
 
-export const accessTableHeaders = [
-  'ID',
-  'Usuário',
-  'Local',
-  'Situação',
-  'Ações',
-]
+export const accessTableHeaders = ['ID', 'Usuário', 'Local', 'Situação']
 
-export const groupsTableHeaders = ['ID', 'Nome', 'Ações']
+export const groupsTableHeaders = ['ID', 'Nome']
