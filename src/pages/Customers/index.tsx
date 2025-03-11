@@ -1,16 +1,16 @@
+import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { customersTableHeaders } from 'constants/table'
 
-import { useEffect } from 'react'
 import { useCustomer } from 'hooks/useCustomer'
 
+import { Line } from 'components/Line'
 import { Table } from 'components/Table'
 import { Button } from 'components/Button'
 
 import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
-import { Line } from 'components/Line'
 
 export const Customers = () => {
   const { t } = useTranslation()
@@ -31,6 +31,7 @@ export const Customers = () => {
       </ContainerHeader>
 
       <Line />
+
       {customerTableData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>
       ) : (
