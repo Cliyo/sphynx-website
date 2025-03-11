@@ -26,7 +26,7 @@ export const RouteApp = () => {
 
   return (
     <BrowserRouter>
-      {true && <NavigationBar />}
+      {isAuthenticated && <NavigationBar />}
       <Routes>
         <Route
           path="/"
@@ -45,68 +45,68 @@ export const RouteApp = () => {
         <Route
           path="/customers"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <Customers />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
         <Route
           path="/customers/new"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <CustomersCreate />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
         <Route
           path="/customers/edit/:id"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <CustomersCreate />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
 
         <Route
           path="/locals"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <Locals />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
 
         <Route
           path="/access"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <Access />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
 
         <Route
           path="/groups"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <Groups />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
         <Route
           path="/groups/new"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <GroupsCreate />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
         <Route
           path="/groups/edit/:id"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <GroupsCreate />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
         <Route path="*" element={<NotFound />} />
