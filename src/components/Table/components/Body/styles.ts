@@ -18,7 +18,7 @@ export const BodyItem = styled.div`
   height: 100%;
 
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   font-weight: ${({ theme }) => theme.FONT_WEIGHT.REGULAR};
   color: ${({ theme }) => theme.COLORS.NEUTRAL_900};
@@ -38,9 +38,7 @@ export const BodyLine = styled.div`
 
   transition: 0.5s;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.COLORS.NEUTRAL_300};
-  }
+  border-bottom: 1px solid ${({ theme }) => theme.COLORS.NEUTRAL_300};
 
   > :last-child {
     gap: 20px;

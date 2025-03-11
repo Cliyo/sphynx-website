@@ -9,8 +9,6 @@ export const Container = styled.div`
   justify-content: space-between;
 
   border-radius: 10px 10px 0 0;
-
-  background-color: ${({ theme }) => theme.COLORS.NEUTRAL_300};
 `
 
 export const HeaderItem = styled.div`
@@ -20,10 +18,9 @@ export const HeaderItem = styled.div`
   height: 100%;
 
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT.BOLD};
-  color: ${({ theme }) => theme.COLORS.NEUTRAL_900};
-
-  text-align: center;
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT.SEMI_BOLD};
+  color: ${({ theme }) => theme.COLORS.PRIMARY_DARKER};
+  font-size: ${({ theme }) => theme.FONT_SIZE.LARGE}px;
 `
