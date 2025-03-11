@@ -23,7 +23,7 @@ export const Groups = () => {
   return (
     <Container>
       <ContainerHeader>
-        <Title> {t('title.users')} </Title>
+        <Title> {t('title.groups')} </Title>
         <NavLink to={'/groups/new'}>
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>

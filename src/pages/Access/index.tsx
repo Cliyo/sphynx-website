@@ -22,7 +22,7 @@ export const Access = () => {
   return (
     <Container>
       <ContainerHeader>
-        <Title> {t('title.users')} </Title>
+        <Title> {t('title.access')} </Title>
       </ContainerHeader>
 
       <Line />

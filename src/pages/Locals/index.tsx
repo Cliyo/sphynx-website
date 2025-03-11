@@ -16,21 +16,25 @@ export const Locals = () => {
 
   const localTableData: LocalItemDTO[] = [
     {
+      id: 1,
       name: 'João Silva',
       mac: '00:1A:2B:3C:4D:5E',
       grupos: ['Clientes Premium', 'VIP'],
     },
     {
+      id: 2,
       name: 'Maria Oliveira',
       mac: '11:2B:3C:4D:5E:6F',
       grupos: ['Clientes Básicos'],
     },
     {
+      id: 3,
       name: 'Pedro Santos',
       mac: '22:3C:4D:5E:6F:7G',
       grupos: ['Clientes Premium'],
     },
     {
+      id: 4,
       name: 'Ana Paula',
       mac: '33:4D:5E:6F:7G:8H',
       grupos: ['Clientes Novos', 'Testes'],
@@ -40,7 +44,7 @@ export const Locals = () => {
   return (
     <Container>
       <ContainerHeader>
-        <Title> {t('title.users')} </Title>
+        <Title> {t('title.locals')} </Title>
         <NavLink to={'/locals/new'}>
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
