@@ -9,6 +9,7 @@ import { useCustomer } from 'hooks/useCustomer'
 import { Line } from 'components/Line'
 import { Table } from 'components/Table'
 import { Button } from 'components/Button'
+import { TopInfosContainer } from 'components/TopInfosContainer'
 
 import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
 
@@ -29,6 +30,16 @@ export const Customers = () => {
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
       </ContainerHeader>
+
+      <Line />
+
+      <TopInfosContainer
+        topInfos={[
+          { title: 'teste', text: 'teste' },
+          { title: 'teste', text: 'teste' },
+          { title: 'teste', text: 'teste' },
+        ]}
+      />
 
       <Line />
 

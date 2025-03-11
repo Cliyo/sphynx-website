@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Line } from 'components/Line'
 import { Table } from 'components/Table'
 import { Button } from 'components/Button'
+import { TopInfosContainer } from 'components/TopInfosContainer'
 
 import { LocalItemDTO } from 'dtos/LocalDTO'
 
@@ -49,6 +50,16 @@ export const Locals = () => {
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
       </ContainerHeader>
+
+      <Line />
+
+      <TopInfosContainer
+        topInfos={[
+          { title: 'teste', text: 'teste' },
+          { title: 'teste', text: 'teste' },
+          { title: 'teste', text: 'teste' },
+        ]}
+      />
 
       <Line />
 

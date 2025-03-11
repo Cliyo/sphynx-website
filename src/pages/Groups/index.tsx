@@ -1,15 +1,17 @@
-import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { groupsTableHeaders } from 'constants/table'
 
+import { Line } from 'components/Line'
 import { Table } from 'components/Table'
 import { Button } from 'components/Button'
+import { TopInfosContainer } from 'components/TopInfosContainer'
 
 import { useGroup } from 'hooks/useGroup'
+
 import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
-import { Line } from 'components/Line'
 
 export const Groups = () => {
   const { t } = useTranslation()
@@ -28,6 +30,16 @@ export const Groups = () => {
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
       </ContainerHeader>
+
+      <Line />
+
+      <TopInfosContainer
+        topInfos={[
+          { title: 'teste', text: 'teste' },
+          { title: 'teste', text: 'teste' },
+          { title: 'teste', text: 'teste' },
+        ]}
+      />
 
       <Line />
 

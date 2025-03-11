@@ -5,6 +5,7 @@ import { accessTableHeaders } from 'constants/table'
 
 import { Line } from 'components/Line'
 import { Table } from 'components/Table'
+import { TopInfosContainer } from 'components/TopInfosContainer'
 
 import { useAccess } from 'hooks/useAccess'
 
@@ -24,6 +25,16 @@ export const Access = () => {
       <ContainerHeader>
         <Title> {t('title.access')} </Title>
       </ContainerHeader>
+
+      <Line />
+
+      <TopInfosContainer
+        topInfos={[
+          { title: 'teste', text: 'teste' },
+          { title: 'teste', text: 'teste' },
+          { title: 'teste', text: 'teste' },
+        ]}
+      />
 
       <Line />
 
