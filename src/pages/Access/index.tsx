@@ -3,13 +3,12 @@ import { useTranslation } from 'react-i18next'
 
 import { accessTableHeaders } from 'constants/table'
 
-import { Input } from 'components/Input'
+import { Line } from 'components/Line'
 import { Table } from 'components/Table'
-import { Button } from 'components/Button'
 
 import { useAccess } from 'hooks/useAccess'
 
-import { Container, InputsContainer, NoRegisterText, Title } from './styles'
+import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
 
 export const Access = () => {
   const { t } = useTranslation()
@@ -22,11 +21,11 @@ export const Access = () => {
 
   return (
     <Container>
-      <Title> {t('title.access')} </Title>
-      <InputsContainer>
-        <Input placeholder={t('placeholder.default')} />
-        <Button text={t('button.filter')} width={90} />
-      </InputsContainer>
+      <ContainerHeader>
+        <Title> {t('title.users')} </Title>
+      </ContainerHeader>
+
+      <Line />
 
       {accessTableData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>
