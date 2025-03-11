@@ -41,6 +41,6 @@ export const BodyLine = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.COLORS.NEUTRAL_300};
 
   > :last-child {
-    gap: 20px;
+    justify-content: center;
   }
 `
