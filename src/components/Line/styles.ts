@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 100%;
-    height: 1px;
+  width: 100%;
+  height: 1px;
 
-    background-color: ${({ theme }) => theme.COLORS.NEUTRAL_300};
+  opacity: 50%;
+
+  background-color: ${({ theme }) => theme.COLORS.NEUTRAL_300};
 `
