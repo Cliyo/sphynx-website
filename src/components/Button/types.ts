@@ -1,7 +1,7 @@
+import { theme } from "@themes/"
+
 export type ButtonProps = {
   text: string
-  width?: number
-  height?: number
-  isDanger?: boolean
+  color: keyof typeof theme.COLORS
   onClick?: () => void
 }

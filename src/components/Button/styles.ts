@@ -1,28 +1,33 @@
+import { theme } from '@themes/'
 import styled from 'styled-components'
 
 interface ContainerProps {
-  width: number
-  height: number
-  isDanger: boolean
+  color: keyof typeof theme.COLORS
 }
 
 export const Container = styled.button<ContainerProps>`
-  width: ${({ width }) => (width === 0 ? `100%` : `${width}px`)};
-  height: ${({ height }) => (height === 0 ? `100%` : `${height}px`)};
+  display: flex;
 
-  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  
+  padding: 15px 45px;
+
+  min-width: 130px;
+
+  border-radius: 8px;
   border: 0;
 
   color: ${({ theme }) => theme.COLORS.NEUTRAL_0};
-  background-color: ${({ isDanger, theme }) =>
-    isDanger ? theme.COLORS.ERROR_MAIN : theme.COLORS.PRIMARY_DARK};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT.SEMI_BOLD};
+
+  background-color: ${({ color, theme }) => theme.COLORS[color]};
 
   cursor: pointer;
 
   transition: 0.5s;
 
   &:hover {
-    background-color: ${({ isDanger, theme }) =>
-      isDanger ? theme.COLORS.ERROR_LIGHT : theme.COLORS.PRIMARY_MAIN};
+    filter: brightness(120%);
   }
 `

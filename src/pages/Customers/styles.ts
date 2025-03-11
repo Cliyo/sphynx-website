@@ -9,13 +9,22 @@ export const Container = styled.div`
 
   gap: 15px;
 
-  padding: 20px;
+  padding: 70px 16px;
+`
+
+export const ContainerHeader = styled.div`
+  display: flex;
+  
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
 `
 
 export const Title = styled.h1`
   ${({ theme }) => css`
     color: ${theme.COLORS.NEUTRAL_900};
-    font-weight: ${theme.FONT_WEIGHT.EXTRA_BOLD};
+    font-weight: ${theme.FONT_WEIGHT.SEMI_BOLD};
     font-size: ${theme.FONT_SIZE.XXLARGE}px;
   `}
   width: 100%;

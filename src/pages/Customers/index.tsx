@@ -10,7 +10,8 @@ import { Table } from 'components/Table'
 import { Input } from 'components/Input'
 import { Button } from 'components/Button'
 
-import { Container, InputsContainer, NoRegisterText, Title } from './styles'
+import { Container, ContainerHeader, InputsContainer, NoRegisterText, Title } from './styles'
+import { Line } from 'components/Line'
 
 export const Customers = () => {
   const { t } = useTranslation()
@@ -23,7 +24,7 @@ export const Customers = () => {
 
   return (
     <Container>
-      <Title> {t('title.users')} </Title>
+      {/* <Title> {t('title.users')} </Title>
       <InputsContainer>
         <Input placeholder={t('placeholder.default')} />
         <Button text={t('button.filter')} width={90} />
@@ -39,7 +40,13 @@ export const Customers = () => {
           headers={customersTableHeaders}
           content={customerTableData.map((obj) => Object.values(obj))}
         />
-      )}
+      )} */}
+      <ContainerHeader>
+        <Title> {t('title.users')} </Title>
+        <Button text={t('button.create')} color={"PRIMARY_LIGHT"} />
+      </ContainerHeader>
+
+      <Line />
     </Container>
   )
 }
