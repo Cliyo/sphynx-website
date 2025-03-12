@@ -26,13 +26,15 @@ export const InputCamp = styled.input<InputCampProps>`
   width: 100%;
   height: 100%;
 
-  background-color: ${({ theme }) => theme.COLORS.NEUTRAL_200};
+  background-color: ${({ theme }) => theme.COLORS.NEUTRAL_0};
 
   padding: 15px;
 
   border-radius: 4px;
   border: ${({ hasError, theme }) =>
-    hasError ? `1px solid ${theme.COLORS.ERROR_MAIN}` : `1px solid ${theme.COLORS.PRIMARY_DARK}`};
+    hasError
+      ? `1px solid ${theme.COLORS.ERROR_MAIN}`
+      : `1px solid ${theme.COLORS.PRIMARY_DARK}`};
 
   &:focus-visible {
     outline: none;
