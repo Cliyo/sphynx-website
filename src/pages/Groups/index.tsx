@@ -44,7 +44,9 @@ export const Groups = () => {
 
       <Line />
 
-      {groupPageData.length > 0 && <Input placeholder="Busque por nome" />}
+      {groupPageData.length > 0 && (
+        <Input placeholder={t('placeholder.find', { name: 'nome' })} />
+      )}
 
       {groupPageData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>

@@ -44,7 +44,9 @@ export const Customers = () => {
 
       <Line />
 
-      {customerTableData.length > 0 && <Input placeholder="Busque por nome" />}
+      {customerTableData.length > 0 && (
+        <Input placeholder={t('placeholder.find', { name: 'nome' })} />
+      )}
 
       {customerTableData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>

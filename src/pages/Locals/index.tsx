@@ -64,7 +64,9 @@ export const Locals = () => {
 
       <Line />
 
-      {localTableData.length > 0 && <Input placeholder="Busque por nome" />}
+      {localTableData.length > 0 && (
+        <Input placeholder={t('placeholder.find', { name: 'nome' })} />
+      )}
 
       <Table
         headers={localsTableHeaders}

@@ -26,6 +26,7 @@
     },
     "placeholder": {
         "default": "Digite aqui... ",
+        "find": "Pesquisar por {{name}}",
         "waiting": "Aguardando solicitação..."
     },
     "button": {

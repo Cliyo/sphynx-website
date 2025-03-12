@@ -40,7 +40,9 @@ export const Access = () => {
       <Line />
 
       {accessTableData.length > 0 && (
-        <Input placeholder="Busque por nome de usuário" />
+        <Input
+          placeholder={t('placeholder.find', { name: 'nome de usuário' })}
+        />
       )}
 
       {accessTableData.length === 0 ? (
