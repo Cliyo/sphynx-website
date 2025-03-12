@@ -13,8 +13,8 @@ export const Container = styled.div`
 export const Label = styled.p`
   ${({ theme }) => css`
     color: ${theme.COLORS.NEUTRAL_900};
-    font-weight: ${theme.FONT_WEIGHT.BOLD};
-    font-size: ${theme.FONT_SIZE.SMALL}px;
+    font-weight: ${theme.FONT_WEIGHT.REGULAR};
+    font-size: ${theme.FONT_SIZE.REGULAR}px;
   `}
 `
 
@@ -25,12 +25,12 @@ export const SelectInput = styled.select`
   width: 100%;
   height: 100%;
 
-  background-color: ${({ theme }) => theme.COLORS.NEUTRAL_200};
+  background-color: ${({ theme }) => theme.COLORS.NEUTRAL_0};
 
   padding: 15px;
 
-  border-radius: 10px;
-  border: 0;
+  border-radius: 8px;
+  border: ${({ theme }) => `1px solid ${theme.COLORS.NEUTRAL_900}`};
 
   &:focus-visible {
     outline: none;
