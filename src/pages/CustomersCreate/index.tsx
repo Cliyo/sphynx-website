@@ -14,9 +14,14 @@ import { useGroup } from 'hooks/useGroup'
 import { useCustomer } from 'hooks/useCustomer'
 
 import {
-  ActionsContainer,
+  ButtonActions,
   Container,
   ContainerForm,
+  ContainerFormAbout,
+  ContainerFormMain,
+  ContainerHeader,
+  FormText,
+  FormTitle,
   SocketInput,
   Title,
 } from './styles'
@@ -104,135 +109,114 @@ export const CustomersCreate = () => {
 
   return (
     <Container>
-      <Title> Usuários </Title>
-      <ContainerForm>
-        <Controller
-          control={control}
-          name="name"
-          rules={{
-            required: t('inputErrors.required'),
-            pattern: {
-              value: REGEX.onlyString,
-              message: t('inputErrors.text'),
-            },
-          }}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              value={value}
-              placeholder={t('placeholder.default')}
-              onChange={onChange}
-              label="Nome"
-              errorMessage={errors.name?.message}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="ra"
-          rules={{
-            required: t('inputErrors.required'),
-            pattern: {
-              value: REGEX.onlyNumbers,
-              message: t('inputErrors.number'),
-            },
-          }}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              value={value}
-              placeholder={t('placeholder.default')}
-              onChange={onChange}
-              label="RA"
-              errorMessage={errors.ra?.message}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="group"
-          render={({ field: { value, onChange } }) => (
-            <Select
-              options={groupPageData.map((group) => ({
-                label: group.name,
-                value: group.id.toString(),
-              }))}
-              label="Grupo"
-              value={value}
-              onChange={(selectedOption) => onChange(selectedOption)}
-            />
-          )}
-        />
-
-        <SocketInput>
-          <Controller
-            control={control}
-            name="tag"
-            rules={
-              {
-                // required: t('inputErrors.required')
-              }
-            }
-            render={({ field: { onChange, value } }) => (
-              <Input
-                value={value}
-                onChange={onChange}
-                placeholder={t('placeholder.waiting')}
-                label="TAG"
-                disabled={true}
-                errorMessage={errors.tag?.message}
-              />
-            )}
-          />
-          <Button text={t('button.tag')} />
-        </SocketInput>
-
-        <SocketInput>
-          <Controller
-            control={control}
-            name="biometry"
-            rules={
-              {
-                // required: t('inputErrors.required')
-              }
-            }
-            render={({ field: { onChange, value } }) => (
-              <Input
-                value={value}
-                onChange={onChange}
-                placeholder={t('placeholder.waiting')}
-                label="Biometria"
-                disabled={true}
-                errorMessage={errors.biometry?.message}
-              />
-            )}
-          />
-          <Button text={t('button.biometry')} />
-        </SocketInput>
-      </ContainerForm>
-      <ActionsContainer>
-        {isEditing && (
+      <ContainerHeader>
+        <Title> {t('title.users')} </Title>
+        <ButtonActions>
           <Button
-            onClick={handleDelete}
-            text={t('button.delete')}
-            width={120}
-            height={50}
-            isDanger={true}
+            onClick={handleCancel}
+            text={t('button.cancel')}
+            color="ERROR_LIGHT"
           />
-        )}
-        <Button
-          onClick={handleCancel}
-          text={t('button.cancel')}
-          width={120}
-          height={50}
-        />
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          text={t('button.confirm')}
-          width={120}
-          height={50}
-        />
-      </ActionsContainer>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            text={t('button.create')}
+            color="PRIMARY_LIGHT"
+          />
+        </ButtonActions>
+      </ContainerHeader>
+
+      <ContainerFormMain>
+        <ContainerFormAbout>
+          <FormTitle> Dados pessoais e institucionais </FormTitle>
+          <FormText>
+            Nesse formulário será possível cadastrar o usuário, para isso
+            preencha as informações e clique no botão de cadastrar tag para
+            ativar a leitura no sensor de tags
+          </FormText>
+        </ContainerFormAbout>
+        <ContainerForm>
+          <Controller
+            control={control}
+            name="name"
+            rules={{
+              required: t('inputErrors.required'),
+              pattern: {
+                value: REGEX.onlyString,
+                message: t('inputErrors.text'),
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                value={value}
+                placeholder={t('placeholder.default')}
+                onChange={onChange}
+                label="Nome"
+                errorMessage={errors.name?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="ra"
+            rules={{
+              required: t('inputErrors.required'),
+              pattern: {
+                value: REGEX.onlyNumbers,
+                message: t('inputErrors.number'),
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                value={value}
+                placeholder={t('placeholder.default')}
+                onChange={onChange}
+                label="RA"
+                errorMessage={errors.ra?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="group"
+            render={({ field: { value, onChange } }) => (
+              <Select
+                options={groupPageData.map((group) => ({
+                  label: group.name,
+                  value: group.id.toString(),
+                }))}
+                label="Grupo"
+                value={value}
+                onChange={(selectedOption) => onChange(selectedOption)}
+              />
+            )}
+          />
+
+          <SocketInput>
+            <Controller
+              control={control}
+              name="tag"
+              rules={
+                {
+                  // required: t('inputErrors.required')
+                }
+              }
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  value={value}
+                  onChange={onChange}
+                  placeholder={t('placeholder.waiting')}
+                  label="TAG"
+                  disabled={true}
+                  errorMessage={errors.tag?.message}
+                />
+              )}
+            />
+            <Button color="PRIMARY_DARK" text={t('button.tag')} />
+          </SocketInput>
+        </ContainerForm>
+      </ContainerFormMain>
     </Container>
   )
 }
