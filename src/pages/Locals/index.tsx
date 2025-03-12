@@ -11,6 +11,7 @@ import { LocalItemDTO } from 'dtos/LocalDTO'
 import { localsTableHeaders } from 'constants/table'
 
 import { Container, ContainerHeader, Title } from './styles'
+import { Input } from 'components/Input'
 
 export const Locals = () => {
   const { t } = useTranslation()
@@ -62,6 +63,8 @@ export const Locals = () => {
       />
 
       <Line />
+
+      {localTableData.length > 0 && <Input placeholder="Busque por nome" />}
 
       <Table
         headers={localsTableHeaders}

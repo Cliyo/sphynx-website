@@ -12,6 +12,7 @@ import { TopInfosContainer } from 'components/TopInfosContainer'
 import { useGroup } from 'hooks/useGroup'
 
 import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
+import { Input } from 'components/Input'
 
 export const Groups = () => {
   const { t } = useTranslation()
@@ -42,6 +43,8 @@ export const Groups = () => {
       />
 
       <Line />
+
+      {groupPageData.length > 0 && <Input placeholder="Busque por nome" />}
 
       {groupPageData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>

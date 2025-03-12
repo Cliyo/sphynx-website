@@ -10,6 +10,7 @@ import { TopInfosContainer } from 'components/TopInfosContainer'
 import { useAccess } from 'hooks/useAccess'
 
 import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
+import { Input } from 'components/Input'
 
 export const Access = () => {
   const { t } = useTranslation()
@@ -37,6 +38,10 @@ export const Access = () => {
       />
 
       <Line />
+
+      {accessTableData.length > 0 && (
+        <Input placeholder="Busque por nome de usuário" />
+      )}
 
       {accessTableData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>
