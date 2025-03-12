@@ -12,7 +12,17 @@ import { useGroup } from 'hooks/useGroup'
 
 import { CreateGroupFormData } from './types'
 
-import { ActionsContainer, Container, ContainerForm, Title } from './styles'
+import {
+  ButtonActions,
+  Container,
+  ContainerForm,
+  ContainerFormAbout,
+  ContainerFormMain,
+  ContainerHeader,
+  FormText,
+  FormTitle,
+  Title,
+} from './styles'
 import { useAlert } from 'hooks/useAlert'
 
 export const GroupsCreate = () => {
@@ -82,52 +92,53 @@ export const GroupsCreate = () => {
 
   return (
     <Container>
-      <Title> Grupos </Title>
-      <ContainerForm>
-        <Controller
-          control={control}
-          name="name"
-          rules={{
-            required: t('inputErrors.required'),
-            pattern: {
-              value: REGEX.onlyString,
-              message: t('inputErrors.text'),
-            },
-          }}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              value={value}
-              onChange={onChange}
-              placeholder={t('placeholder.default')}
-              label="Nome"
-              errorMessage={errors.name?.message}
-            />
-          )}
-        />
-      </ContainerForm>
-      <ActionsContainer>
-        {isEditing && (
+      <ContainerHeader>
+        <Title> {t('title.groups')} </Title>
+        <ButtonActions>
           <Button
-            onClick={handleDelete}
-            text={t('button.delete')}
-            width={120}
-            height={50}
-            isDanger={true}
+            onClick={handleCancel}
+            text={t('button.cancel')}
+            color="ERROR_LIGHT"
           />
-        )}
-        <Button
-          onClick={handleCancel}
-          text={t('button.cancel')}
-          width={120}
-          height={50}
-        />
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          text={t('button.confirm')}
-          width={120}
-          height={50}
-        />
-      </ActionsContainer>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            text={t('button.create')}
+            color="PRIMARY_LIGHT"
+          />
+        </ButtonActions>
+      </ContainerHeader>
+      <ContainerFormMain>
+        <ContainerFormAbout>
+          <FormTitle> Dados do grupo </FormTitle>
+          <FormText>
+            Nesse formulário será possível cadastrar o grupo, para isso preencha
+            as informações e clique no botão de cadastrar.
+          </FormText>
+        </ContainerFormAbout>
+
+        <ContainerForm>
+          <Controller
+            control={control}
+            name="name"
+            rules={{
+              required: t('inputErrors.required'),
+              pattern: {
+                value: REGEX.onlyString,
+                message: t('inputErrors.text'),
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                value={value}
+                onChange={onChange}
+                placeholder={t('placeholder.default')}
+                label="Nome"
+                errorMessage={errors.name?.message}
+              />
+            )}
+          />
+        </ContainerForm>
+      </ContainerFormMain>
     </Container>
   )
 }
