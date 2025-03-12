@@ -1,7 +1,7 @@
-import { theme } from "@themes/"
+import { theme } from '@themes/'
+import React from 'react'
 
-export type ButtonProps = {
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   text: string
   color: keyof typeof theme.COLORS
-  onClick?: () => void
 }
