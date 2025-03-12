@@ -12,9 +12,10 @@ export const TableBody = (props: BodyProps) => {
     <Container>
       {bodyLines.map((line, index) => (
         <BodyLine key={index}>
-          {line.map((text, index) => (
-            <BodyItem key={index}> {text} </BodyItem>
-          ))}
+          {line.map(
+            (text, index) =>
+              index !== 0 && <BodyItem key={index}> {text} </BodyItem>,
+          )}
           <BodyItem>
             <NavLink to={`${path}/edit/${line[0]}`}>
               <Icon color="NEUTRAL_900" size="16" name="IoEye" />
