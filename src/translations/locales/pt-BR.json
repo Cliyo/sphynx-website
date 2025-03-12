@@ -31,6 +31,7 @@
     },
     "button": {
         "create": "Criar",
+        "update": "Atualizar",
         "filter": "Filtrar",
         "confirm": "Confirmar",
         "cancel": "Cancelar",
