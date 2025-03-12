@@ -58,7 +58,10 @@ export const Locals = () => {
         <>
           <TopInfosContainer
             topInfos={[
-              { title: 'Último adicionado', text: localTableData[0].name },
+              {
+                title: 'Último adicionado',
+                text: localTableData[localTableData.length - 1].name,
+              },
               {
                 title: 'Quantidade de locais',
                 text: localTableData.length.toString(),

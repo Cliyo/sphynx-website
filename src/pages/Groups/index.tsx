@@ -38,7 +38,10 @@ export const Groups = () => {
         <>
           <TopInfosContainer
             topInfos={[
-              { title: 'Último adicionado', text: groupPageData[0].name },
+              {
+                title: 'Último adicionado',
+                text: groupPageData[groupPageData.length - 1].name,
+              },
               {
                 title: 'Quantidade de grupos',
                 text: groupPageData.length.toString(),

@@ -31,11 +31,19 @@ export const Access = () => {
 
       <TopInfosContainer
         topInfos={[
-          { title: 'Último local', text: accessTableData[0].local.name },
-          { title: 'Último usuário', text: accessTableData[0].customer.name },
+          {
+            title: 'Último local',
+            text: accessTableData[accessTableData.length - 1].local.name,
+          },
+          {
+            title: 'Último usuário',
+            text: accessTableData[accessTableData.length - 1].customer.name,
+          },
           {
             title: 'Situação',
-            text: accessTableData[0].situation ? 'Aprovado' : 'Negado',
+            text: accessTableData[accessTableData.length - 1].situation
+              ? 'Aprovado'
+              : 'Negado',
           },
         ]}
       />
