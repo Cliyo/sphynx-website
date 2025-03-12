@@ -17,6 +17,12 @@ export const useGroup = () => {
     navigate('/groups')
   }
 
+  const fetchUpdateGroup = async (id: number, data: CreateGroupFormData) => {
+    await api.put(`/groups/${id}`, data)
+
+    navigate('/groups')
+  }
+
   const fetchGetAllGroups = useCallback(async () => {
     const data = await api.get('/groups')
     setGroupPageData(data.data)
@@ -36,6 +42,7 @@ export const useGroup = () => {
   return {
     fetchCreateGroup,
     fetchGetAllGroups,
+    fetchUpdateGroup,
     fetchGetGroupById,
     fetchDeleteGroupById,
     groupPageData,

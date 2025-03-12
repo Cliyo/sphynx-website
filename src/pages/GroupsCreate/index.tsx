@@ -31,8 +31,12 @@ export const GroupsCreate = () => {
 
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { fetchCreateGroup, fetchGetGroupById, fetchDeleteGroupById } =
-    useGroup()
+  const {
+    fetchCreateGroup,
+    fetchGetGroupById,
+    fetchDeleteGroupById,
+    fetchUpdateGroup,
+  } = useGroup()
 
   const { alert } = useAlert()
 
@@ -79,9 +83,9 @@ export const GroupsCreate = () => {
 
   const onSubmit = async (data: CreateGroupFormData) => {
     if (isEditing) {
-      // fetchUpdateGroup(data)
+      await fetchUpdateGroup(Number(id), data)
     } else {
-      fetchCreateGroup(data)
+      await fetchCreateGroup(data)
     }
   }
 

@@ -19,6 +19,15 @@ export const useCustomer = () => {
     navigate('/customers')
   }
 
+  const fetchUpdateCustomer = async (
+    id: number,
+    data: CreateCustomerFormData,
+  ) => {
+    await api.put(`/consumers/${id}`, data)
+
+    navigate('/customers')
+  }
+
   const fetchGetAllCustomers = useCallback(async () => {
     const request = await api.get('/consumers')
     const data = request.data as CustomerItemDTO[]
@@ -49,6 +58,7 @@ export const useCustomer = () => {
 
   return {
     fetchGetAllCustomers,
+    fetchUpdateCustomer,
     fetchCreateCustomer,
     fetchGetCustomerById,
     fetchDeleteCustomerById,

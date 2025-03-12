@@ -33,8 +33,12 @@ export const CustomersCreate = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { fetchGetAllGroups, groupPageData } = useGroup()
-  const { fetchCreateCustomer, fetchGetCustomerById, fetchDeleteCustomerById } =
-    useCustomer()
+  const {
+    fetchCreateCustomer,
+    fetchGetCustomerById,
+    fetchDeleteCustomerById,
+    fetchUpdateCustomer,
+  } = useCustomer()
 
   const { alert } = useAlert()
 
@@ -90,7 +94,7 @@ export const CustomersCreate = () => {
 
   const onSubmit = async (data: CreateCustomerFormData) => {
     if (isEditing) {
-      // fetchUpdateCustomer(data)
+      await fetchUpdateCustomer(Number(id), data)
     } else {
       await fetchCreateCustomer(data)
     }
