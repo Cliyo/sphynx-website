@@ -79,7 +79,7 @@ export const ContainerForm = styled.form`
   gap: 15px;
 `
 
-export const ActionsContainer = styled.div`
+export const FooterActionsContainer = styled.div`
   display: flex;
 
   width: 100%;

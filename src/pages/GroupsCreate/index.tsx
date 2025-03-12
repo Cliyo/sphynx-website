@@ -13,6 +13,7 @@ import { useGroup } from 'hooks/useGroup'
 import { CreateGroupFormData } from './types'
 
 import {
+  FooterActionsContainer,
   ButtonActions,
   Container,
   ContainerForm,
@@ -102,7 +103,7 @@ export const GroupsCreate = () => {
           />
           <Button
             onClick={handleSubmit(onSubmit)}
-            text={t('button.create')}
+            text={isEditing ? t('button.update') : t('button.create')}
             color="PRIMARY_LIGHT"
           />
         </ButtonActions>
@@ -139,6 +140,15 @@ export const GroupsCreate = () => {
           />
         </ContainerForm>
       </ContainerFormMain>
+      <FooterActionsContainer>
+        {isEditing && (
+          <Button
+            onClick={handleDelete}
+            text={t('button.delete')}
+            color="ERROR_MAIN"
+          />
+        )}
+      </FooterActionsContainer>
     </Container>
   )
 }
