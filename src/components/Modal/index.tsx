@@ -14,8 +14,8 @@ export const Modal = (props: ModalProps) => {
       <Title> {title} </Title>
       <Text> {message} </Text>
       <ButtonsContainer>
-        <Button onClick={onClose} text="Fechar" width={120} height={50} />
-        <Button onClick={onConfirm} text="Confirmar" width={120} height={50} />
+        <Button color="ERROR_LIGHT" onClick={onClose} text="Fechar" />
+        <Button color="PRIMARY_LIGHT" onClick={onConfirm} text="Confirmar" />
       </ButtonsContainer>
     </Container>
   )
