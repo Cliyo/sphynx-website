@@ -86,3 +86,13 @@ export const SocketInput = styled.div`
 
   gap: 10px;
 `
+
+export const FooterActionsContainer = styled.div`
+  display: flex;
+
+  width: 100%;
+
+  justify-content: flex-end;
+
+  gap: 20px;
+`

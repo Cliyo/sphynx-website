@@ -20,6 +20,7 @@ import {
   ContainerFormAbout,
   ContainerFormMain,
   ContainerHeader,
+  FooterActionsContainer,
   FormText,
   FormTitle,
   SocketInput,
@@ -50,7 +51,6 @@ export const CustomersCreate = () => {
       ra: '',
       tag: 'teste',
       group: '',
-      biometry: 'teste',
     },
   })
 
@@ -59,14 +59,13 @@ export const CustomersCreate = () => {
       const customerData = await fetchGetCustomerById(id as string)
 
       if (customerData) {
-        const { name, ra, tag, group, biometry } = customerData
+        const { name, ra, tag, group } = customerData
         const groupValue = group.id.toString()
 
         setValue('name', name)
         setValue('ra', ra)
         setValue('group', groupValue)
         setValue('tag', tag)
-        setValue('biometry', biometry)
       }
     } catch (error) {
       console.error(error)
@@ -119,7 +118,7 @@ export const CustomersCreate = () => {
           />
           <Button
             onClick={handleSubmit(onSubmit)}
-            text={t('button.create')}
+            text={isEditing ? t('button.update') : t('button.create')}
             color="PRIMARY_LIGHT"
           />
         </ButtonActions>
@@ -217,6 +216,15 @@ export const CustomersCreate = () => {
           </SocketInput>
         </ContainerForm>
       </ContainerFormMain>
+      <FooterActionsContainer>
+        {isEditing && (
+          <Button
+            onClick={handleDelete}
+            text={t('button.delete')}
+            color="ERROR_MAIN"
+          />
+        )}
+      </FooterActionsContainer>
     </Container>
   )
 }

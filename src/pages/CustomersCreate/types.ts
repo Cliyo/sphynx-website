@@ -3,5 +3,4 @@ export type CreateCustomerFormData = {
   ra: string
   tag: string
   group: string
-  biometry: string
 }
