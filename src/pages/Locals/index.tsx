@@ -54,18 +54,19 @@ export const Locals = () => {
 
       <Line />
 
-      <TopInfosContainer
-        topInfos={[
-          { title: 'teste', text: 'teste' },
-          { title: 'teste', text: 'teste' },
-          { title: 'teste', text: 'teste' },
-        ]}
-      />
-
-      <Line />
-
       {localTableData.length > 0 && (
-        <Input placeholder={t('placeholder.find', { name: 'nome' })} />
+        <>
+          <TopInfosContainer
+            topInfos={[
+              { title: 'Último adicionado', text: localTableData[0].name },
+              { title: 'Quantidade', text: localTableData.length.toString() },
+            ]}
+          />
+
+          <Line />
+
+          <Input placeholder={t('placeholder.find', { name: 'nome' })} />
+        </>
       )}
 
       <Table

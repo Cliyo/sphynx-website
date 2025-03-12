@@ -34,18 +34,22 @@ export const Groups = () => {
 
       <Line />
 
-      <TopInfosContainer
-        topInfos={[
-          { title: 'teste', text: 'teste' },
-          { title: 'teste', text: 'teste' },
-          { title: 'teste', text: 'teste' },
-        ]}
-      />
-
-      <Line />
-
       {groupPageData.length > 0 && (
-        <Input placeholder={t('placeholder.find', { name: 'nome' })} />
+        <>
+          <TopInfosContainer
+            topInfos={[
+              { title: 'Último adicionado', text: groupPageData[0].name },
+              {
+                title: 'Quantidade',
+                text: groupPageData.length.toString(),
+              },
+            ]}
+          />
+
+          <Line />
+
+          <Input placeholder={t('placeholder.find', { name: 'nome' })} />
+        </>
       )}
 
       {groupPageData.length === 0 ? (
