@@ -90,6 +90,7 @@ export const Login = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <Input
+                type="password"
                 value={value}
                 onChange={onChange}
                 placeholder={t('placeholder.default')}

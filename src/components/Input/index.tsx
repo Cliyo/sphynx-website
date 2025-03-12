@@ -3,12 +3,13 @@ import { Container, ErrorMessage, InputCamp, Label } from './styles'
 import { InputProps } from './types'
 
 export const Input = (props: InputProps) => {
-  const { placeholder, disabled, label, errorMessage, value } = props
+  const { placeholder, disabled, label, errorMessage, value, type } = props
 
   return (
     <Container>
       {label && <Label>{label}</Label>}
       <InputCamp
+        type={type ?? 'text'}
         placeholder={placeholder}
         disabled={disabled}
         value={value}
