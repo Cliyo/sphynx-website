@@ -30,11 +30,11 @@ export const InputCamp = styled.input<InputCampProps>`
 
   padding: 15px;
 
-  border-radius: 4px;
+  border-radius: 8px;
   border: ${({ hasError, theme }) =>
     hasError
       ? `1px solid ${theme.COLORS.ERROR_MAIN}`
-      : `1px solid ${theme.COLORS.PRIMARY_DARK}`};
+      : `1px solid ${theme.COLORS.NEUTRAL_900}`};
 
   &:focus-visible {
     outline: none;
