@@ -53,7 +53,7 @@ export const Customers = () => {
       ) : (
         <Table
           headers={customersTableHeaders}
-          content={[['ID', 'Nome', 'RA', 'Tag', 'Grupo']]}
+          content={customerTableData.map((customer) => Object.values(customer))}
         />
       )}
     </Container>
