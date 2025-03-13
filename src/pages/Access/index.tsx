@@ -33,17 +33,15 @@ export const Access = () => {
         topInfos={[
           {
             title: 'Último local',
-            text: accessTableData[accessTableData.length - 1].local.name,
+            text: accessTableData[0].local.name,
           },
           {
             title: 'Último usuário',
-            text: accessTableData[accessTableData.length - 1].customer.name,
+            text: accessTableData[0].customer.name,
           },
           {
             title: 'Situação',
-            text: accessTableData[accessTableData.length - 1].situation
-              ? 'Aprovado'
-              : 'Negado',
+            text: accessTableData[0].situation ? 'Aprovado' : 'Negado',
           },
         ]}
       />

@@ -40,7 +40,7 @@ export const Groups = () => {
             topInfos={[
               {
                 title: 'Último adicionado',
-                text: groupPageData[groupPageData.length - 1].name,
+                text: groupPageData[0].name,
               },
               {
                 title: 'Quantidade de grupos',

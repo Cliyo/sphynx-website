@@ -39,7 +39,7 @@ export const Customers = () => {
             topInfos={[
               {
                 title: 'Último adicionado',
-                text: customerTableData[customerTableData.length - 1].name,
+                text: customerTableData[0].name,
               },
               {
                 title: 'Quantidade de usuários',
