@@ -18,6 +18,7 @@ import { useAuth } from 'hooks/useAuth'
 
 import { PrivateRoute } from 'components/PrivateRoute'
 import { NotFound } from 'pages/NotFound'
+import { LocalsCreate } from 'pages/LocalsCreate'
 
 export const RouteApp = () => {
   const { user } = useAuth()
@@ -72,6 +73,24 @@ export const RouteApp = () => {
           element={
             <PrivateRoute>
               <Locals />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/locals/new"
+          element={
+            <PrivateRoute>
+              <LocalsCreate />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/locals/edit/:id"
+          element={
+            <PrivateRoute>
+              <LocalsCreate />
             </PrivateRoute>
           }
         />
