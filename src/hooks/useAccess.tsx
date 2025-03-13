@@ -9,7 +9,7 @@ export const useAccess = () => {
 
   const fetchGetAllAccess = useCallback(async () => {
     const data = await api.get('/accessRegisters')
-    setAccessTableData(data.data)
+    setAccessTableData(data.data.data)
   }, [])
 
   return {

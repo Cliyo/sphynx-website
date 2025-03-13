@@ -29,29 +29,31 @@ export const Access = () => {
 
       <Line />
 
-      <TopInfosContainer
-        topInfos={[
-          {
-            title: 'Último local',
-            text: accessTableData[0].local.name,
-          },
-          {
-            title: 'Último usuário',
-            text: accessTableData[0].customer.name,
-          },
-          {
-            title: 'Situação',
-            text: accessTableData[0].situation ? 'Aprovado' : 'Negado',
-          },
-        ]}
-      />
-
-      <Line />
-
       {accessTableData.length > 0 && (
-        <Input
-          placeholder={t('placeholder.find', { name: 'nome de usuário' })}
-        />
+        <>
+          <TopInfosContainer
+            topInfos={[
+              {
+                title: 'Último local',
+                text: accessTableData[0].local.name,
+              },
+              {
+                title: 'Último usuário',
+                text: accessTableData[0].customer.name,
+              },
+              {
+                title: 'Situação',
+                text: accessTableData[0].situation ? 'Aprovado' : 'Negado',
+              },
+            ]}
+          />
+
+          <Line />
+
+          <Input
+            placeholder={t('placeholder.find', { name: 'nome de usuário' })}
+          />
+        </>
       )}
 
       {accessTableData.length === 0 ? (

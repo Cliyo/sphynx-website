@@ -41,7 +41,7 @@ export const useCustomer = () => {
 
   const fetchGetAllCustomers = useCallback(async () => {
     const request = await api.get('/consumers')
-    const data = request.data as CustomerItemDTO[]
+    const data = request.data.data as CustomerItemDTO[]
 
     const dataFormatted = data.map((customer) => {
       return {
@@ -58,7 +58,7 @@ export const useCustomer = () => {
 
   const fetchGetCustomerById = useCallback(async (id: string) => {
     const request = await api.get(`/consumers/${id}`)
-    return request.data as CustomerItemDTO
+    return request.data.data as CustomerItemDTO
   }, [])
 
   const fetchDeleteCustomerById = async (id: string) => {

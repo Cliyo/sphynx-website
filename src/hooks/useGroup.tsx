@@ -36,12 +36,12 @@ export const useGroup = () => {
 
   const fetchGetAllGroups = useCallback(async () => {
     const data = await api.get('/groups')
-    setGroupPageData(data.data)
+    setGroupPageData(data.data.data)
   }, [])
 
   const fetchGetGroupById = useCallback(async (id: string) => {
     const data = await api.get(`/groups/${id}`)
-    return data.data as GroupItemDTO
+    return data.data.data as GroupItemDTO
   }, [])
 
   const fetchDeleteGroupById = async (id: string) => {
