@@ -9,6 +9,7 @@ import {
   removeAuthDataStorage,
   saveAuthDataStorage,
 } from 'storage/storage'
+import { notify } from 'utils/notification'
 
 export const AuthContext = createContext<AuthContextDataProps>(
   {} as AuthContextDataProps,
@@ -49,8 +50,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
           saveAuthDataStorage(token)
 
           persistUserData(token)
+
+          notify('Login efetuado com sucesso', 'success')
         }
       } catch (error) {
+        notify('Erro ao efetuar login', 'error')
         console.log(error)
       }
     },
