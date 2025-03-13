@@ -5,6 +5,7 @@ import { api } from 'services/axios'
 
 import { GroupItemDTO } from 'dtos/GroupsDTO'
 import { CreateGroupFormData } from 'pages/GroupsCreate/types'
+import { notify } from 'utils/notification'
 
 export const useGroup = () => {
   const navigate = useNavigate()
@@ -12,15 +13,25 @@ export const useGroup = () => {
   const [groupPageData, setGroupPageData] = useState<GroupItemDTO[]>([])
 
   const fetchCreateGroup = async (data: CreateGroupFormData) => {
-    await api.post('/groups', data)
+    try {
+      await api.post('/groups', data)
+      notify('Operação realizada com sucesso', 'success')
 
-    navigate('/groups')
+      navigate('/groups')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const fetchUpdateGroup = async (id: number, data: CreateGroupFormData) => {
-    await api.put(`/groups/${id}`, data)
+    try {
+      await api.put(`/groups/${id}`, data)
+      notify('Operação realizada com sucesso', 'success')
 
-    navigate('/groups')
+      navigate('/groups')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const fetchGetAllGroups = useCallback(async () => {
@@ -34,9 +45,14 @@ export const useGroup = () => {
   }, [])
 
   const fetchDeleteGroupById = async (id: string) => {
-    await api.delete(`/groups/${id}`)
+    try {
+      await api.delete(`/groups/${id}`)
+      notify('Operação realizada com sucesso', 'success')
 
-    navigate('/groups')
+      navigate('/groups')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return {

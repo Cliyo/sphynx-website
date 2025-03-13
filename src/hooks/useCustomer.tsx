@@ -5,6 +5,7 @@ import { api } from 'services/axios'
 
 import { CustomerItemDTO, CustomerTableDataDTO } from 'dtos/CustomerDTO'
 import { CreateCustomerFormData } from 'pages/CustomersCreate/types'
+import { notify } from 'utils/notification'
 
 export const useCustomer = () => {
   const navigate = useNavigate()
@@ -14,18 +15,28 @@ export const useCustomer = () => {
   >([])
 
   const fetchCreateCustomer = async (data: CreateCustomerFormData) => {
-    await api.post('/consumers', data)
+    try {
+      await api.post('/consumers', data)
+      notify('Operação realizada com sucesso', 'success')
 
-    navigate('/customers')
+      navigate('/customers')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const fetchUpdateCustomer = async (
     id: number,
     data: CreateCustomerFormData,
   ) => {
-    await api.put(`/consumers/${id}`, data)
+    try {
+      await api.put(`/consumers/${id}`, data)
+      notify('Operação realizada com sucesso', 'success')
 
-    navigate('/customers')
+      navigate('/customers')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const fetchGetAllCustomers = useCallback(async () => {
@@ -51,9 +62,14 @@ export const useCustomer = () => {
   }, [])
 
   const fetchDeleteCustomerById = async (id: string) => {
-    await api.delete(`/consumers/${id}`)
+    try {
+      await api.delete(`/consumers/${id}`)
+      notify('Operação realizada com sucesso', 'success')
 
-    navigate('/customers')
+      navigate('/customers')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return {
