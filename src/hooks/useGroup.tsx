@@ -6,16 +6,19 @@ import { api } from 'services/axios'
 import { GroupItemDTO } from 'dtos/GroupsDTO'
 import { CreateGroupFormData } from 'pages/GroupsCreate/types'
 import { notify } from 'utils/notification'
+import { useTranslation } from 'react-i18next'
 
 export const useGroup = () => {
   const navigate = useNavigate()
+
+  const { t } = useTranslation()
 
   const [groupPageData, setGroupPageData] = useState<GroupItemDTO[]>([])
 
   const fetchCreateGroup = async (data: CreateGroupFormData) => {
     try {
       await api.post('/groups', data)
-      notify('Operação realizada com sucesso', 'success')
+      notify(t('toastMessages.success'), 'success')
 
       navigate('/groups')
     } catch (error) {
@@ -26,7 +29,7 @@ export const useGroup = () => {
   const fetchUpdateGroup = async (id: number, data: CreateGroupFormData) => {
     try {
       await api.put(`/groups/${id}`, data)
-      notify('Operação realizada com sucesso', 'success')
+      notify(t('toastMessages.success'), 'success')
 
       navigate('/groups')
     } catch (error) {
@@ -47,7 +50,7 @@ export const useGroup = () => {
   const fetchDeleteGroupById = async (id: string) => {
     try {
       await api.delete(`/groups/${id}`)
-      notify('Operação realizada com sucesso', 'success')
+      notify(t('toastMessages.success'), 'success')
 
       navigate('/groups')
     } catch (error) {

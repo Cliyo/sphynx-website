@@ -43,6 +43,9 @@
     "tableErrors": {
         "noData": "Nenhum registro encontrado"
     },
+    "toastMessages": {
+        "success": "Operação realizada com sucesso"
+    },
     "httpErrors": {
         "400": "Requisição inválida",
         "401": "Não autorizado",

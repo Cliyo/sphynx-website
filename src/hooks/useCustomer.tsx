@@ -1,14 +1,19 @@
 import { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { api } from 'services/axios'
 
-import { CustomerItemDTO, CustomerTableDataDTO } from 'dtos/CustomerDTO'
 import { CreateCustomerFormData } from 'pages/CustomersCreate/types'
+
+import { CustomerItemDTO, CustomerTableDataDTO } from 'dtos/CustomerDTO'
+
 import { notify } from 'utils/notification'
 
 export const useCustomer = () => {
   const navigate = useNavigate()
+
+  const { t } = useTranslation()
 
   const [customerTableData, setCustomerTableData] = useState<
     CustomerTableDataDTO[]
@@ -17,7 +22,7 @@ export const useCustomer = () => {
   const fetchCreateCustomer = async (data: CreateCustomerFormData) => {
     try {
       await api.post('/consumers', data)
-      notify('Operação realizada com sucesso', 'success')
+      notify(t('toastMessages.success'), 'success')
 
       navigate('/customers')
     } catch (error) {
@@ -31,7 +36,7 @@ export const useCustomer = () => {
   ) => {
     try {
       await api.put(`/consumers/${id}`, data)
-      notify('Operação realizada com sucesso', 'success')
+      notify(t('toastMessages.success'), 'success')
 
       navigate('/customers')
     } catch (error) {
@@ -64,7 +69,7 @@ export const useCustomer = () => {
   const fetchDeleteCustomerById = async (id: string) => {
     try {
       await api.delete(`/consumers/${id}`)
-      notify('Operação realizada com sucesso', 'success')
+      notify(t('toastMessages.success'), 'success')
 
       navigate('/customers')
     } catch (error) {
