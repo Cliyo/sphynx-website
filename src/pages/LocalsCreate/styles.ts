@@ -76,7 +76,7 @@ export const ContainerForm = styled.form`
 
   width: 60%;
 
-  gap: 15px;
+  gap: 30px;
 `
 
 export const FooterActionsContainer = styled.div`
