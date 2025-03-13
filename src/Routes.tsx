@@ -109,7 +109,14 @@ export const RouteApp = () => {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={
+            <PrivateRoute>
+              <NotFound />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )
