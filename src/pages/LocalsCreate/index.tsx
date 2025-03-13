@@ -26,6 +26,7 @@ import {
   FormTitle,
   Title,
 } from './styles'
+import { Select } from 'components/Select'
 
 export const LocalsCreate = () => {
   const { id } = useParams()
@@ -151,6 +152,22 @@ export const LocalsCreate = () => {
                 placeholder={t('placeholder.default')}
                 label="Nome"
                 errorMessage={errors.name?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="mac"
+            render={({ field: { value, onChange } }) => (
+              <Select
+                options={groupPageData.map((group) => ({
+                  label: group.name,
+                  value: group.id.toString(),
+                }))}
+                label="Mac"
+                value={value}
+                onChange={(selectedOption) => onChange(selectedOption)}
               />
             )}
           />
