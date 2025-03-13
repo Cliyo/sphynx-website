@@ -61,6 +61,23 @@ export const useCustomer = () => {
     setCustomerTableData(dataFormatted)
   }, [])
 
+  const fetchGetAllCustomersByRa = useCallback(async (ra: string) => {
+    const request = await api.get(`/consumers?ra=${ra}`)
+    const data = request.data.data as CustomerItemDTO[]
+
+    const dataFormatted = data.map((customer) => {
+      return {
+        id: customer.id,
+        name: customer.name,
+        ra: customer.ra,
+        tag: customer.tag,
+        group: customer.group.name,
+      } as CustomerTableDataDTO
+    })
+
+    setCustomerTableData(dataFormatted)
+  }, [])
+
   const fetchGetCustomerById = useCallback(async (id: string) => {
     const request = await api.get(`/consumers/${id}`)
     return request.data.data as CustomerItemDTO
@@ -79,6 +96,7 @@ export const useCustomer = () => {
 
   return {
     fetchGetAllCustomers,
+    fetchGetAllCustomersByRa,
     fetchUpdateCustomer,
     fetchCreateCustomer,
     fetchGetCustomerById,

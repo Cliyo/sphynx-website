@@ -42,6 +42,11 @@ export const useGroup = () => {
     setGroupPageData(data.data.data)
   }, [])
 
+  const fetchGetAllGroupsByName = useCallback(async (name: string) => {
+    const data = await api.get(`/groups?name=${name}`)
+    setGroupPageData(data.data.data)
+  }, [])
+
   const fetchGetGroupById = useCallback(async (id: string) => {
     const data = await api.get(`/groups/${id}`)
     return data.data.data as GroupItemDTO
@@ -61,6 +66,7 @@ export const useGroup = () => {
   return {
     fetchCreateGroup,
     fetchGetAllGroups,
+    fetchGetAllGroupsByName,
     fetchUpdateGroup,
     fetchGetGroupById,
     fetchDeleteGroupById,
