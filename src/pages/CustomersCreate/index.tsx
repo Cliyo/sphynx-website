@@ -211,7 +211,6 @@ export const CustomersCreate = () => {
                   onChange={onChange}
                   placeholder={t('placeholder.waiting')}
                   label="TAG"
-                  disabled={true}
                   errorMessage={errors.tag?.message}
                 />
               )}
