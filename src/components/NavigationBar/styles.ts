@@ -9,7 +9,8 @@ export const Container = styled.div`
 
   height: 100%;
   width: 320px;
-  background: ${({ theme }) => `linear-gradient(${theme.COLORS.PRIMARY_DARKER} 0 70%, ${theme.COLORS.PRIMARY_MAIN})`};
+  background: ${({ theme }) =>
+    `linear-gradient(${theme.COLORS.PRIMARY_DARKER} 0 70%, ${theme.COLORS.PRIMARY_MAIN})`};
 
   padding: 70px 40px;
 

@@ -25,5 +25,5 @@ export const routes: MenuOptionProps[] = [
     iconName: 'IoPeopleSharp',
     name: 'Grupos',
     path: '/groups',
-  }
+  },
 ]
