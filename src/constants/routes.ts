@@ -17,13 +17,13 @@ export const routes: MenuOptionProps[] = [
     path: '/locals',
   },
   {
-    iconName: 'IoLockClosed',
-    name: 'Acessos',
-    path: '/access',
-  },
-  {
     iconName: 'IoPeopleSharp',
     name: 'Grupos',
     path: '/groups',
+  },
+  {
+    iconName: 'IoLockClosed',
+    name: 'Acessos',
+    path: '/access',
   },
 ]
