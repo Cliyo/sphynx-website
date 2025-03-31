@@ -1,6 +1,12 @@
-export type LocalItemDTO = {
+import { GroupItemDTO } from './GroupsDTO'
+
+export type LocalDTO = {
   id: number
   name: string
   mac: string
-  grupos: string[]
+}
+
+export type LocalGroupItemDTO = {
+  local: LocalDTO
+  groups: GroupItemDTO[]
 }
