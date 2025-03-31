@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: flex-start;
 
   gap: 64px;
-  padding: 20px;
+  padding: 70px 42px;
 `
 
 export const ContainerHeader = styled.div`
