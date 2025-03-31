@@ -62,7 +62,7 @@ export const Locals = () => {
         topInfos={[
           {
             title: 'Última ocorrência',
-            text: localPageData[0]?.name ?? '-',
+            text: localPageData[0]?.local?.name ?? '-',
           },
           {
             title: 'Quantidade de ocorrências',
@@ -98,7 +98,7 @@ export const Locals = () => {
       ) : (
         <Table
           headers={localsTableHeaders}
-          content={localPageData.map((obj) => Object.values(obj))}
+          content={localPageData.map((obj) => Object.values(obj.local))}
         />
       )}
     </Container>

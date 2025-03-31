@@ -1,16 +1,18 @@
 import { useTranslation } from 'react-i18next'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Input } from 'components/Input'
 import { Button } from 'components/Button'
+import { Select } from 'components/Select'
 
 import { REGEX } from 'constants/regex'
 
 import { useAlert } from 'hooks/useAlert'
 import { useLocal } from 'hooks/useLocal'
 import { useGroup } from 'hooks/useGroup'
+import { useLocalsCreate } from './hooks/useLocalsCreate'
 
 import { CreateLocalFormData } from './types'
 
@@ -26,7 +28,6 @@ import {
   FormTitle,
   Title,
 } from './styles'
-import { Select } from 'components/Select'
 
 export const LocalsCreate = () => {
   const { id } = useParams()
@@ -35,6 +36,10 @@ export const LocalsCreate = () => {
 
   const navigate = useNavigate()
 
+  const [macs, setMacs] = useState<string[][]>([])
+  const { handleGetAllMacs } = useLocalsCreate()
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { fetchGetAllGroups, groupPageData } = useGroup()
 
   const {
@@ -66,7 +71,7 @@ export const LocalsCreate = () => {
       const groupData = await fetchGetLocalById(id as string)
 
       if (groupData) {
-        setValue('name', groupData.name)
+        setValue('name', 'teste')
       }
     } catch (error) {
       console.error(error)
@@ -99,7 +104,8 @@ export const LocalsCreate = () => {
 
   useEffect(() => {
     fetchGetAllGroups()
-  }, [fetchGetAllGroups])
+    handleGetAllMacs().then((response) => setMacs(response.data))
+  }, [fetchGetAllGroups, handleGetAllMacs])
 
   useEffect(() => {
     if (isEditing) {
@@ -161,10 +167,14 @@ export const LocalsCreate = () => {
             name="mac"
             render={({ field: { value, onChange } }) => (
               <Select
-                options={groupPageData.map((group) => ({
-                  label: group.name,
-                  value: group.id.toString(),
-                }))}
+                options={
+                  macs
+                    ? macs.map((mac: string[]) => ({
+                        label: mac[0],
+                        value: mac[1],
+                      }))
+                    : []
+                }
                 label="Mac"
                 value={value}
                 onChange={(selectedOption) => onChange(selectedOption)}
