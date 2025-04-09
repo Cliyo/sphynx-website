@@ -98,7 +98,12 @@ export const Locals = () => {
       ) : (
         <Table
           headers={localsTableHeaders}
-          content={localPageData.map((obj) => Object.values(obj.local))}
+          content={localPageData.map((obj) => [
+            obj.local.id,
+            obj.local.name,
+            obj.local.mac,
+            obj.groups[0].name,
+          ])}
         />
       )}
     </Container>
