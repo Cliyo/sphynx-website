@@ -12,6 +12,8 @@ export const Container = styled.div`
 
   width: 100%;
   height: 50px;
+
+  gap: 6px;
 `
 
 export const Label = styled.p`
