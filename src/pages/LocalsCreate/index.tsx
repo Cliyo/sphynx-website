@@ -38,7 +38,6 @@ export const LocalsCreate = () => {
 
   const { handleGetAllMacs, macs } = useLocalsCreate()
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { fetchGetAllGroups, groupPageData } = useGroup()
 
   const {
@@ -96,8 +95,6 @@ export const LocalsCreate = () => {
 
   const onSubmit = async (data: CreateLocalFormData) => {
     data.groups = [Number(data.groups)]
-
-    console.log('data', data)
 
     if (isEditing) {
       await fetchUpdateLocal(Number(id), data)
