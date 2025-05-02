@@ -7,7 +7,6 @@ export const Container = styled.div`
   flex-direction: column;
 
   width: 100%;
-  height: 50px;
 `
 
 export const Label = styled.p`
@@ -23,7 +22,7 @@ export const SelectInput = styled.select`
   border: 0;
 
   width: 100%;
-  height: 100%;
+  height: 50px;
 
   background-color: ${({ theme }) => theme.COLORS.NEUTRAL_0};
 
