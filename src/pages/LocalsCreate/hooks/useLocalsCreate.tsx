@@ -1,16 +1,23 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+
 import api from 'services/axios'
-import { ResponseDTO } from 'dtos/ResponseDTO'
 
 export const useLocalsCreate = () => {
-  const handleGetAllMacs = useCallback(async () => {
-    const response =
-      await api.get<ResponseDTO<string[][]>>('/deviceFinder/scan')
+  const [macs, setMacs] = useState<{ label: string; value: string }[]>()
 
-    return response.data
+  const handleGetAllMacs = useCallback(async () => {
+    const response = await api.get<string[][]>('/deviceFinder')
+
+    const formattedMacs = response.data.map((mac: string[]) => ({
+      label: mac[1],
+      value: mac[1],
+    }))
+
+    setMacs(formattedMacs)
   }, [])
 
   return {
     handleGetAllMacs,
+    macs,
   }
 }

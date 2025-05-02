@@ -1,5 +1,6 @@
 export type CreateLocalFormData = {
   name: string
   mac: string
-  groups: number[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  groups: any[]
 }

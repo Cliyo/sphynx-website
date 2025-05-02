@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -36,8 +36,7 @@ export const LocalsCreate = () => {
 
   const navigate = useNavigate()
 
-  const [macs, setMacs] = useState<string[][]>([])
-  const { handleGetAllMacs } = useLocalsCreate()
+  const { handleGetAllMacs, macs } = useLocalsCreate()
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { fetchGetAllGroups, groupPageData } = useGroup()
@@ -95,6 +94,10 @@ export const LocalsCreate = () => {
   }
 
   const onSubmit = async (data: CreateLocalFormData) => {
+    data.groups = [Number(data.groups)]
+
+    console.log('data', data)
+
     if (isEditing) {
       await fetchUpdateLocal(Number(id), data)
     } else {
@@ -104,7 +107,7 @@ export const LocalsCreate = () => {
 
   useEffect(() => {
     fetchGetAllGroups()
-    handleGetAllMacs().then((response) => setMacs(response.data))
+    handleGetAllMacs()
   }, [fetchGetAllGroups, handleGetAllMacs])
 
   useEffect(() => {
@@ -167,15 +170,24 @@ export const LocalsCreate = () => {
             name="mac"
             render={({ field: { value, onChange } }) => (
               <Select
-                options={
-                  macs
-                    ? macs.map((mac: string[]) => ({
-                        label: mac[0],
-                        value: mac[1],
-                      }))
-                    : []
-                }
+                options={macs ?? []}
                 label="Mac"
+                value={value}
+                onChange={(selectedOption) => onChange(selectedOption)}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="groups"
+            render={({ field: { value, onChange } }) => (
+              <Select
+                options={groupPageData.map((group) => ({
+                  label: group.name,
+                  value: group.id.toString(),
+                }))}
+                label="Grupos"
                 value={value}
                 onChange={(selectedOption) => onChange(selectedOption)}
               />
