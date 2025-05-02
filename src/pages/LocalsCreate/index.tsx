@@ -67,10 +67,11 @@ export const LocalsCreate = () => {
 
   const fillLocalFields = useCallback(async () => {
     try {
-      const groupData = await fetchGetLocalById(id as string)
-
-      if (groupData) {
-        setValue('name', 'teste')
+      const localGroupData = await fetchGetLocalById(id as string)
+      if (localGroupData) {
+        setValue('name', localGroupData.local.name)
+        setValue('mac', localGroupData.local.mac)
+        setValue('groups', [localGroupData.groups[0].id.toString()])
       }
     } catch (error) {
       console.error(error)
