@@ -39,11 +39,11 @@ export const Access = () => {
               },
               {
                 title: 'Último usuário',
-                text: accessTableData[0].customer.name,
+                text: accessTableData[0].consumer.name,
               },
               {
                 title: 'Situação',
-                text: accessTableData[0].situation ? 'Aprovado' : 'Negado',
+                text: accessTableData[0].status ? 'Aprovado' : 'Negado',
               },
             ]}
           />
@@ -61,7 +61,12 @@ export const Access = () => {
       ) : (
         <Table
           headers={accessTableHeaders}
-          content={accessTableData.map((obj) => Object.values(obj))}
+          content={accessTableData.map((obj) => [
+            obj.id,
+            obj.consumer.name,
+            obj.local.name,
+            obj.status ? 'Aprovado' : 'Negado',
+          ])}
         />
       )}
     </Container>

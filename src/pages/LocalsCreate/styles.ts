@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: flex-start;
 
   gap: 64px;
-  padding: 70px 42px;
+  padding: 20px;
 `
 
 export const ContainerHeader = styled.div`
@@ -70,21 +70,13 @@ export const FormText = styled.h3`
 `
 
 export const ContainerForm = styled.form`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+
+  grid-template-columns: auto;
 
   width: 60%;
 
   gap: 16px;
-`
-
-export const SocketInput = styled.div`
-  display: flex;
-
-  justify-content: space-between;
-  align-items: center;
-
-  gap: 10px;
 `
 
 export const FooterActionsContainer = styled.div`

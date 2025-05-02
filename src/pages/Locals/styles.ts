@@ -30,3 +30,14 @@ export const Title = styled.h1`
   width: 100%;
   text-align: left;
 `
+
+export const NoRegisterText = styled.p`
+  width: 100%;
+
+  text-align: center;
+
+  margin-top: 20px;
+
+  font-size: ${({ theme }) => theme.FONT_SIZE.SMALL};
+  color: ${({ theme }) => theme.COLORS.ERROR_MAIN};
+`
