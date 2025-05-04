@@ -6,7 +6,7 @@ export const useLocalsCreate = () => {
   const [macs, setMacs] = useState<{ label: string; value: string }[]>()
 
   const handleGetAllMacs = useCallback(async () => {
-    const response = await api.get<string[][]>('/deviceFinder')
+    const response = await api.get<string[][]>('/deviceFinder/scan')
 
     const formattedMacs = response.data.map((mac: string[]) => ({
       label: mac[1],
