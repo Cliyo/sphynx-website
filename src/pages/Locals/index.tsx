@@ -61,11 +61,11 @@ export const Locals = () => {
       <TopInfosContainer
         topInfos={[
           {
-            title: 'Última ocorrência',
-            text: localPageData[0]?.local?.name ?? '-',
+            title: 'Último local adicionado',
+            text: localPageData.length > 0 ? localPageData[localPageData.length - 1].local.name ?? '-' : '-',
           },
           {
-            title: 'Quantidade de ocorrências',
+            title: 'Quantidade de Locais',
             text: localPageData?.length.toString() ?? '-',
           },
         ]}
