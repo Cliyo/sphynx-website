@@ -136,8 +136,8 @@ export const LocalsCreate = () => {
           <FormTitle> Dados do local </FormTitle>
           <FormText>
             Nesse formulário será possível cadastrar o local, para isso preencha
-            as informações e clique no botão de cadastrar. Lembrando que os MACs
-            no select são os disponíveis na sua rede.
+            as informações e clique no botão de cadastrar. Os dispositivos
+            encontrados na sua rede estão disponíveis no campo MAC.
           </FormText>
         </ContainerFormAbout>
 
