@@ -3,7 +3,8 @@ import { Container, ErrorMessage, InputCamp, Label } from './styles'
 import { InputProps } from './types'
 
 export const Input = (props: InputProps) => {
-  const { placeholder, disabled, label, errorMessage, value, type } = props
+  const { placeholder, disabled, label, errorMessage, value, type, readOnly } =
+    props
 
   return (
     <Container>
@@ -15,6 +16,7 @@ export const Input = (props: InputProps) => {
         value={value}
         onChange={props.onChange}
         hasError={!!errorMessage}
+        readOnly={readOnly}
       />
       {errorMessage && (
         <ErrorMessage>

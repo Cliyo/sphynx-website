@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 
 import api from 'services/axios'
+import { saveSphynxAddressStorage } from 'storage/storage'
 
 export const useLocalsCreate = () => {
   const [macs, setMacs] = useState<{ label: string; value: string }[]>()
@@ -14,6 +15,7 @@ export const useLocalsCreate = () => {
     }))
 
     setMacs(formattedMacs)
+    saveSphynxAddressStorage(response.data)
   }, [])
 
   return {

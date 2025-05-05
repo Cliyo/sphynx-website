@@ -11,7 +11,11 @@ import { REGEX } from 'constants/regex'
 import { CreateCustomerFormData } from './types'
 
 import { useGroup } from 'hooks/useGroup'
+import { useAlert } from 'hooks/useAlert'
+import { useLocal } from 'hooks/useLocal'
 import { useCustomer } from 'hooks/useCustomer'
+
+import { getSphynxAddressDataStorage } from 'storage/storage'
 
 import {
   ButtonActions,
@@ -26,19 +30,24 @@ import {
   SocketInput,
   Title,
 } from './styles'
-import { useAlert } from 'hooks/useAlert'
+import { getCustomerTagSocket } from 'services/websocket'
+import { notify } from 'utils/notification'
 
 export const CustomersCreate = () => {
   const { id } = useParams()
   const { t } = useTranslation()
   const navigate = useNavigate()
+
   const { fetchGetAllGroups, groupPageData } = useGroup()
+
   const {
     fetchCreateCustomer,
     fetchGetCustomerById,
     fetchDeleteCustomerById,
     fetchUpdateCustomer,
   } = useCustomer()
+
+  const { fetchGetAllLocals, localPageData } = useLocal()
 
   const { alert } = useAlert()
 
@@ -48,15 +57,18 @@ export const CustomersCreate = () => {
     control,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<CreateCustomerFormData>({
     defaultValues: {
       name: '',
       ra: '',
-      tag: 'teste',
+      tag: '',
+      sensor: '',
       group: '',
     },
   })
+  const sensorValue = watch('sensor')
 
   const fillCustomerFields = useCallback(async () => {
     try {
@@ -92,6 +104,19 @@ export const CustomersCreate = () => {
     navigate('/customers')
   }
 
+  const tagInputFill = useCallback(
+    async (ipAddress: string) => {
+      try {
+        const tagValue = await getCustomerTagSocket(ipAddress)
+
+        setValue('tag', tagValue)
+      } catch (error) {
+        notify('Conexão falhou', 'error')
+      }
+    },
+    [setValue],
+  )
+
   const onSubmit = async (data: CreateCustomerFormData) => {
     if (isEditing) {
       await fetchUpdateCustomer(Number(id), data)
@@ -102,13 +127,24 @@ export const CustomersCreate = () => {
 
   useEffect(() => {
     fetchGetAllGroups()
-  }, [fetchGetAllGroups])
+    fetchGetAllLocals()
+  }, [fetchGetAllGroups, fetchGetAllLocals])
 
   useEffect(() => {
     if (isEditing) {
       fillCustomerFields()
     }
   }, [isEditing, id, fillCustomerFields])
+
+  useEffect(() => {
+    const avaliableAddress = getSphynxAddressDataStorage().find(
+      (s) => s.mac === sensorValue,
+    )
+
+    if (avaliableAddress) {
+      tagInputFill(avaliableAddress.ip)
+    }
+  }, [sensorValue, tagInputFill])
 
   return (
     <Container>
@@ -199,6 +235,26 @@ export const CustomersCreate = () => {
           <SocketInput>
             <Controller
               control={control}
+              name="sensor"
+              rules={
+                {
+                  // required: t('inputErrors.required')
+                }
+              }
+              render={({ field: { onChange, value } }) => (
+                <Select
+                  options={localPageData.map((local) => ({
+                    label: local.local.name,
+                    value: local.local.mac,
+                  }))}
+                  onChange={onChange}
+                  value={value}
+                  label="Selecionar sensor"
+                />
+              )}
+            />
+            <Controller
+              control={control}
               name="tag"
               rules={
                 {
@@ -211,11 +267,11 @@ export const CustomersCreate = () => {
                   onChange={onChange}
                   placeholder={t('placeholder.waiting')}
                   label="TAG"
+                  readOnly
                   errorMessage={errors.tag?.message}
                 />
               )}
             />
-            <Button color="PRIMARY_DARK" text={t('button.tag')} />
           </SocketInput>
         </ContainerForm>
       </ContainerFormMain>

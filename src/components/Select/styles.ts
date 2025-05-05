@@ -7,6 +7,8 @@ export const Container = styled.div`
   flex-direction: column;
 
   width: 100%;
+
+  gap: 6px;
 `
 
 export const Label = styled.p`

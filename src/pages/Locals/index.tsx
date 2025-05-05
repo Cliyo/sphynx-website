@@ -62,7 +62,10 @@ export const Locals = () => {
         topInfos={[
           {
             title: 'Último local adicionado',
-            text: localPageData.length > 0 ? localPageData[localPageData.length - 1].local.name ?? '-' : '-',
+            text:
+              localPageData.length > 0
+                ? (localPageData[localPageData.length - 1].local.name ?? '-')
+                : '-',
           },
           {
             title: 'Quantidade de Locais',
