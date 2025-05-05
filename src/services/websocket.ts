@@ -3,7 +3,7 @@ export const getCustomerTagSocket = (ipAddress: string): Promise<string> => {
     const ws = new WebSocket(`ws://${ipAddress}/ws`)
 
     ws.onopen = () => {
-      ws.send('tag')
+      ws.send('tags')
     }
 
     ws.onmessage = (event) => {
