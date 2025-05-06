@@ -24,6 +24,7 @@ export const saveSphynxAddressStorage = (data: string[][]) => {
   const formattedMacs = data.map((mac: string[]) => ({
     ip: mac[0],
     mac: mac[1],
+    registered: mac[2],
   }))
 
   localStorage.setItem('sphynxs', JSON.stringify(formattedMacs))
@@ -32,6 +33,7 @@ export const saveSphynxAddressStorage = (data: string[][]) => {
 type SphynxAddressStorage = {
   ip: string
   mac: string
+  registered: boolean
 }
 
 export const getSphynxAddressDataStorage = (): SphynxAddressStorage[] => {
