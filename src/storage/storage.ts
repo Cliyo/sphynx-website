@@ -1,3 +1,4 @@
+import { DeviceDTO } from 'dtos/DeviceDTO'
 import { AUTH_TOKEN_STORAGE } from './storageConfig'
 
 export const saveAuthDataStorage = (token: string) => {
@@ -20,14 +21,8 @@ export const removeAuthDataStorage = () => {
   localStorage.removeItem(AUTH_TOKEN_STORAGE)
 }
 
-export const saveSphynxAddressStorage = (data: string[][]) => {
-  const formattedMacs = data.map((mac: string[]) => ({
-    ip: mac[0],
-    mac: mac[1],
-    registered: mac[2],
-  }))
-
-  localStorage.setItem('sphynxs', JSON.stringify(formattedMacs))
+export const saveSphynxAddressStorage = (data: DeviceDTO[]) => {
+  localStorage.setItem('sphynxs', JSON.stringify(data))
 }
 
 type SphynxAddressStorage = {

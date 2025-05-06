@@ -1,25 +1,21 @@
+import { DeviceDTO } from 'dtos/DeviceDTO'
 import { useCallback, useState } from 'react'
 
 import api from 'services/axios'
 import { saveSphynxAddressStorage } from 'storage/storage'
 
 export const useLocalsCreate = () => {
-  const [macs, setMacs] = useState<{ label: string; value: string }[]>()
+  const [devices, setDevices] = useState<DeviceDTO[]>([])
 
-  const handleGetAllMacs = useCallback(async () => {
-    const response = await api.get<string[][]>('/deviceFinder/scan')
+  const handleGetAllDevices = useCallback(async () => {
+    const response = await api.get<DeviceDTO[]>('/deviceFinder/scan')
 
-    const formattedMacs = response.data.map((mac: string[]) => ({
-      label: mac[1],
-      value: mac[1],
-    }))
-
-    setMacs(formattedMacs)
+    setDevices(response.data)
     saveSphynxAddressStorage(response.data)
   }, [])
 
   return {
-    handleGetAllMacs,
-    macs,
+    handleGetAllDevices,
+    devices,
   }
 }

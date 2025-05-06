@@ -36,7 +36,7 @@ export const LocalsCreate = () => {
 
   const navigate = useNavigate()
 
-  const { handleGetAllMacs, macs } = useLocalsCreate()
+  const { handleGetAllDevices, devices } = useLocalsCreate()
 
   const { fetchGetAllGroups, groupPageData } = useGroup()
 
@@ -105,8 +105,8 @@ export const LocalsCreate = () => {
 
   useEffect(() => {
     fetchGetAllGroups()
-    handleGetAllMacs()
-  }, [fetchGetAllGroups, handleGetAllMacs])
+    handleGetAllDevices()
+  }, [fetchGetAllGroups, handleGetAllDevices])
 
   useEffect(() => {
     if (isEditing) {
@@ -168,7 +168,10 @@ export const LocalsCreate = () => {
             name="mac"
             render={({ field: { value, onChange } }) => (
               <Select
-                options={macs ?? []}
+                options={devices.map((device) => ({
+                  label: device.mac,
+                  value: device.mac,
+                }))}
                 label="Mac"
                 value={value}
                 onChange={(selectedOption) => onChange(selectedOption)}
