@@ -66,8 +66,10 @@ export const Access = () => {
             obj.consumer.name,
             obj.local.name,
             obj.date instanceof Date
-              ? obj.date.toLocaleDateString()
-              : new Date(obj.date).toLocaleDateString(),
+              ? obj.date.toLocaleDateString('pt-BR', { timeZone: 'UTC' })
+              : new Date(obj.date).toLocaleDateString('pt-BR', {
+                  timeZone: 'UTC',
+                }),
             obj.time.slice(0, 5),
             obj.status ? 'Aprovado' : 'Negado',
           ])}
