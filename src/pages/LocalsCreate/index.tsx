@@ -168,10 +168,12 @@ export const LocalsCreate = () => {
             name="mac"
             render={({ field: { value, onChange } }) => (
               <Select
-                options={devices.map((device) => ({
-                  label: device.mac,
-                  value: device.mac,
-                }))}
+                options={devices
+                  .filter((device) => !device.registered)
+                  .map((device) => ({
+                    label: device.mac,
+                    value: device.mac,
+                  }))}
                 label="Mac"
                 value={value}
                 onChange={(selectedOption) => onChange(selectedOption)}
