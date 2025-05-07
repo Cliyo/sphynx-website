@@ -21,7 +21,7 @@ export const getCustomerTagSocket = (ipAddress: string): Promise<string> => {
 export const getCustomerBiometrySocket = (
   ipAddress: string,
   fingerId: number,
-): Promise<string> => {
+): Promise<number> => {
   return new Promise((resolve, reject) => {
     const ws = new WebSocket(`ws://${ipAddress}/ws`)
 

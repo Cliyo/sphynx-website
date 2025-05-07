@@ -70,7 +70,7 @@ export const CustomersCreate = () => {
       tag: '',
       sensorTag: '',
       group: '',
-      fingerprint: '',
+      fingerprint: Number(''),
       sensorBiometry: '',
     },
   })
