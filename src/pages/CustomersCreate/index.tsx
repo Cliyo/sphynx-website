@@ -75,7 +75,7 @@ export const CustomersCreate = () => {
     },
   })
   const sensorTagValue = watch('sensorTag')
-  const sensorBiometryValue = watch('sensorTag')
+  const sensorBiometryValue = watch('sensorBiometry')
 
   const fillCustomerFields = useCallback(async () => {
     try {
