@@ -2,7 +2,10 @@ import { NavLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  position: relative;
+  position: fixed;
+
+  top: 0;
+  left: 0;
 
   display: flex;
   flex-direction: column;
@@ -15,6 +18,8 @@ export const Container = styled.div`
   padding: 70px 40px;
 
   gap: 20px;
+
+  z-index: 99;
 `
 
 export const LogoContainer = styled.div`
