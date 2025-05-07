@@ -65,6 +65,10 @@ export const Access = () => {
             obj.id,
             obj.consumer.name,
             obj.local.name,
+            obj.date instanceof Date
+              ? obj.date.toLocaleDateString()
+              : new Date(obj.date).toLocaleDateString(),
+            obj.time.slice(0, 5),
             obj.status ? 'Aprovado' : 'Negado',
           ])}
         />

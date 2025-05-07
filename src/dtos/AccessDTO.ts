@@ -6,4 +6,6 @@ export type AccessItemDTO = {
   consumer: CustomerItemDTO
   local: LocalDTO
   status: boolean
+  date: Date
+  time: string
 }
