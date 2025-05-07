@@ -2,6 +2,8 @@ export type CreateCustomerFormData = {
   name: string
   ra: string
   tag: string
+  fingerprint: string
   group: string
-  sensor: string
+  sensorTag: string
+  sensorBiometry: string
 }

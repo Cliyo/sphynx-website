@@ -30,7 +30,10 @@ import {
   SocketInput,
   Title,
 } from './styles'
-import { getCustomerTagSocket } from 'services/websocket'
+import {
+  getCustomerBiometrySocket,
+  getCustomerTagSocket,
+} from 'services/websocket'
 import { notify } from 'utils/notification'
 
 export const CustomersCreate = () => {
@@ -45,6 +48,7 @@ export const CustomersCreate = () => {
     fetchGetCustomerById,
     fetchDeleteCustomerById,
     fetchUpdateCustomer,
+    customerTableData,
   } = useCustomer()
 
   const { fetchGetAllLocals, localPageData } = useLocal()
@@ -64,11 +68,14 @@ export const CustomersCreate = () => {
       name: '',
       ra: '',
       tag: '',
-      sensor: '',
+      sensorTag: '',
       group: '',
+      fingerprint: '',
+      sensorBiometry: '',
     },
   })
-  const sensorValue = watch('sensor')
+  const sensorTagValue = watch('sensorTag')
+  const sensorBiometryValue = watch('sensorTag')
 
   const fillCustomerFields = useCallback(async () => {
     try {
@@ -117,6 +124,22 @@ export const CustomersCreate = () => {
     [setValue],
   )
 
+  const biometryInputFill = useCallback(
+    async (ipAddress: string) => {
+      try {
+        const biometry = await getCustomerBiometrySocket(
+          ipAddress,
+          customerTableData.length,
+        )
+
+        setValue('fingerprint', biometry)
+      } catch (error) {
+        notify('Conexão falhou', 'error')
+      }
+    },
+    [customerTableData.length, setValue],
+  )
+
   const onSubmit = async (data: CreateCustomerFormData) => {
     if (isEditing) {
       await fetchUpdateCustomer(Number(id), data)
@@ -138,13 +161,23 @@ export const CustomersCreate = () => {
 
   useEffect(() => {
     const avaliableAddress = getSphynxAddressDataStorage().find(
-      (s) => s.mac === sensorValue,
+      (s) => s.mac === sensorTagValue,
     )
 
     if (avaliableAddress) {
       tagInputFill(avaliableAddress.ip)
     }
-  }, [sensorValue, tagInputFill])
+  }, [sensorTagValue, tagInputFill])
+
+  useEffect(() => {
+    const avaliableAddress = getSphynxAddressDataStorage().find(
+      (s) => s.mac === sensorBiometryValue,
+    )
+
+    if (avaliableAddress) {
+      biometryInputFill(avaliableAddress.ip)
+    }
+  }, [sensorBiometryValue, biometryInputFill])
 
   return (
     <Container>
@@ -235,7 +268,7 @@ export const CustomersCreate = () => {
           <SocketInput>
             <Controller
               control={control}
-              name="sensor"
+              name="sensorTag"
               rules={
                 {
                   // required: t('inputErrors.required')
@@ -267,6 +300,47 @@ export const CustomersCreate = () => {
                   onChange={onChange}
                   placeholder={t('placeholder.waiting')}
                   label="TAG"
+                  readOnly
+                  errorMessage={errors.tag?.message}
+                />
+              )}
+            />
+          </SocketInput>
+          <SocketInput>
+            <Controller
+              control={control}
+              name="sensorBiometry"
+              rules={
+                {
+                  // required: t('inputErrors.required')
+                }
+              }
+              render={({ field: { onChange, value } }) => (
+                <Select
+                  options={localPageData.map((local) => ({
+                    label: local.local.name,
+                    value: local.local.mac,
+                  }))}
+                  onChange={onChange}
+                  value={value}
+                  label="Selecionar sensor"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="fingerprint"
+              rules={
+                {
+                  // required: t('inputErrors.required')
+                }
+              }
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  value={value}
+                  onChange={onChange}
+                  placeholder={t('placeholder.waiting')}
+                  label="Biometria"
                   readOnly
                   errorMessage={errors.tag?.message}
                 />
