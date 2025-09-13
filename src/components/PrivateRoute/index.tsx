@@ -1,6 +1,7 @@
 import { useAuth } from 'hooks/useAuth'
 import { PrivateRouteProps } from './types'
 import { Navigate, useLocation } from 'react-router-dom'
+import { PrivateRouteContainer } from './styles'
 
 export const PrivateRoute = (props: PrivateRouteProps) => {
   const { children } = props
