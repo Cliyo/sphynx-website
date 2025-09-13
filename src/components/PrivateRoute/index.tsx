@@ -14,5 +14,5 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     return <Navigate to="/auth/login" state={{ from: location }} replace />
   }
 
-  return <>{children}</>
+  return <PrivateRouteContainer>{children}</PrivateRouteContainer>
 }
