@@ -8,12 +8,11 @@ import { Button } from 'components/Button'
 import { Select } from 'components/Select'
 
 import { REGEX } from 'constants/regex'
-import { CreateCustomerFormData } from './types'
+import { CreateUserFormData } from './types'
 
-import { useGroup } from 'hooks/useGroup'
 import { useAlert } from 'hooks/useAlert'
 import { useLocal } from 'hooks/useLocal'
-import { useCustomer } from 'hooks/useCustomer'
+import { useUser } from 'hooks/useUser'
 
 import { getSphynxAddressDataStorage } from 'storage/storage'
 
@@ -36,20 +35,18 @@ import {
 } from 'services/websocket'
 import { notify } from 'utils/notification'
 
-export const CustomersCreate = () => {
+export const UsersCreate = () => {
   const { id } = useParams()
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { fetchGetAllGroups, groupPageData } = useGroup()
-
   const {
-    fetchCreateCustomer,
-    fetchGetCustomerById,
-    fetchDeleteCustomerById,
-    fetchUpdateCustomer,
-    customerTableData,
-  } = useCustomer()
+    fetchCreateUser,
+    fetchGetUserById,
+    fetchDeleteUserById,
+    fetchUpdateUser,
+    userTableData,
+  } = useUser()
 
   const { fetchGetAllLocals, localPageData } = useLocal()
 
@@ -63,13 +60,13 @@ export const CustomersCreate = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<CreateCustomerFormData>({
+  } = useForm<CreateUserFormData>({
     defaultValues: {
       name: '',
+      email: '',
       ra: '',
       tag: '',
       sensorTag: '',
-      group: '',
       fingerprint: Number(''),
       sensorBiometry: '',
     },
@@ -77,23 +74,22 @@ export const CustomersCreate = () => {
   const sensorTagValue = watch('sensorTag')
   const sensorBiometryValue = watch('sensorBiometry')
 
-  const fillCustomerFields = useCallback(async () => {
+  const fillUserFields = useCallback(async () => {
     try {
-      const customerData = await fetchGetCustomerById(id as string)
+      const userData = await fetchGetUserById(id as string)
 
-      if (customerData) {
-        const { name, ra, tag, group } = customerData
-        const groupValue = group.id.toString()
+      if (userData) {
+        const { name, email, ra, tag } = userData
 
         setValue('name', name)
+        setValue('email', email)
         setValue('ra', ra)
-        setValue('group', groupValue)
         setValue('tag', tag)
       }
     } catch (error) {
       console.error(error)
     }
-  }, [fetchGetCustomerById, id, setValue])
+  }, [fetchGetUserById, id, setValue])
 
   const handleDelete = async () => {
     alert({
@@ -104,11 +100,11 @@ export const CustomersCreate = () => {
   }
 
   const onConfirmDelete = async () => {
-    await fetchDeleteCustomerById(id as string)
+    await fetchDeleteUserById(id as string)
   }
 
   const handleCancel = () => {
-    navigate('/customers')
+    navigate('/users')
   }
 
   const tagInputFill = useCallback(
@@ -129,7 +125,7 @@ export const CustomersCreate = () => {
       try {
         const biometry = await getCustomerBiometrySocket(
           ipAddress,
-          customerTableData.length,
+          userTableData.length,
         )
 
         setValue('fingerprint', biometry)
@@ -137,27 +133,26 @@ export const CustomersCreate = () => {
         notify('Conexão falhou', 'error')
       }
     },
-    [customerTableData.length, setValue],
+    [userTableData.length, setValue],
   )
 
-  const onSubmit = async (data: CreateCustomerFormData) => {
+  const onSubmit = async (data: CreateUserFormData) => {
     if (isEditing) {
-      await fetchUpdateCustomer(Number(id), data)
+      await fetchUpdateUser(Number(id), data)
     } else {
-      await fetchCreateCustomer(data)
+      await fetchCreateUser(data)
     }
   }
 
   useEffect(() => {
-    fetchGetAllGroups()
     fetchGetAllLocals()
-  }, [fetchGetAllGroups, fetchGetAllLocals])
+  }, [fetchGetAllLocals])
 
   useEffect(() => {
     if (isEditing) {
-      fillCustomerFields()
+      fillUserFields()
     }
-  }, [isEditing, id, fillCustomerFields])
+  }, [isEditing, id, fillUserFields])
 
   useEffect(() => {
     const avaliableAddress = getSphynxAddressDataStorage().find(
@@ -182,7 +177,7 @@ export const CustomersCreate = () => {
   return (
     <Container>
       <ContainerHeader>
-        <Title> {t('title.consumers')} </Title>
+        <Title> {t('title.users')} </Title>
         <ButtonActions>
           <Button
             onClick={handleCancel}
@@ -199,9 +194,9 @@ export const CustomersCreate = () => {
 
       <ContainerFormMain>
         <ContainerFormAbout>
-          <FormTitle> Dados pessoais e institucionais </FormTitle>
+          <FormTitle> Dados pessoais </FormTitle>
           <FormText>
-            Nesse formulário será possível cadastrar o seu dependente, para isso
+            Nesse formulário será possível cadastrar o usuário, para isso
             preencha as informações e clique no botão de cadastrar tag para
             ativar a leitura no sensor de tags
           </FormText>
@@ -230,6 +225,27 @@ export const CustomersCreate = () => {
 
           <Controller
             control={control}
+            name="email"
+            rules={{
+              required: t('inputErrors.required'),
+              pattern: {
+                value: REGEX.email,
+                message: t('inputErrors.email'),
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                value={value}
+                placeholder={t('placeholder.default')}
+                onChange={onChange}
+                label="Email"
+                errorMessage={errors.email?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
             name="ra"
             rules={{
               required: t('inputErrors.required'),
@@ -245,22 +261,6 @@ export const CustomersCreate = () => {
                 onChange={onChange}
                 label="RA"
                 errorMessage={errors.ra?.message}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="group"
-            render={({ field: { value, onChange } }) => (
-              <Select
-                options={groupPageData.map((group) => ({
-                  label: group.name,
-                  value: group.id.toString(),
-                }))}
-                label="Grupo"
-                value={value}
-                onChange={(selectedOption) => onChange(selectedOption)}
               />
             )}
           />

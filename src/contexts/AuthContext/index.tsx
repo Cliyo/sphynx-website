@@ -2,7 +2,7 @@ import { createContext, useCallback, useEffect, useState } from 'react'
 import { AuthContextDataProps, AuthContextProviderProps } from './types'
 import { api } from 'services/axios'
 import { LoginFormData } from 'pages/Login/types'
-import { SignInDTO, UserDTO } from 'dtos/SignInDTO'
+import { SignInDTO, AuthDTO } from 'dtos/SignInDTO'
 import { JWTdecoder } from 'utils/JWTdecoder'
 import {
   getAuthDataStorage,
@@ -16,7 +16,7 @@ export const AuthContext = createContext<AuthContextDataProps>(
 )
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [user, setUser] = useState<UserDTO>({} as UserDTO)
+  const [user, setUser] = useState<AuthDTO>({} as AuthDTO)
 
   const persistUserData = useCallback((token: string | null) => {
     if (token) {
@@ -63,7 +63,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
   const signOut = useCallback(() => {
     removeAuthDataStorage()
-    setUser({} as UserDTO)
+    setUser({} as AuthDTO)
     api.defaults.headers.common.Authorization = ''
   }, [])
 

@@ -2,6 +2,7 @@
     "title": {
         "access": "Acessos",
         "users": "Usuários",
+        "consumers": "Dependentes",
         "groups": "Grupos",
         "locals": "Locais"
     },

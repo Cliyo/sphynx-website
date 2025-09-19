@@ -8,6 +8,6 @@ export type SignInDecodedDTO = {
   sub: string
 }
 
-export type UserDTO = SignInDecodedDTO & {
+export type AuthDTO = SignInDecodedDTO & {
   isAuthenticated: boolean
 }

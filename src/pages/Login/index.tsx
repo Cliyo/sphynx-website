@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Controller, useForm } from 'react-hook-form'
 
-import { useAuth } from 'hooks/useAuth'
-
 import { Line } from 'components/Line'
 import { Input } from 'components/Input'
 import { Button } from 'components/Button'
@@ -23,11 +21,13 @@ import {
   FormTitle,
   IconImage,
 } from './styles'
+import { useContext } from 'react'
+import { AuthContext } from 'contexts/AuthContext'
 
 export const Login = () => {
   const { t } = useTranslation()
 
-  const { fetchLogin } = useAuth()
+  const { fetchLogin } = useContext(AuthContext)
 
   const {
     control,

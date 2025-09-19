@@ -50,7 +50,7 @@ export const Customers = () => {
   return (
     <Container>
       <ContainerHeader>
-        <Title> {t('title.users')} </Title>
+        <Title> {t('title.consumers')} </Title>
         <NavLink to={'/customers/new'}>
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>

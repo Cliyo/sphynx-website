@@ -14,14 +14,16 @@ import { Access } from 'pages/Access'
 import { Groups } from 'pages/Groups/GroupsTable'
 import { GroupsCreate } from 'pages/Groups/GroupsCreate'
 
-import { useAuth } from 'hooks/useAuth'
-
 import { PrivateRoute } from 'components/PrivateRoute'
 import { NotFound } from 'pages/NotFound'
 import { LocalsCreate } from 'pages/Locals/LocalsCreate'
+import { useContext } from 'react'
+import { AuthContext } from 'contexts/AuthContext'
+import { Users } from 'pages/Users/UsersTable'
+import { UsersCreate } from 'pages/Users/UsersCreate'
 
 export const RouteApp = () => {
-  const { user } = useAuth()
+  const { user } = useContext(AuthContext)
 
   const { isAuthenticated } = user
 
@@ -40,6 +42,23 @@ export const RouteApp = () => {
           path="/auth/login"
           element={
             isAuthenticated ? <Navigate to={'/customers'} replace /> : <Login />
+          }
+        />
+
+        <Route
+          path="/users"
+          element={
+            <PrivateRoute>
+              <Users />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/users/new"
+          element={
+            <PrivateRoute>
+              <UsersCreate />
+            </PrivateRoute>
           }
         />
 

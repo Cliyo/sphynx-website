@@ -1,8 +1,8 @@
-import { UserDTO } from 'dtos/SignInDTO'
+import { AuthDTO } from 'dtos/SignInDTO'
 import { LoginFormData } from 'pages/Login/types'
 
 export type AuthContextDataProps = {
-  user: UserDTO
+  user: AuthDTO
   fetchLogin: (data: LoginFormData) => Promise<void>
   signOut: () => void
 }

@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import { Icon } from 'components/Icon'
 import { Line } from 'components/Line'
 
-import { useAuth } from 'hooks/useAuth'
 import { useAlert } from 'hooks/useAlert'
 
 import IconImage from 'assets/icon.svg'
@@ -17,10 +16,12 @@ import {
   MenuOption,
   MenuOptionText,
 } from './styles'
+import { useContext } from 'react'
+import { AuthContext } from 'contexts/AuthContext'
 
 export const NavigationBar = () => {
   const { alert } = useAlert()
-  const { signOut } = useAuth()
+  const { signOut } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const onConfirmLogout = () => {
