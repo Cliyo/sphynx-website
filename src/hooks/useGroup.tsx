@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'
 import { api } from 'services/axios'
 
 import { GroupItemDTO } from 'dtos/GroupsDTO'
-import { CreateGroupFormData } from 'pages/GroupsCreate/types'
+import { CreateGroupFormData } from 'pages/Groups/GroupsCreate/types'
 import { notify } from 'utils/notification'
 import { useTranslation } from 'react-i18next'
 

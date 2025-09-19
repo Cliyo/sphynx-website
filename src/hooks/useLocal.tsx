@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { api } from 'services/axios'
 
-import { CreateLocalFormData } from 'pages/LocalsCreate/types'
+import { CreateLocalFormData } from 'pages/Locals/LocalsCreate/types'
 
 import { LocalGroupItemDTO } from 'dtos/LocalDTO'
 

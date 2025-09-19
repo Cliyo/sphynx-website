@@ -4,21 +4,21 @@ import { NavigationBar } from 'components/NavigationBar'
 
 import { Login } from 'pages/Login'
 
-import { Customers } from 'pages/Customers'
-import { CustomersCreate } from 'pages/CustomersCreate'
+import { Customers } from 'pages/Customers/CustomersTable'
+import { CustomersCreate } from 'pages/Customers/CustomersCreate'
 
-import { Locals } from 'pages/Locals'
+import { Locals } from 'pages/Locals/LocalsTable'
 
 import { Access } from 'pages/Access'
 
-import { Groups } from 'pages/Groups'
-import { GroupsCreate } from 'pages/GroupsCreate'
+import { Groups } from 'pages/Groups/GroupsTable'
+import { GroupsCreate } from 'pages/Groups/GroupsCreate'
 
 import { useAuth } from 'hooks/useAuth'
 
 import { PrivateRoute } from 'components/PrivateRoute'
 import { NotFound } from 'pages/NotFound'
-import { LocalsCreate } from 'pages/LocalsCreate'
+import { LocalsCreate } from 'pages/Locals/LocalsCreate'
 
 export const RouteApp = () => {
   const { user } = useAuth()

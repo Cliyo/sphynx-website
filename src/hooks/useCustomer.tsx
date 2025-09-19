@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { api } from 'services/axios'
 
-import { CreateCustomerFormData } from 'pages/CustomersCreate/types'
+import { CreateCustomerFormData } from 'pages/Customers/CustomersCreate/types'
 
 import { CustomerItemDTO, CustomerTableDataDTO } from 'dtos/CustomerDTO'
 
