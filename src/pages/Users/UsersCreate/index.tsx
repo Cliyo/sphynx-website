@@ -64,6 +64,7 @@ export const UsersCreate = () => {
     defaultValues: {
       name: '',
       email: '',
+      password: '',
       ra: '',
       tag: '',
       sensorTag: '',
@@ -240,6 +241,28 @@ export const UsersCreate = () => {
                 onChange={onChange}
                 label="Email"
                 errorMessage={errors.email?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="password"
+            rules={{
+              required: t('inputErrors.required'),
+              minLength: {
+                value: 4,
+                message: t('inputErrors.minLength', { length: 4 }),
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                value={value}
+                type="password"
+                placeholder={t('placeholder.default')}
+                onChange={onChange}
+                label="Senha"
+                errorMessage={errors.password?.message}
               />
             )}
           />

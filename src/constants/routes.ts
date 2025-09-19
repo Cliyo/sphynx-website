@@ -7,8 +7,13 @@ export const routes: MenuOptionProps[] = [
     path: '/',
   },
   {
-    iconName: 'IoPersonSharp',
+    iconName: 'IoPerson',
     name: 'Usuários',
+    path: '/users',
+  },
+  {
+    iconName: 'IoPersonSharp',
+    name: 'Dependentes',
     path: '/customers',
   },
   {
