@@ -15,7 +15,7 @@ export const useUser = () => {
 
   const fetchCreateUser = async (data: CreateUserFormData) => {
     try {
-      await api.post('/users', data)
+      await api.post('/auth/users/', data)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/users')
@@ -26,7 +26,7 @@ export const useUser = () => {
 
   const fetchUpdateUser = async (id: number, data: CreateUserFormData) => {
     try {
-      await api.put(`/users/${id}`, data)
+      await api.put(`/auth/users/${id}`, data)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/users')
@@ -36,28 +36,31 @@ export const useUser = () => {
   }
 
   const fetchGetAllUsers = useCallback(async () => {
-    const request = await api.get('/consumers')
+    const request = await api.get('/auth/users')
     const data = request.data.data as UserDTO[]
 
     const dataFormatted = data.map((user) => {
       return {
+        id: user.id,
         name: user.name,
-        email: user.email,
         ra: user.ra,
+        user: user.user,
       } as UserDTO
     })
+
+    console.log(dataFormatted)
 
     setUserTableData(dataFormatted)
   }, [])
 
   const fetchGetUserById = useCallback(async (id: string) => {
-    const request = await api.get(`/users/${id}`)
+    const request = await api.get(`/auth/users/${id}`)
     return request.data.data as UserDTO
   }, [])
 
   const fetchDeleteUserById = async (id: string) => {
     try {
-      await api.delete(`/users/${id}`)
+      await api.delete(`/auth/users/${id}`)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/users')

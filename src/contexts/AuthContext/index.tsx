@@ -42,7 +42,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const fetchLogin = useCallback(
     async (formData: LoginFormData) => {
       try {
-        const { data } = await api.post<SignInDTO>('/login', formData)
+        const { data } = await api.post<SignInDTO>('/auth/login', formData)
 
         if (data?.token) {
           const { token } = data

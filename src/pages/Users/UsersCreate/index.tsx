@@ -80,10 +80,10 @@ export const UsersCreate = () => {
       const userData = await fetchGetUserById(id as string)
 
       if (userData) {
-        const { name, email, ra, tag } = userData
+        const { name, user, ra, tag } = userData
 
         setValue('name', name)
-        setValue('email', email)
+        setValue('email', user)
         setValue('ra', ra)
         setValue('tag', tag)
       }
