@@ -3,7 +3,6 @@ import { AUTH_STORAGE } from './storageConfig'
 
 type AuthObject = {
   token: string
-  isAdmin: boolean
 }
 
 export const saveAuthDataStorage = (data: AuthObject) => {

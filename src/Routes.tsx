@@ -21,6 +21,7 @@ import { useContext } from 'react'
 import { AuthContext } from 'contexts/AuthContext'
 import { Users } from 'pages/Users/UsersTable'
 import { UsersCreate } from 'pages/Users/UsersCreate'
+import { Home } from 'pages/Home'
 
 export const RouteApp = () => {
   const { user } = useContext(AuthContext)
@@ -34,15 +35,15 @@ export const RouteApp = () => {
         <Route
           path="/"
           element={
-            <Navigate to={isAuthenticated ? '/customers' : '/auth/login'} />
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
           }
         />
 
         <Route
           path="/auth/login"
-          element={
-            isAuthenticated ? <Navigate to={'/customers'} replace /> : <Login />
-          }
+          element={isAuthenticated ? <Navigate to={'/'} replace /> : <Login />}
         />
 
         <Route
