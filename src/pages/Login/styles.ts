@@ -71,3 +71,19 @@ export const Form = styled.form`
 
   gap: 35px;
 `
+
+export const PasswordForgot = styled.p`
+  color: ${({ theme }) => theme.COLORS.PRIMARY_MAIN};
+  text-decoration: underline;
+
+  width: 100%;
+  text-align: center;
+
+  cursor: pointer;
+
+  transition: 0.5s;
+
+  &:hover {
+    color: ${({ theme }) => theme.COLORS.PRIMARY_LIGHT};
+  }
+`

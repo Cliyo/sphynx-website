@@ -20,6 +20,7 @@ import {
   FormText,
   FormTitle,
   IconImage,
+  PasswordForgot,
 } from './styles'
 import { useContext } from 'react'
 import { AuthContext } from 'contexts/AuthContext'
@@ -99,6 +100,7 @@ export const Login = () => {
               />
             )}
           />
+          <PasswordForgot>Esqueci minha senha</PasswordForgot>
           <Button
             color="PRIMARY_DARK"
             onClick={handleSubmit(onSubmit)}
