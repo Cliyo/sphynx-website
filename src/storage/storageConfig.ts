@@ -1,3 +1,3 @@
-const AUTH_TOKEN_STORAGE = '@sphynx:authToken'
+const AUTH_STORAGE = '@sphynx:authToken'
 
-export { AUTH_TOKEN_STORAGE }
+export { AUTH_STORAGE }

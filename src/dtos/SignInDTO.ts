@@ -1,5 +1,6 @@
 export type SignInDTO = {
   token: string
+  isAdmin: boolean
 }
 
 export type SignInDecodedDTO = {
@@ -10,4 +11,5 @@ export type SignInDecodedDTO = {
 
 export type AuthDTO = SignInDecodedDTO & {
   isAuthenticated: boolean
+  isAdmin: boolean
 }

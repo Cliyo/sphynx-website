@@ -21,7 +21,7 @@ import { AuthContext } from 'contexts/AuthContext'
 
 export const NavigationBar = () => {
   const { alert } = useAlert()
-  const { signOut } = useContext(AuthContext)
+  const { signOut, user } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const onConfirmLogout = () => {
@@ -46,12 +46,15 @@ export const NavigationBar = () => {
 
       <Line />
 
-      {routes.map((route) => (
-        <MenuOption to={route.path} key={route.name}>
-          <Icon color={'NEUTRAL_0'} size="20" name={route.iconName} />
-          <MenuOptionText> {route.name} </MenuOptionText>
-        </MenuOption>
-      ))}
+      {routes.map(
+        (route) =>
+          (route.adminOnly ? user.isAdmin : true) && (
+            <MenuOption to={route.path} key={route.name}>
+              <Icon color={'NEUTRAL_0'} size="20" name={route.iconName} />
+              <MenuOptionText> {route.name} </MenuOptionText>
+            </MenuOption>
+          ),
+      )}
 
       <Line />
 

@@ -18,25 +18,31 @@ export const AuthContext = createContext<AuthContextDataProps>(
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [user, setUser] = useState<AuthDTO>({} as AuthDTO)
 
-  const persistUserData = useCallback((token: string | null) => {
-    if (token) {
-      const jwtDecoded = JWTdecoder(token)
+  const persistUserData = useCallback(
+    (token: string | null, isAdmin: boolean) => {
+      if (token) {
+        const jwtDecoded = JWTdecoder(token)
 
-      if (jwtDecoded?.sub) {
-        setUser({
-          isAuthenticated: true,
-          ...jwtDecoded,
-        })
+        if (jwtDecoded?.sub) {
+          setUser({
+            isAuthenticated: true,
+            isAdmin,
+            ...jwtDecoded,
+          })
 
-        api.defaults.headers.common.Authorization = `Bearer ${token}`
+          api.defaults.headers.common.Authorization = `Bearer ${token}`
+        }
       }
-    }
-  }, [])
+    },
+    [],
+  )
 
   const loadUserData = useCallback(() => {
-    const token = getAuthDataStorage()
+    const data = getAuthDataStorage()
 
-    persistUserData(token)
+    if (!data) return
+
+    persistUserData(data.token, data.isAdmin)
   }, [persistUserData])
 
   const fetchLogin = useCallback(
@@ -44,12 +50,15 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       try {
         const { data } = await api.post<SignInDTO>('/auth/login', formData)
 
-        if (data?.token) {
-          const { token } = data
+        console.log(data)
 
-          saveAuthDataStorage(token)
+        if (data) {
+          saveAuthDataStorage({
+            token: data.token,
+            isAdmin: data.isAdmin,
+          })
 
-          persistUserData(token)
+          persistUserData(data.token, data.isAdmin)
 
           notify('Login efetuado com sucesso', 'success')
         }

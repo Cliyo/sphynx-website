@@ -1,15 +1,24 @@
 import { DeviceDTO } from 'dtos/DeviceDTO'
-import { AUTH_TOKEN_STORAGE } from './storageConfig'
+import { AUTH_STORAGE } from './storageConfig'
 
-export const saveAuthDataStorage = (token: string) => {
-  localStorage.setItem(AUTH_TOKEN_STORAGE, token)
+type AuthObject = {
+  token: string
+  isAdmin: boolean
+}
+
+export const saveAuthDataStorage = (data: AuthObject) => {
+  localStorage.setItem(AUTH_STORAGE, JSON.stringify(data))
 }
 
 export const getAuthDataStorage = () => {
   try {
-    const token = localStorage.getItem(AUTH_TOKEN_STORAGE)
+    const data = localStorage.getItem(AUTH_STORAGE)
 
-    return token ?? null
+    if (!data) return null
+
+    const dataParsed = JSON.parse(data) as AuthObject
+
+    return dataParsed
   } catch (error) {
     console.log('getAuthDataStorage: ', error)
 
@@ -18,7 +27,7 @@ export const getAuthDataStorage = () => {
 }
 
 export const removeAuthDataStorage = () => {
-  localStorage.removeItem(AUTH_TOKEN_STORAGE)
+  localStorage.removeItem(AUTH_STORAGE)
 }
 
 export const saveSphynxAddressStorage = (data: DeviceDTO[]) => {
