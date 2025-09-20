@@ -15,7 +15,7 @@ export const useUser = () => {
 
   const fetchCreateUser = async (data: CreateUserFormData) => {
     try {
-      await api.post('/auth/users/', data)
+      await api.post('/auth/register', data)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/users')
@@ -47,8 +47,6 @@ export const useUser = () => {
         user: user.user,
       } as UserDTO
     })
-
-    console.log(dataFormatted)
 
     setUserTableData(dataFormatted)
   }, [])

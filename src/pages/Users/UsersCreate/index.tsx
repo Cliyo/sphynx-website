@@ -5,16 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { Input } from 'components/Input'
 import { Button } from 'components/Button'
-import { Select } from 'components/Select'
 
 import { REGEX } from 'constants/regex'
 import { CreateUserFormData } from './types'
 
 import { useAlert } from 'hooks/useAlert'
-import { useLocal } from 'hooks/useLocal'
 import { useUser } from 'hooks/useUser'
-
-import { getSphynxAddressDataStorage } from 'storage/storage'
 
 import {
   ButtonActions,
@@ -26,14 +22,8 @@ import {
   FooterActionsContainer,
   FormText,
   FormTitle,
-  SocketInput,
   Title,
 } from './styles'
-import {
-  getCustomerBiometrySocket,
-  getCustomerTagSocket,
-} from 'services/websocket'
-import { notify } from 'utils/notification'
 
 export const UsersCreate = () => {
   const { id } = useParams()
@@ -45,10 +35,7 @@ export const UsersCreate = () => {
     fetchGetUserById,
     fetchDeleteUserById,
     fetchUpdateUser,
-    userTableData,
   } = useUser()
-
-  const { fetchGetAllLocals, localPageData } = useLocal()
 
   const { alert } = useAlert()
 
@@ -58,34 +45,25 @@ export const UsersCreate = () => {
     control,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm<CreateUserFormData>({
     defaultValues: {
       name: '',
-      email: '',
-      password: '',
+      user: '',
       ra: '',
-      tag: '',
-      sensorTag: '',
-      fingerprint: Number(''),
-      sensorBiometry: '',
     },
   })
-  const sensorTagValue = watch('sensorTag')
-  const sensorBiometryValue = watch('sensorBiometry')
 
   const fillUserFields = useCallback(async () => {
     try {
       const userData = await fetchGetUserById(id as string)
 
       if (userData) {
-        const { name, user, ra, tag } = userData
+        const { name, user, ra } = userData
 
         setValue('name', name)
-        setValue('email', user)
+        setValue('user', user)
         setValue('ra', ra)
-        setValue('tag', tag)
       }
     } catch (error) {
       console.error(error)
@@ -108,35 +86,6 @@ export const UsersCreate = () => {
     navigate('/users')
   }
 
-  const tagInputFill = useCallback(
-    async (ipAddress: string) => {
-      try {
-        const tagValue = await getCustomerTagSocket(ipAddress)
-
-        setValue('tag', tagValue)
-      } catch (error) {
-        notify('Conexão falhou', 'error')
-      }
-    },
-    [setValue],
-  )
-
-  const biometryInputFill = useCallback(
-    async (ipAddress: string) => {
-      try {
-        const biometry = await getCustomerBiometrySocket(
-          ipAddress,
-          userTableData.length,
-        )
-
-        setValue('fingerprint', biometry)
-      } catch (error) {
-        notify('Conexão falhou', 'error')
-      }
-    },
-    [userTableData.length, setValue],
-  )
-
   const onSubmit = async (data: CreateUserFormData) => {
     if (isEditing) {
       await fetchUpdateUser(Number(id), data)
@@ -146,34 +95,10 @@ export const UsersCreate = () => {
   }
 
   useEffect(() => {
-    fetchGetAllLocals()
-  }, [fetchGetAllLocals])
-
-  useEffect(() => {
     if (isEditing) {
       fillUserFields()
     }
   }, [isEditing, id, fillUserFields])
-
-  useEffect(() => {
-    const avaliableAddress = getSphynxAddressDataStorage().find(
-      (s) => s.mac === sensorTagValue,
-    )
-
-    if (avaliableAddress) {
-      tagInputFill(avaliableAddress.ip)
-    }
-  }, [sensorTagValue, tagInputFill])
-
-  useEffect(() => {
-    const avaliableAddress = getSphynxAddressDataStorage().find(
-      (s) => s.mac === sensorBiometryValue,
-    )
-
-    if (avaliableAddress) {
-      biometryInputFill(avaliableAddress.ip)
-    }
-  }, [sensorBiometryValue, biometryInputFill])
 
   return (
     <Container>
@@ -198,8 +123,7 @@ export const UsersCreate = () => {
           <FormTitle> Dados pessoais </FormTitle>
           <FormText>
             Nesse formulário será possível cadastrar o usuário, para isso
-            preencha as informações e clique no botão de cadastrar tag para
-            ativar a leitura no sensor de tags
+            preencha as informações e clique no botão de salvar.
           </FormText>
         </ContainerFormAbout>
         <ContainerForm>
@@ -226,7 +150,7 @@ export const UsersCreate = () => {
 
           <Controller
             control={control}
-            name="email"
+            name="user"
             rules={{
               required: t('inputErrors.required'),
               pattern: {
@@ -240,29 +164,7 @@ export const UsersCreate = () => {
                 placeholder={t('placeholder.default')}
                 onChange={onChange}
                 label="Email"
-                errorMessage={errors.email?.message}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="password"
-            rules={{
-              required: t('inputErrors.required'),
-              minLength: {
-                value: 4,
-                message: t('inputErrors.minLength', { length: 4 }),
-              },
-            }}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                value={value}
-                type="password"
-                placeholder={t('placeholder.default')}
-                onChange={onChange}
-                label="Senha"
-                errorMessage={errors.password?.message}
+                errorMessage={errors.user?.message}
               />
             )}
           />
@@ -287,89 +189,6 @@ export const UsersCreate = () => {
               />
             )}
           />
-
-          <SocketInput>
-            <Controller
-              control={control}
-              name="sensorTag"
-              rules={
-                {
-                  // required: t('inputErrors.required')
-                }
-              }
-              render={({ field: { onChange, value } }) => (
-                <Select
-                  options={localPageData.map((local) => ({
-                    label: local.local.name,
-                    value: local.local.mac,
-                  }))}
-                  onChange={onChange}
-                  value={value}
-                  label="Selecionar sensor"
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="tag"
-              rules={
-                {
-                  // required: t('inputErrors.required')
-                }
-              }
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value}
-                  onChange={onChange}
-                  placeholder={t('placeholder.waiting')}
-                  label="TAG"
-                  readOnly
-                  errorMessage={errors.tag?.message}
-                />
-              )}
-            />
-          </SocketInput>
-          <SocketInput>
-            <Controller
-              control={control}
-              name="sensorBiometry"
-              rules={
-                {
-                  // required: t('inputErrors.required')
-                }
-              }
-              render={({ field: { onChange, value } }) => (
-                <Select
-                  options={localPageData.map((local) => ({
-                    label: local.local.name,
-                    value: local.local.mac,
-                  }))}
-                  onChange={onChange}
-                  value={value}
-                  label="Selecionar sensor"
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="fingerprint"
-              rules={
-                {
-                  // required: t('inputErrors.required')
-                }
-              }
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value}
-                  onChange={onChange}
-                  placeholder={t('placeholder.waiting')}
-                  label="Biometria"
-                  readOnly
-                  errorMessage={errors.tag?.message}
-                />
-              )}
-            />
-          </SocketInput>
         </ContainerForm>
       </ContainerFormMain>
       <FooterActionsContainer>
