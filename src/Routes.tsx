@@ -22,6 +22,7 @@ import { AuthContext } from 'contexts/AuthContext'
 import { Users } from 'pages/Users/UsersTable'
 import { UsersCreate } from 'pages/Users/UsersCreate'
 import { Home } from 'pages/Home'
+import { ForgotPassword } from 'pages/Auth/ForgotPassword'
 
 export const RouteApp = () => {
   const { user } = useContext(AuthContext)
@@ -44,6 +45,13 @@ export const RouteApp = () => {
         <Route
           path="/auth/login"
           element={isAuthenticated ? <Navigate to={'/'} replace /> : <Login />}
+        />
+
+        <Route
+          path="/auth/password-recovery"
+          element={
+            isAuthenticated ? <Navigate to={'/'} replace /> : <ForgotPassword />
+          }
         />
 
         <Route

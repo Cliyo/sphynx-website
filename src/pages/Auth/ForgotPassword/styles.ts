@@ -87,3 +87,12 @@ export const PasswordForgot = styled.p`
     color: ${({ theme }) => theme.COLORS.PRIMARY_LIGHT};
   }
 `
+
+export const ResultText = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.SMALL}px;
+    color: ${theme.COLORS.PRIMARY_MAIN};
+    font-weight: ${theme.FONT_WEIGHT.REGULAR};
+  `}
+  text-align: center;
+`

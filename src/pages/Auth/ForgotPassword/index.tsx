@@ -9,6 +9,7 @@ import {
   FormText,
   FormTitle,
   IconImage,
+  ResultText,
 } from './styles'
 import { Line } from 'components/Line'
 import { REGEX } from 'constants/regex'
@@ -16,9 +17,13 @@ import { Input } from 'components/Input'
 import { Button } from 'components/Button'
 import Icon from 'assets/icon.svg'
 import { ForgotPasswordEmailForm } from './types'
+import api from 'services/axios'
+import { useState } from 'react'
 
 export const ForgotPassword = () => {
   const { t } = useTranslation()
+
+  const [resultText, setResultText] = useState('')
 
   const {
     control,
@@ -31,7 +36,11 @@ export const ForgotPassword = () => {
   })
 
   const onSubmit = async (data: ForgotPasswordEmailForm) => {
-    console.log(data)
+    await api.post('/auth/password-recovery', { user: data.user })
+
+    setResultText(
+      'Se você tiver uma conta, receberá um e-mail com instruções para redefinir sua senha.',
+    )
   }
   return (
     <ForgotPasswordContainer>
@@ -67,6 +76,9 @@ export const ForgotPassword = () => {
               />
             )}
           />
+
+          <ResultText> {resultText} </ResultText>
+
           <Button
             color="PRIMARY_DARK"
             onClick={handleSubmit(onSubmit)}

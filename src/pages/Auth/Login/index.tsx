@@ -24,9 +24,12 @@ import {
 } from './styles'
 import { useContext } from 'react'
 import { AuthContext } from 'contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
   const { t } = useTranslation()
+
+  const navigate = useNavigate()
 
   const { fetchLogin } = useContext(AuthContext)
 
@@ -100,7 +103,9 @@ export const Login = () => {
               />
             )}
           />
-          <PasswordForgot>Esqueci minha senha</PasswordForgot>
+          <PasswordForgot onClick={() => navigate('/auth/password-recovery')}>
+            Esqueci minha senha
+          </PasswordForgot>
           <Button
             color="PRIMARY_DARK"
             onClick={handleSubmit(onSubmit)}
