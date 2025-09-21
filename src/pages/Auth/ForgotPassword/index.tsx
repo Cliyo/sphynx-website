@@ -15,6 +15,7 @@ import { REGEX } from 'constants/regex'
 import { Input } from 'components/Input'
 import { Button } from 'components/Button'
 import Icon from 'assets/icon.svg'
+import { ForgotPasswordEmailForm } from './types'
 
 export const ForgotPassword = () => {
   const { t } = useTranslation()
@@ -23,13 +24,13 @@ export const ForgotPassword = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ user: string }>({
+  } = useForm<ForgotPasswordEmailForm>({
     defaultValues: {
       user: '',
     },
   })
 
-  const onSubmit = async (data: { user: string }) => {
+  const onSubmit = async (data: ForgotPasswordEmailForm) => {
     console.log(data)
   }
   return (
