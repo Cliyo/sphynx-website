@@ -9,6 +9,7 @@
     "inputLabel": {
         "email": "E-mail",
         "password": "Senha",
+        "confirmPassword": "Confirmar Senha",
         "name": "Nome",
         "tag": "TAG",
         "ra": "RA",

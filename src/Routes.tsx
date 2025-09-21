@@ -23,6 +23,7 @@ import { Users } from 'pages/Users/UsersTable'
 import { UsersCreate } from 'pages/Users/UsersCreate'
 import { Home } from 'pages/Home'
 import { ForgotPassword } from 'pages/Auth/ForgotPassword'
+import { SetNewPassword } from 'pages/Auth/SetNewPassword'
 
 export const RouteApp = () => {
   const { user } = useContext(AuthContext)
@@ -51,6 +52,13 @@ export const RouteApp = () => {
           path="/auth/password-recovery"
           element={
             isAuthenticated ? <Navigate to={'/'} replace /> : <ForgotPassword />
+          }
+        />
+
+        <Route
+          path="/auth/password-recovery/:id/:hash"
+          element={
+            isAuthenticated ? <Navigate to={'/'} replace /> : <SetNewPassword />
           }
         />
 
