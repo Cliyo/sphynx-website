@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { NavigationBar } from 'components/NavigationBar'
 
-import { Login } from 'pages/Login'
+import { Login } from 'pages/Auth/Login'
 
 import { Customers } from 'pages/Customers/CustomersTable'
 import { CustomersCreate } from 'pages/Customers/CustomersCreate'

@@ -1,7 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from 'react'
 import { AuthContextDataProps, AuthContextProviderProps } from './types'
 import { api } from 'services/axios'
-import { LoginFormData } from 'pages/Login/types'
+import { LoginFormData } from 'pages/Auth/Login/types'
 import { SignInDTO, AuthDTO } from 'dtos/SignInDTO'
 import { JWTdecoder } from 'utils/JWTdecoder'
 import {
