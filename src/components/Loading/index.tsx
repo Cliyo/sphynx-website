@@ -12,7 +12,7 @@ export const Loading = (props: LoadingProps) => {
 
   return (
     <LoadingContainer>
-      <img src={Spinner} alt="Loading..." width="200px" />
+      <img src={Spinner} alt="Loading..." width="120px" />
     </LoadingContainer>
   )
 }
