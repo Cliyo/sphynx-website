@@ -16,6 +16,8 @@ export const AlertContextProvider = ({
   const [modalIsOpen, setIsOpen] = useState(false)
   const [modalProps, setModalProps] = useState<ModalProps>({} as ModalProps)
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const { title, message, onConfirm } = modalProps
 
   const handleToggleModal = () => {
@@ -33,7 +35,7 @@ export const AlertContextProvider = ({
   }
 
   return (
-    <AlertContext.Provider value={{ alert }}>
+    <AlertContext.Provider value={{ alert, isLoading, setIsLoading }}>
       {children}
 
       <ReactModal

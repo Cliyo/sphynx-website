@@ -39,13 +39,14 @@ export const SetNewPassword = () => {
 
   const onSubmit = async (data: NewPasswordForm) => {
     await api.post(`/auth/password-recovery/${id}/${hash}`, {
-      password: data.password,
+      newPassword: data.password,
     })
 
     notify(t('toastMessages.success'), 'success')
 
     navigate('auth/login')
   }
+
   return (
     <SetNewPasswordContainer>
       <ContainerForm>
@@ -72,6 +73,7 @@ export const SetNewPassword = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <Input
+                type="password"
                 value={value}
                 onChange={onChange}
                 placeholder={t('placeholder.default')}
@@ -93,6 +95,7 @@ export const SetNewPassword = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <Input
+                type="password"
                 value={value}
                 onChange={onChange}
                 placeholder={t('placeholder.default')}

@@ -24,15 +24,19 @@ import { UsersCreate } from 'pages/Users/UsersCreate'
 import { Home } from 'pages/Home'
 import { ForgotPassword } from 'pages/Auth/ForgotPassword'
 import { SetNewPassword } from 'pages/Auth/SetNewPassword'
+import { Loading } from 'components/Loading'
+import { AlertContext } from 'contexts/AlertContext'
 
 export const RouteApp = () => {
   const { user } = useContext(AuthContext)
+  const { isLoading } = useContext(AlertContext)
 
   const { isAuthenticated } = user
 
   return (
     <BrowserRouter>
       {isAuthenticated && <NavigationBar />}
+      <Loading isLoading={isLoading} />
       <Routes>
         <Route
           path="/"
