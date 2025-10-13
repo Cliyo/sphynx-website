@@ -26,6 +26,8 @@ import { ForgotPassword } from 'pages/Auth/ForgotPassword'
 import { SetNewPassword } from 'pages/Auth/SetNewPassword'
 import { Loading } from 'components/Loading'
 import { AlertContext } from 'contexts/AlertContext'
+import { UnitsCreate } from 'pages/Units/UnitsCreate'
+import { Units } from 'pages/Units/UnitsTable'
 
 export const RouteApp = () => {
   const { user } = useContext(AuthContext)
@@ -36,7 +38,7 @@ export const RouteApp = () => {
   return (
     <BrowserRouter>
       {isAuthenticated && <NavigationBar />}
-      <Loading isLoading={isLoading} />
+      {/* <Loading isLoading={isLoading} /> */}
       <Routes>
         <Route
           path="/"
@@ -63,6 +65,33 @@ export const RouteApp = () => {
           path="/auth/password-recovery/:id/:hash"
           element={
             isAuthenticated ? <Navigate to={'/'} replace /> : <SetNewPassword />
+          }
+        />
+
+        <Route
+          path="/units"
+          element={
+            <PrivateRoute>
+              <Units />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/units/new"
+          element={
+            <PrivateRoute>
+              <UnitsCreate />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/units/edit/:id"
+          element={
+            <PrivateRoute>
+              <UnitsCreate />
+            </PrivateRoute>
           }
         />
 

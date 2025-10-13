@@ -4,7 +4,8 @@
         "users": "Usuários",
         "consumers": "Dependentes",
         "groups": "Grupos",
-        "locals": "Locais"
+        "locals": "Locais",
+        "units": "Unidades"
     },
     "inputLabel": {
         "email": "E-mail",

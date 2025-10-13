@@ -8,10 +8,16 @@ export const routes: MenuOptionProps[] = [
     adminOnly: false,
   },
   {
+    iconName: 'IoCube',
+    name: 'Unidades',
+    path: '/units',
+    adminOnly: true,
+  },
+  {
     iconName: 'IoPerson',
     name: 'Usuários',
     path: '/users',
-    adminOnly: true,
+    adminOnly: false,
   },
   {
     iconName: 'IoPersonSharp',
