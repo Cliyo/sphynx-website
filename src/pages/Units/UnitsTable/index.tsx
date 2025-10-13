@@ -12,9 +12,8 @@ import { Input } from 'components/Input'
 import { Button } from 'components/Button'
 import { TopInfosContainer } from 'components/TopInfosContainer'
 
-import { useGroup } from 'hooks/useGroup'
-
 import { Container, ContainerHeader, NoRegisterText, Title } from './styles'
+import { useUnit } from 'hooks/useUnit'
 
 export const Units = () => {
   const { t } = useTranslation()
@@ -31,21 +30,20 @@ export const Units = () => {
 
   const name = watch('name')
 
-  const { groupPageData, fetchGetAllGroups, fetchGetAllGroupsByName } =
-    useGroup()
+  const { unitPageData, fetchGetAllUnits, fetchGetAllUnitsByName } = useUnit()
 
   useEffect(() => {
-    fetchGetAllGroups()
-  }, [fetchGetAllGroups])
+    fetchGetAllUnits()
+  }, [fetchGetAllUnits])
 
   useEffect(() => {
     if (name.length > 0) {
-      fetchGetAllGroupsByName(name)
+      fetchGetAllUnitsByName(name)
     }
     if (name.length === 0) {
-      fetchGetAllGroups()
+      fetchGetAllUnits()
     }
-  }, [fetchGetAllGroups, fetchGetAllGroupsByName, name])
+  }, [fetchGetAllUnits, fetchGetAllUnitsByName, name])
 
   return (
     <Container>
@@ -62,11 +60,11 @@ export const Units = () => {
         topInfos={[
           {
             title: 'Última ocorrência',
-            text: groupPageData[0]?.name ?? '-',
+            text: unitPageData[0]?.name ?? '-',
           },
           {
             title: 'Quantidade de ocorrências',
-            text: groupPageData?.length.toString() ?? '-',
+            text: unitPageData?.length.toString() ?? '-',
           },
         ]}
       />
@@ -93,12 +91,12 @@ export const Units = () => {
         )}
       />
 
-      {groupPageData.length === 0 ? (
+      {unitPageData.length === 0 ? (
         <NoRegisterText> {t('tableErrors.noData')} </NoRegisterText>
       ) : (
         <Table
           headers={groupsTableHeaders}
-          content={groupPageData.map((obj) => Object.values(obj))}
+          content={unitPageData.map((obj) => Object.values(obj))}
         />
       )}
     </Container>

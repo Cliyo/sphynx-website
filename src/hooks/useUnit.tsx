@@ -51,6 +51,13 @@ export const useUnit = () => {
     setIsLoading(false)
   }, [])
 
+  const fetchGetAllUnitsByName = useCallback(async (name: string) => {
+    setIsLoading(true)
+    const data = await api.get(`/units?name=${name}`)
+    setUnitPageData(data.data.data)
+    setIsLoading(false)
+  }, [])
+
   const fetchGetUnitById = useCallback(async (id: string) => {
     setIsLoading(true)
     const data = await api.get(`/units/${id}`)
@@ -77,6 +84,7 @@ export const useUnit = () => {
     fetchGetUnitById,
     fetchUpdateUnit,
     fetchDeleteUnitById,
+    fetchGetAllUnitsByName,
     unitPageData,
   }
 }
