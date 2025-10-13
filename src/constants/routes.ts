@@ -20,12 +20,6 @@ export const routes: MenuOptionProps[] = [
     adminOnly: false,
   },
   {
-    iconName: 'IoPersonSharp',
-    name: 'Dependentes',
-    path: '/customers',
-    adminOnly: false,
-  },
-  {
     iconName: 'IoMap',
     name: 'Locais',
     path: '/locals',

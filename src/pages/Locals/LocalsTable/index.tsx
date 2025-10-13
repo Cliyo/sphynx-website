@@ -64,7 +64,7 @@ export const Locals = () => {
             title: 'Último local adicionado',
             text:
               localPageData.length > 0
-                ? (localPageData[localPageData.length - 1].local.name ?? '-')
+                ? (localPageData[localPageData.length - 1].name ?? '-')
                 : '-',
           },
           {
@@ -102,9 +102,9 @@ export const Locals = () => {
         <Table
           headers={localsTableHeaders}
           content={localPageData.map((obj) => [
-            obj.local.id,
-            obj.local.name,
-            obj.local.mac,
+            obj.id,
+            obj.name,
+            obj.mac,
             obj.groups[0].name,
           ])}
         />

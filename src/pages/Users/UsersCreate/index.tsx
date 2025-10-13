@@ -22,8 +22,18 @@ import {
   FooterActionsContainer,
   FormText,
   FormTitle,
+  SocketInput,
   Title,
 } from './styles'
+import { Select } from 'components/Select'
+import { useLocal } from 'hooks/useLocal'
+import { useGroup } from 'hooks/useGroup'
+import {
+  getCustomerBiometrySocket,
+  getCustomerTagSocket,
+} from 'services/websocket'
+import { notify } from 'utils/notification'
+import { getSphynxAddressDataStorage } from 'storage/storage'
 
 export const UsersCreate = () => {
   const { id } = useParams()
@@ -35,7 +45,11 @@ export const UsersCreate = () => {
     fetchGetUserById,
     fetchDeleteUserById,
     fetchUpdateUser,
+    userTableData,
   } = useUser()
+
+  const { fetchGetAllLocals, localPageData } = useLocal()
+  const { fetchGetAllGroups, groupPageData } = useGroup()
 
   const { alert } = useAlert()
 
@@ -45,14 +59,23 @@ export const UsersCreate = () => {
     control,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<CreateUserFormData>({
     defaultValues: {
       name: '',
       user: '',
       ra: '',
+      tag: '',
+      sensorTag: '',
+      group: '',
+      fingerprint: Number(''),
+      sensorBiometry: '',
     },
   })
+
+  const sensorTagValue = watch('sensorTag')
+  const sensorBiometryValue = watch('sensorBiometry')
 
   const fillUserFields = useCallback(async () => {
     try {
@@ -69,6 +92,35 @@ export const UsersCreate = () => {
       console.error(error)
     }
   }, [fetchGetUserById, id, setValue])
+
+  const tagInputFill = useCallback(
+    async (ipAddress: string) => {
+      try {
+        const tagValue = await getCustomerTagSocket(ipAddress)
+
+        setValue('tag', tagValue)
+      } catch (error) {
+        notify('Conexão falhou', 'error')
+      }
+    },
+    [setValue],
+  )
+
+  const biometryInputFill = useCallback(
+    async (ipAddress: string) => {
+      try {
+        const biometry = await getCustomerBiometrySocket(
+          ipAddress,
+          userTableData.length,
+        )
+
+        setValue('fingerprint', biometry)
+      } catch (error) {
+        notify('Conexão falhou', 'error')
+      }
+    },
+    [userTableData.length, setValue],
+  )
 
   const handleDelete = async () => {
     alert({
@@ -99,6 +151,31 @@ export const UsersCreate = () => {
       fillUserFields()
     }
   }, [isEditing, id, fillUserFields])
+
+  useEffect(() => {
+    const avaliableAddress = getSphynxAddressDataStorage().find(
+      (s) => s.mac === sensorTagValue,
+    )
+
+    if (avaliableAddress) {
+      tagInputFill(avaliableAddress.ip)
+    }
+  }, [sensorTagValue, tagInputFill])
+
+  useEffect(() => {
+    const avaliableAddress = getSphynxAddressDataStorage().find(
+      (s) => s.mac === sensorBiometryValue,
+    )
+
+    if (avaliableAddress) {
+      biometryInputFill(avaliableAddress.ip)
+    }
+  }, [sensorBiometryValue, biometryInputFill])
+
+  useEffect(() => {
+    fetchGetAllGroups()
+    fetchGetAllLocals()
+  }, [fetchGetAllGroups, fetchGetAllLocals])
 
   return (
     <Container>
@@ -189,6 +266,105 @@ export const UsersCreate = () => {
               />
             )}
           />
+
+          <Controller
+            control={control}
+            name="group"
+            render={({ field: { value, onChange } }) => (
+              <Select
+                options={groupPageData.map((group) => ({
+                  label: group.name,
+                  value: group.id.toString(),
+                }))}
+                label="Grupo"
+                value={value}
+                onChange={(selectedOption) => onChange(selectedOption)}
+              />
+            )}
+          />
+
+          <SocketInput>
+            <Controller
+              control={control}
+              name="sensorTag"
+              rules={
+                {
+                  // required: t('inputErrors.required')
+                }
+              }
+              render={({ field: { onChange, value } }) => (
+                <Select
+                  options={localPageData.map((local) => ({
+                    label: local.name,
+                    value: local.mac,
+                  }))}
+                  onChange={onChange}
+                  value={value}
+                  label="Selecionar sensor"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="tag"
+              rules={
+                {
+                  // required: t('inputErrors.required')
+                }
+              }
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  value={value}
+                  onChange={onChange}
+                  placeholder={t('placeholder.waiting')}
+                  label="TAG"
+                  readOnly
+                  errorMessage={errors.tag?.message}
+                />
+              )}
+            />
+          </SocketInput>
+          <SocketInput>
+            <Controller
+              control={control}
+              name="sensorBiometry"
+              rules={
+                {
+                  // required: t('inputErrors.required')
+                }
+              }
+              render={({ field: { onChange, value } }) => (
+                <Select
+                  options={localPageData.map((local) => ({
+                    label: local.name,
+                    value: local.mac,
+                  }))}
+                  onChange={onChange}
+                  value={value}
+                  label="Selecionar sensor"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="fingerprint"
+              rules={
+                {
+                  // required: t('inputErrors.required')
+                }
+              }
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  value={value}
+                  onChange={onChange}
+                  placeholder={t('placeholder.waiting')}
+                  label="Biometria"
+                  readOnly
+                  errorMessage={errors.tag?.message}
+                />
+              )}
+            />
+          </SocketInput>
         </ContainerForm>
       </ContainerFormMain>
       <FooterActionsContainer>

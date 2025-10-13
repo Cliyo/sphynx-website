@@ -68,8 +68,8 @@ export const LocalsCreate = () => {
     try {
       const localGroupData = await fetchGetLocalById(id as string)
       if (localGroupData) {
-        setValue('name', localGroupData.local.name)
-        setValue('mac', localGroupData.local.mac)
+        setValue('name', localGroupData.name)
+        setValue('mac', localGroupData.mac)
         setValue('groups', [localGroupData.groups[0].id.toString()])
       }
     } catch (error) {

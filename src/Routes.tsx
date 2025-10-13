@@ -4,9 +4,6 @@ import { NavigationBar } from 'components/NavigationBar'
 
 import { Login } from 'pages/Auth/Login'
 
-import { Customers } from 'pages/Customers/CustomersTable'
-import { CustomersCreate } from 'pages/Customers/CustomersCreate'
-
 import { Locals } from 'pages/Locals/LocalsTable'
 
 import { Access } from 'pages/Access'
@@ -24,14 +21,14 @@ import { UsersCreate } from 'pages/Users/UsersCreate'
 import { Home } from 'pages/Home'
 import { ForgotPassword } from 'pages/Auth/ForgotPassword'
 import { SetNewPassword } from 'pages/Auth/SetNewPassword'
-import { Loading } from 'components/Loading'
-import { AlertContext } from 'contexts/AlertContext'
+// import { Loading } from 'components/Loading'
+// import { AlertContext } from 'contexts/AlertContext'
 import { UnitsCreate } from 'pages/Units/UnitsCreate'
 import { Units } from 'pages/Units/UnitsTable'
 
 export const RouteApp = () => {
   const { user } = useContext(AuthContext)
-  const { isLoading } = useContext(AlertContext)
+  // const { isLoading } = useContext(AlertContext)
 
   const { isAuthenticated } = user
 
@@ -108,31 +105,6 @@ export const RouteApp = () => {
           element={
             <PrivateRoute>
               <UsersCreate />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/customers"
-          element={
-            <PrivateRoute>
-              <Customers />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/customers/new"
-          element={
-            <PrivateRoute>
-              <CustomersCreate />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/customers/edit/:id"
-          element={
-            <PrivateRoute>
-              <CustomersCreate />
             </PrivateRoute>
           }
         />

@@ -6,7 +6,7 @@ import { api } from 'services/axios'
 
 import { CreateLocalFormData } from 'pages/Locals/LocalsCreate/types'
 
-import { LocalGroupItemDTO } from 'dtos/LocalDTO'
+import { LocalDTO } from 'dtos/LocalDTO'
 
 import { notify } from 'utils/notification'
 import { AlertContext } from 'contexts/AlertContext'
@@ -18,7 +18,7 @@ export const useLocal = () => {
 
   const { t } = useTranslation()
 
-  const [localPageData, setLocalPageData] = useState<LocalGroupItemDTO[]>([])
+  const [localPageData, setLocalPageData] = useState<LocalDTO[]>([])
 
   const fetchCreateLocal = async (data: CreateLocalFormData) => {
     setIsLoading(true)
@@ -65,7 +65,7 @@ export const useLocal = () => {
     setIsLoading(true)
     const data = await api.get(`/locals/${id}`)
     setIsLoading(false)
-    return data.data.data as LocalGroupItemDTO
+    return data.data.data as LocalDTO
   }, [])
 
   const fetchDeleteLocalById = async (id: string) => {

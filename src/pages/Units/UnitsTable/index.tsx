@@ -50,8 +50,8 @@ export const Units = () => {
   return (
     <Container>
       <ContainerHeader>
-        <Title> {t('title.groups')} </Title>
-        <NavLink to={'/groups/new'}>
+        <Title> {t('title.units')} </Title>
+        <NavLink to={'/units/new'}>
           <Button text={t('button.create')} color="PRIMARY_LIGHT" />
         </NavLink>
       </ContainerHeader>
