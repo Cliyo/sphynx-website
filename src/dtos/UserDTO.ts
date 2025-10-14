@@ -3,4 +3,7 @@ export type UserDTO = {
   name: string
   ra: string
   user: string
+  tag: string
+  isAdmin: boolean
+  fingerprint: number
 }

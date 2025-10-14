@@ -19,7 +19,14 @@ export const useUser = () => {
   const fetchCreateUser = async (data: CreateUserFormData) => {
     setIsLoading(true)
     try {
-      await api.post('/auth/register', data)
+      const finalRequestObject = {
+        ...data,
+        unitId: data.unitId === 0 ? null : data.unitId,
+        groupId: data.groupId === 0 ? null : data.groupId,
+        isAdmin: data.isAdmin === 'true',
+      }
+
+      await api.post('/users', finalRequestObject)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/users')
@@ -32,7 +39,7 @@ export const useUser = () => {
   const fetchUpdateUser = async (id: number, data: CreateUserFormData) => {
     setIsLoading(true)
     try {
-      await api.put(`/auth/users/${id}`, data)
+      await api.put(`/users/${id}`, data)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/users')
@@ -44,7 +51,7 @@ export const useUser = () => {
 
   const fetchGetAllUsers = useCallback(async () => {
     setIsLoading(true)
-    const request = await api.get('/auth/users')
+    const request = await api.get('/users')
     const data = request.data.data as UserDTO[]
 
     const dataFormatted = data.map((user) => {
@@ -62,7 +69,7 @@ export const useUser = () => {
 
   const fetchGetUserById = useCallback(async (id: string) => {
     setIsLoading(true)
-    const request = await api.get(`/auth/users/${id}`)
+    const request = await api.get(`/users/${id}`)
     setIsLoading(false)
     return request.data.data as UserDTO
   }, [])
@@ -70,7 +77,7 @@ export const useUser = () => {
   const fetchDeleteUserById = async (id: string) => {
     setIsLoading(true)
     try {
-      await api.delete(`/auth/users/${id}`)
+      await api.delete(`/users/${id}`)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/users')

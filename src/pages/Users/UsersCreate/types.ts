@@ -1,10 +1,12 @@
 export type CreateUserFormData = {
   name: string
+  unitId: number
   ra: string
   user: string
   tag: string
+  isAdmin: string
   fingerprint: number
-  group: string
+  groupId: number
   sensorTag: string
   sensorBiometry: string
 }

@@ -39,7 +39,7 @@ export const Access = () => {
               },
               {
                 title: 'Último usuário',
-                text: accessTableData[0].consumer.name,
+                text: accessTableData[0].user.name,
               },
               {
                 title: 'Situação',
@@ -63,7 +63,7 @@ export const Access = () => {
           headers={accessTableHeaders}
           content={accessTableData.map((obj) => [
             obj.id,
-            obj.consumer.name,
+            obj.user.name,
             obj.local.name,
             obj.date instanceof Date
               ? obj.date.toLocaleDateString('pt-BR', { timeZone: 'UTC' })

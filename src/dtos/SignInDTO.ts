@@ -8,6 +8,7 @@ export type SignInDecodedDTO = {
   sub: string
   name: string
   isAdmin: boolean
+  unitId: number
 }
 
 export type AuthDTO = SignInDecodedDTO & {

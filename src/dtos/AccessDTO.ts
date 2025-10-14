@@ -1,9 +1,9 @@
 import { LocalDTO } from './LocalDTO'
-import { CustomerItemDTO } from './CustomerDTO'
+import { UserDTO } from './UserDTO'
 
 export type AccessItemDTO = {
   id: number
-  consumer: CustomerItemDTO
+  user: UserDTO
   local: LocalDTO
   status: boolean
   date: Date

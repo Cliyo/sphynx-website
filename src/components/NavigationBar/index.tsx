@@ -37,6 +37,8 @@ export const NavigationBar = () => {
     })
   }
 
+  const userRole = user.isAdmin ? 'admin' : 'user'
+
   return (
     <Container>
       <LogoContainer>
@@ -48,7 +50,7 @@ export const NavigationBar = () => {
 
       {routes.map(
         (route) =>
-          (route.adminOnly ? user.isAdmin : true) && (
+          route.accessList.includes(userRole) && (
             <MenuOption to={route.path} key={route.name}>
               <Icon color={'NEUTRAL_0'} size="20" name={route.iconName} />
               <MenuOptionText> {route.name} </MenuOptionText>

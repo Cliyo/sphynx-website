@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -34,8 +34,12 @@ import {
 } from 'services/websocket'
 import { notify } from 'utils/notification'
 import { getSphynxAddressDataStorage } from 'storage/storage'
+import { AuthContext } from 'contexts/AuthContext'
+import { useUnit } from 'hooks/useUnit'
 
 export const UsersCreate = () => {
+  const { user } = useContext(AuthContext)
+
   const { id } = useParams()
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -48,6 +52,7 @@ export const UsersCreate = () => {
     userTableData,
   } = useUser()
 
+  const { fetchGetAllUnits, unitPageData } = useUnit()
   const { fetchGetAllLocals, localPageData } = useLocal()
   const { fetchGetAllGroups, groupPageData } = useGroup()
 
@@ -67,13 +72,16 @@ export const UsersCreate = () => {
       user: '',
       ra: '',
       tag: '',
+      unitId: user.isAdmin ? 0 : user.unitId,
       sensorTag: '',
-      group: '',
+      isAdmin: 'false',
+      groupId: 0,
       fingerprint: Number(''),
       sensorBiometry: '',
     },
   })
 
+  const isAdminValue = watch('isAdmin') === 'true'
   const sensorTagValue = watch('sensorTag')
   const sensorBiometryValue = watch('sensorBiometry')
 
@@ -175,7 +183,8 @@ export const UsersCreate = () => {
   useEffect(() => {
     fetchGetAllGroups()
     fetchGetAllLocals()
-  }, [fetchGetAllGroups, fetchGetAllLocals])
+    fetchGetAllUnits()
+  }, [fetchGetAllGroups, fetchGetAllLocals, fetchGetAllUnits])
 
   return (
     <Container>
@@ -204,6 +213,46 @@ export const UsersCreate = () => {
           </FormText>
         </ContainerFormAbout>
         <ContainerForm>
+          {user.isAdmin && (
+            <>
+              <Controller
+                control={control}
+                name="isAdmin"
+                rules={{
+                  required: t('inputErrors.required'),
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    options={[
+                      { label: 'Administrador', value: true.toString() },
+                      { label: 'Usuário', value: false.toString() },
+                    ]}
+                    onChange={onChange}
+                    value={value.toString()}
+                    label="Selecionar Rule"
+                  />
+                )}
+              />
+              {!isAdminValue && (
+                <Controller
+                  control={control}
+                  name="unitId"
+                  render={({ field: { value, onChange } }) => (
+                    <Select
+                      options={unitPageData.map((unit) => ({
+                        label: unit.name,
+                        value: unit.id,
+                      }))}
+                      label="Unidade"
+                      value={value}
+                      onChange={(selectedOption) => onChange(selectedOption)}
+                    />
+                  )}
+                />
+              )}
+            </>
+          )}
+
           <Controller
             control={control}
             name="name"
@@ -267,21 +316,23 @@ export const UsersCreate = () => {
             )}
           />
 
-          <Controller
-            control={control}
-            name="group"
-            render={({ field: { value, onChange } }) => (
-              <Select
-                options={groupPageData.map((group) => ({
-                  label: group.name,
-                  value: group.id.toString(),
-                }))}
-                label="Grupo"
-                value={value}
-                onChange={(selectedOption) => onChange(selectedOption)}
-              />
-            )}
-          />
+          {!user.isAdmin && (
+            <Controller
+              control={control}
+              name="groupId"
+              render={({ field: { value, onChange } }) => (
+                <Select
+                  options={groupPageData.map((group) => ({
+                    label: group.name,
+                    value: group.id.toString(),
+                  }))}
+                  label="Grupo"
+                  value={value}
+                  onChange={(selectedOption) => onChange(selectedOption)}
+                />
+              )}
+            />
+          )}
 
           <SocketInput>
             <Controller
@@ -318,7 +369,6 @@ export const UsersCreate = () => {
                   onChange={onChange}
                   placeholder={t('placeholder.waiting')}
                   label="TAG"
-                  readOnly
                   errorMessage={errors.tag?.message}
                 />
               )}
