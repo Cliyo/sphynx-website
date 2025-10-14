@@ -21,8 +21,8 @@ export const useUser = () => {
     try {
       const finalRequestObject = {
         ...data,
-        unitId: data.unitId === 0 ? null : data.unitId,
-        groupId: data.groupId === 0 ? null : data.groupId,
+        unitId: data.unitId === 0 ? null : Number(data.unitId),
+        groupId: data.groupId === 0 ? null : Number(data.groupId),
         isAdmin: data.isAdmin === 'true',
       }
 
