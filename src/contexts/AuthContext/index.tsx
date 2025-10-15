@@ -46,6 +46,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       try {
         const { data } = await api.post<SignInDTO>('/auth/login', formData)
 
+        console.log(data)
+
         if (data) {
           saveAuthDataStorage({
             token: data.token,
@@ -66,7 +68,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const signOut = useCallback(() => {
     removeAuthDataStorage()
     setUser({} as AuthDTO)
-    api.defaults.headers.common.Authorization = ''
+    api.defaults.headers.common.Authorization = undefined
   }, [])
 
   useEffect(() => {
