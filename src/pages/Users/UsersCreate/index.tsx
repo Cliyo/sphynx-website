@@ -183,8 +183,10 @@ export const UsersCreate = () => {
   useEffect(() => {
     fetchGetAllGroups()
     fetchGetAllLocals()
-    fetchGetAllUnits()
-  }, [fetchGetAllGroups, fetchGetAllLocals, fetchGetAllUnits])
+    if (user.isAdmin) {
+      fetchGetAllUnits()
+    }
+  }, [fetchGetAllGroups, fetchGetAllLocals, fetchGetAllUnits, user])
 
   return (
     <Container>
