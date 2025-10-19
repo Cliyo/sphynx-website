@@ -90,11 +90,13 @@ export const UsersCreate = () => {
       const userData = await fetchGetUserById(id as string)
 
       if (userData) {
-        const { name, user, ra } = userData
+        const { name, user, ra, tag, group } = userData
 
         setValue('name', name)
         setValue('user', user)
         setValue('ra', ra)
+        setValue('tag', tag)
+        setValue('groupId', group.id)
       }
     } catch (error) {
       console.error(error)

@@ -110,6 +110,15 @@ export const RouteApp = () => {
         />
 
         <Route
+          path="/users/edit/:id"
+          element={
+            <PrivateRoute>
+              <UsersCreate />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
           path="/locals"
           element={
             <PrivateRoute>
