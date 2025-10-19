@@ -71,7 +71,7 @@ export const UsersCreate = () => {
       name: '',
       user: '',
       ra: '',
-      tag: '',
+      tag: undefined,
       unitId: user.isAdmin ? 0 : user.unitId,
       sensorTag: '',
       isAdmin: 'false',
