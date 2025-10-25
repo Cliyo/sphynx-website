@@ -14,7 +14,13 @@ export const TableBody = (props: BodyProps) => {
         <BodyLine key={index}>
           {line.map(
             (text, index) =>
-              index !== 0 && <BodyItem key={index}> {text} </BodyItem>,
+              index !== 0 && (
+                <BodyItem key={index}>
+                  {typeof text === 'string' || typeof text === 'number'
+                    ? text
+                    : ''}
+                </BodyItem>
+              ),
           )}
           <BodyItem>
             <NavLink to={`${path}/edit/${line[0]}`}>

@@ -62,6 +62,12 @@ export const GroupsCreate = () => {
 
       if (groupData) {
         setValue('name', groupData.name)
+        setValue(
+          'weekDays',
+          groupData.weekDays.map(
+            (day) => WeekDaysEnum[day.name as keyof typeof WeekDaysEnum],
+          ),
+        )
       }
     } catch (error) {
       console.error(error)
@@ -88,8 +94,6 @@ export const GroupsCreate = () => {
     if (isEditing) {
       await fetchUpdateGroup(Number(id), data)
     } else {
-      console.log(data)
-
       await fetchCreateGroup(data)
     }
   }

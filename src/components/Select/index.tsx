@@ -35,8 +35,16 @@ export const Select = (props: SelectProps) => {
   }
 
   useEffect(() => {
-    onChange?.(optionsSelected as string[])
+    console.log('optionsSelected:', optionsSelected)
+    if (optionsSelected !== value) {
+      onChange?.(optionsSelected as string[])
+    }
   }, [optionsSelected])
+
+  useEffect(() => {
+    console.log('value:', value)
+    setOptionsSelected(Array.isArray(value) ? value : [])
+  }, [value])
 
   return (
     <Container>

@@ -45,7 +45,16 @@ export const useGroup = () => {
   const fetchUpdateGroup = async (id: number, data: CreateGroupFormData) => {
     setIsLoading(true)
     try {
-      await api.put(`/groups/${id}`, data)
+      const formattedData = {
+        ...data,
+        weekDays: data.weekDays.map((day) => {
+          return Object.keys(WeekDaysEnum).find(
+            (key) => WeekDaysEnum[key as keyof typeof WeekDaysEnum] === day,
+          ) as keyof typeof WeekDaysEnum
+        }),
+      }
+
+      await api.put(`/groups/${id}`, formattedData)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/groups')
