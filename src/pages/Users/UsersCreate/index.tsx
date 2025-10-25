@@ -337,7 +337,6 @@ export const UsersCreate = () => {
             )}
           />
 
-          {/* {!user.isAdmin && ( */}
           <Controller
             control={control}
             name="permissionMenu"
@@ -354,7 +353,6 @@ export const UsersCreate = () => {
               />
             )}
           />
-          {/* )} */}
 
           {!user.isAdmin && (
             <Controller
