@@ -91,13 +91,20 @@ export const UsersCreate = () => {
       const userData = await fetchGetUserById(id as string)
 
       if (userData) {
-        const { name, user, ra, tag, group } = userData
+        const { name, user, ra, tag, group, permissionMenus } = userData
 
         setValue('name', name)
         setValue('user', user)
         setValue('ra', ra)
         setValue('tag', tag)
         setValue('groupId', group.id)
+        setValue(
+          'permissionMenu',
+          permissionMenus.map(
+            (menu) =>
+              PermissionMenuEnum[menu.name as keyof typeof PermissionMenuEnum],
+          ),
+        )
       }
     } catch (error) {
       console.error(error)

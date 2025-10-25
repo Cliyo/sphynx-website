@@ -7,6 +7,10 @@ export type UserDTO = {
   user: string
   tag: string
   group: GroupItemDTO
+  permissionMenus: {
+    id: number
+    name: string
+  }[]
   isAdmin: boolean
   fingerprint: number
 }
