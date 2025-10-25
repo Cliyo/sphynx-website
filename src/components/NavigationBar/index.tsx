@@ -50,7 +50,8 @@ export const NavigationBar = () => {
 
       {routes.map(
         (route) =>
-          route.accessList.includes(userRole) && (
+          route.accessList.includes(userRole) &&
+          (route.menu ? user.permissionMenu.includes(route.menu) : true) && (
             <MenuOption to={route.path} key={route.name}>
               <Icon color={'NEUTRAL_0'} size="20" name={route.iconName} />
               <MenuOptionText> {route.name} </MenuOptionText>

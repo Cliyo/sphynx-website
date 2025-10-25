@@ -10,6 +10,7 @@ import {
   saveAuthDataStorage,
 } from 'storage/storage'
 import { notify } from 'utils/notification'
+import { PermissionMenuEnum } from 'utils/enums/PermissionMenusEnum'
 
 export const AuthContext = createContext<AuthContextDataProps>(
   {} as AuthContextDataProps,
@@ -23,9 +24,19 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       const jwtDecoded = JWTdecoder(token)
 
       if (jwtDecoded?.sub) {
+        const mappedPerssions =
+          jwtDecoded.permissionMenu
+            ?.map((key: string) => {
+              const value =
+                PermissionMenuEnum[key as keyof typeof PermissionMenuEnum]
+              return value
+            })
+            .filter(Boolean) || []
+
         setUser({
           isAuthenticated: true,
           ...jwtDecoded,
+          permissionMenu: mappedPerssions,
         })
 
         api.defaults.headers.common.Authorization = `Bearer ${token}`
