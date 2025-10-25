@@ -25,6 +25,8 @@ import {
   Title,
 } from './styles'
 import { useAlert } from 'hooks/useAlert'
+import { Select } from 'components/Select'
+import { WeekDaysEnum } from 'utils/enums/WeekDaysEnum'
 
 export const GroupsCreate = () => {
   const { id } = useParams()
@@ -50,6 +52,7 @@ export const GroupsCreate = () => {
   } = useForm<CreateGroupFormData>({
     defaultValues: {
       name: '',
+      weekDays: [],
     },
   })
 
@@ -85,7 +88,9 @@ export const GroupsCreate = () => {
     if (isEditing) {
       await fetchUpdateGroup(Number(id), data)
     } else {
-      await fetchCreateGroup(data)
+      console.log(data)
+
+      // await fetchCreateGroup(data)
     }
   }
 
@@ -139,6 +144,23 @@ export const GroupsCreate = () => {
                 placeholder={t('placeholder.default')}
                 label="Nome"
                 errorMessage={errors.name?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="weekDays"
+            render={({ field: { value, onChange } }) => (
+              <Select
+                options={Object.values(WeekDaysEnum).map((day) => ({
+                  label: day,
+                  value: day,
+                }))}
+                multiple
+                label="Dias da semana"
+                value={value}
+                onChange={(selectedOption) => onChange(selectedOption)}
               />
             )}
           />

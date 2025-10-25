@@ -52,3 +52,82 @@ export const ErrorMessage = styled.p`
     font-size: ${theme.FONT_SIZE.SMALL}px;
   `}
 `
+
+export const SelectMultipleInput = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  border: 10px;
+  border: 0;
+
+  width: 100%;
+  min-height: 50px;
+
+  background-color: ${({ theme }) => theme.COLORS.NEUTRAL_0};
+
+  padding: 15px;
+
+  border-radius: 8px;
+  border: ${({ theme }) => `1px solid ${theme.COLORS.NEUTRAL_900}`};
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  p {
+    ${({ theme }) => css`
+      color: ${theme.COLORS.NEUTRAL_900};
+      font-size: ${theme.FONT_SIZE.SMALL}px;
+
+      background-color: ${theme.COLORS.NEUTRAL_300};
+      padding: 4px 8px;
+      border-radius: 4px;
+
+      cursor: pointer;
+    `}
+  }
+
+  span {
+    ${({ theme }) => css`
+      color: ${theme.COLORS.NEUTRAL_500};
+      font-size: ${theme.FONT_SIZE.SMALL}px;
+
+      border-radius: 4px;
+    `}
+  }
+`
+
+interface OptionsMenuProps {
+  isVisible: boolean
+}
+
+export const OptionsMenu = styled.div<OptionsMenuProps>`
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  max-height: 180px;
+  overflow-y: auto;
+  background-color: ${({ theme }) => theme.COLORS.NEUTRAL_0};
+  border: ${({ theme }) => `1px solid ${theme.COLORS.NEUTRAL_900}`};
+  border-radius: 8px;
+  z-index: 10;
+
+  ${({ isVisible }) => css`
+    display: ${isVisible ? 'block' : 'none'};
+  `}
+`
+
+export const OptionItem = styled.div`
+  padding: 10px 15px;
+  cursor: pointer;
+
+  ${({ theme }) => css`
+    color: ${theme.COLORS.NEUTRAL_900};
+    font-size: ${theme.FONT_SIZE.SMALL}px;
+
+    &:hover {
+      background-color: ${theme.COLORS.PRIMARY_LIGHT};
+    }
+  `}
+`
