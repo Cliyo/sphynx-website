@@ -50,7 +50,7 @@ export const Select = (props: SelectProps) => {
     <Container>
       <Label>{label}</Label>
       {multiple ? (
-        <>
+        <div onMouseLeave={() => setIsVisible(false)}>
           <SelectMultipleInput onClick={(e) => handleSelectMultipleClick(e)}>
             {optionsSelected.map((option) => (
               <p
@@ -83,7 +83,7 @@ export const Select = (props: SelectProps) => {
               )
             })}
           </OptionsMenu>
-        </>
+        </div>
       ) : (
         <SelectInput value={value} onChange={(e) => onChange?.(e.target.value)}>
           <SelectOption value="0">Selecione uma opção</SelectOption>
