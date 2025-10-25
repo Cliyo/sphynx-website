@@ -23,20 +23,27 @@ export const Select = (props: SelectProps) => {
   }
 
   const handleMultipleOptionClicked = (value: string) => {
-    setOptionsSelected((prev) => [...prev, value])
-
+    const newSelection = [...optionsSelected, value]
+    setOptionsSelected(newSelection)
+    onChange?.(newSelection)
     setIsVisible(false)
   }
 
   const handleSelectedOptionClicked = (value: string) => {
-    setOptionsSelected((prev) =>
-      prev.filter((optionValue) => optionValue !== value),
+    const newSelection = optionsSelected.filter(
+      (optionValue) => optionValue !== value,
     )
+    setOptionsSelected(newSelection)
+    onChange?.(newSelection)
   }
 
   useEffect(() => {
     if (!multiple) return
-    setOptionsSelected(Array.isArray(value) ? value : [])
+    const newValue = Array.isArray(value) ? value : []
+
+    if (JSON.stringify(newValue) !== JSON.stringify(optionsSelected)) {
+      setOptionsSelected(newValue)
+    }
   }, [value, multiple])
 
   return (

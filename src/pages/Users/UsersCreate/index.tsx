@@ -79,6 +79,7 @@ export const UsersCreate = () => {
       groupId: 0,
       fingerprint: Number(''),
       sensorBiometry: '',
+      permissionMenu: [],
     },
   })
 
