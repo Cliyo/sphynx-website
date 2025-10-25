@@ -1,8 +1,7 @@
 export enum PermissionMenuEnum {
-  DASHBOARD,
-  ACCESS,
-  USERS,
-  GROUPS,
-  LOCALS,
-  DEPENDENTS,
+  DASHBOARD = 'DASHBOARD',
+  ACCESS = 'ACCESS',
+  USERS = 'USERS',
+  GROUPS = 'GROUPS',
+  LOCALS = 'LOCALS',
 }

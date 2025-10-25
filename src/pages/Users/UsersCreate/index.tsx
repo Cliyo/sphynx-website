@@ -36,6 +36,7 @@ import { notify } from 'utils/notification'
 import { getSphynxAddressDataStorage } from 'storage/storage'
 import { AuthContext } from 'contexts/AuthContext'
 import { useUnit } from 'hooks/useUnit'
+import { PermissionMenuEnum } from 'utils/enums/PermissionMenusEnum'
 
 export const UsersCreate = () => {
   const { user } = useContext(AuthContext)
@@ -319,6 +320,25 @@ export const UsersCreate = () => {
               />
             )}
           />
+
+          {!user.isAdmin && (
+            <Controller
+              control={control}
+              name="permissionMenu"
+              render={({ field: { value, onChange } }) => (
+                <Select
+                  options={Object.values(PermissionMenuEnum).map((menu) => ({
+                    label: menu,
+                    value: menu,
+                  }))}
+                  multiple
+                  label="Permissões de acesso"
+                  value={value}
+                  onChange={(selectedOption) => onChange(selectedOption)}
+                />
+              )}
+            />
+          )}
 
           {!user.isAdmin && (
             <Controller

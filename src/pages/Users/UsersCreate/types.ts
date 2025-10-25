@@ -1,3 +1,5 @@
+import { PermissionMenuEnum } from 'utils/enums/PermissionMenusEnum'
+
 export type CreateUserFormData = {
   name: string
   unitId: number
@@ -9,4 +11,5 @@ export type CreateUserFormData = {
   groupId: number
   sensorTag: string
   sensorBiometry: string
+  permissionMenu: PermissionMenuEnum[]
 }
