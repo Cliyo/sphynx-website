@@ -46,8 +46,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       try {
         const { data } = await api.post<SignInDTO>('/auth/login', formData)
 
-        console.log(data)
-
         if (data) {
           saveAuthDataStorage({
             token: data.token,
