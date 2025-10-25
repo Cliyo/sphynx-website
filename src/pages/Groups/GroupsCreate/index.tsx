@@ -90,7 +90,7 @@ export const GroupsCreate = () => {
     } else {
       console.log(data)
 
-      // await fetchCreateGroup(data)
+      await fetchCreateGroup(data)
     }
   }
 

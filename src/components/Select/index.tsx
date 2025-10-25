@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import {
   Container,
   ErrorMessage,
@@ -33,6 +33,10 @@ export const Select = (props: SelectProps) => {
       prev.filter((optionValue) => optionValue !== value),
     )
   }
+
+  useEffect(() => {
+    onChange?.(optionsSelected as string[])
+  }, [optionsSelected])
 
   return (
     <Container>

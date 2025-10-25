@@ -8,6 +8,7 @@ import { CreateGroupFormData } from 'pages/Groups/GroupsCreate/types'
 import { notify } from 'utils/notification'
 import { useTranslation } from 'react-i18next'
 import { AlertContext } from 'contexts/AlertContext'
+import { WeekDaysEnum } from 'utils/enums/WeekDaysEnum'
 
 export const useGroup = () => {
   const { setIsLoading } = useContext(AlertContext)
@@ -20,8 +21,18 @@ export const useGroup = () => {
 
   const fetchCreateGroup = async (data: CreateGroupFormData) => {
     setIsLoading(true)
+
+    const formattedData = {
+      ...data,
+      weekDays: data.weekDays.map((day) => {
+        return Object.keys(WeekDaysEnum).find(
+          (key) => WeekDaysEnum[key as keyof typeof WeekDaysEnum] === day,
+        ) as keyof typeof WeekDaysEnum
+      }),
+    }
+
     try {
-      await api.post('/groups', data)
+      await api.post('/groups', formattedData)
       notify(t('toastMessages.success'), 'success')
 
       navigate('/groups')
