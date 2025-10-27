@@ -9,12 +9,12 @@ import {
   SelectMultipleInput,
   SelectOption,
 } from './styles'
-import { SelectProps } from './types'
+import { Option, SelectProps } from './types'
 
 export const Select = (props: SelectProps) => {
   const { label, options, errorMessage, value, onChange, multiple } = props
 
-  const [optionsSelected, setOptionsSelected] = useState<string[]>([])
+  const [optionsSelected, setOptionsSelected] = useState<Option[]>([])
   const [isVisible, setIsVisible] = useState(false)
 
   const handleSelectMultipleClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -22,29 +22,37 @@ export const Select = (props: SelectProps) => {
     setIsVisible(!isVisible)
   }
 
-  const handleMultipleOptionClicked = (value: string) => {
-    const newSelection = [...optionsSelected, value]
+  const handleMultipleOptionClicked = (option: Option) => {
+    const newSelection = [...optionsSelected, option]
     setOptionsSelected(newSelection)
-    onChange?.(newSelection)
+    onChange?.(newSelection.map((option) => option.value))
     setIsVisible(false)
   }
 
-  const handleSelectedOptionClicked = (value: string) => {
+  const handleSelectedOptionClicked = (option: Option) => {
     const newSelection = optionsSelected.filter(
-      (optionValue) => optionValue !== value,
+      (optionSelected) => optionSelected.value !== option.value,
     )
     setOptionsSelected(newSelection)
-    onChange?.(newSelection)
+    onChange?.(newSelection.map((option) => option.value))
   }
 
   useEffect(() => {
     if (!multiple) return
     const newValue = Array.isArray(value) ? value : []
 
-    if (JSON.stringify(newValue) !== JSON.stringify(optionsSelected)) {
-      setOptionsSelected(newValue)
+    const selectedOptions = options.filter((option) =>
+      newValue.includes(option.value),
+    )
+    if (
+      selectedOptions.length !== optionsSelected.length ||
+      !selectedOptions.every(
+        (opt, idx) => opt.value === optionsSelected[idx]?.value,
+      )
+    ) {
+      setOptionsSelected(selectedOptions)
     }
-  }, [value, multiple])
+  }, [value, multiple, optionsSelected, options])
 
   return (
     <Container>
@@ -52,31 +60,29 @@ export const Select = (props: SelectProps) => {
       {multiple ? (
         <div onMouseLeave={() => setIsVisible(false)}>
           <SelectMultipleInput onClick={(e) => handleSelectMultipleClick(e)}>
-            {optionsSelected.map((option) => (
+            {optionsSelected.map((option: Option) => (
               <p
                 onClick={() => handleSelectedOptionClicked(option)}
-                key={option}
+                key={option.value}
               >
-                {option}
+                {option.label}
               </p>
             ))}
             {
               <span>
                 {optionsSelected.length === 0 &&
-                  'Selecione algum dia na semana'}
+                  'Selecione uma ou mais opções da lista'}
               </span>
             }
           </SelectMultipleInput>
           <OptionsMenu isVisible={isVisible}>
             {options.map((option) => {
-              if (optionsSelected.includes(option.value as string)) return null
+              if (optionsSelected.includes(option)) return null
 
               return (
                 <OptionItem
                   key={option.value}
-                  onClick={() =>
-                    handleMultipleOptionClicked(option.value as string)
-                  }
+                  onClick={() => handleMultipleOptionClicked(option)}
                 >
                   {option.label}
                 </OptionItem>
