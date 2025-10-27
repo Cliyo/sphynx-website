@@ -93,7 +93,6 @@ export const useUser = () => {
     setIsLoading(true)
     const request = await api.get(`/users/${id}`)
     setIsLoading(false)
-    console.log('request user by id', request.data.data)
     return request.data.data as UserDTO
   }, [])
 
