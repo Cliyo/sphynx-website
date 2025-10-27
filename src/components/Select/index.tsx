@@ -77,7 +77,11 @@ export const Select = (props: SelectProps) => {
           </SelectMultipleInput>
           <OptionsMenu isVisible={isVisible}>
             {options.map((option) => {
-              if (optionsSelected.includes(option)) return null
+              const isIncluded = optionsSelected.some(
+                (selectedOption) => selectedOption.value === option.value,
+              )
+
+              if (isIncluded) return null
 
               return (
                 <OptionItem
