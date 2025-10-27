@@ -193,6 +193,7 @@ export const LocalsCreate = () => {
                 label="Grupos"
                 value={value}
                 onChange={(selectedOption) => onChange(selectedOption)}
+                multiple
               />
             )}
           />
