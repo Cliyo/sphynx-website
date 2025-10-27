@@ -49,7 +49,6 @@ export const useLocal = () => {
   const fetchGetAllLocals = useCallback(async () => {
     setIsLoading(true)
     const data = await api.get('/locals')
-    console.log(data.data.data)
     setLocalPageData(data.data.data)
     setIsLoading(false)
   }, [])
