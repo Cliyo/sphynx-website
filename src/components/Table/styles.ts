@@ -7,4 +7,6 @@ export const Container = styled.div`
   border: 0;
 
   width: 100%;
+
+  overflow-x: scroll;
 `

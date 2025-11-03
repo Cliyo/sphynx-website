@@ -26,6 +26,7 @@ import { SetNewPassword } from 'pages/Auth/SetNewPassword'
 import { UnitsCreate } from 'pages/Units/UnitsCreate'
 import { Units } from 'pages/Units/UnitsTable'
 import { ResizeContext } from 'contexts/ResizeContext'
+import { NavigationBarMobile } from 'components/NavigationBarMobile'
 
 export const RouteApp = () => {
   const { user } = useContext(AuthContext)
@@ -37,6 +38,7 @@ export const RouteApp = () => {
   return (
     <BrowserRouter>
       {isAuthenticated && !isMobile && <NavigationBar />}
+      {isAuthenticated && isMobile && <NavigationBarMobile />}
       {/* <Loading isLoading={isLoading} /> */}
       <Routes>
         <Route
