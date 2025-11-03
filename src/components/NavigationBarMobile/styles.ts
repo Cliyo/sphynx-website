@@ -139,4 +139,14 @@ export const MobileMenuOption = styled(NavLink)`
   &:hover {
     background-color: ${({ theme }) => theme.COLORS.PRIMARY_MAIN};
   }
+
+  li {
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+  }
 `

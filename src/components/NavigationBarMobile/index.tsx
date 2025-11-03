@@ -30,7 +30,9 @@ export const NavigationBarMobile = () => {
                 ? user.permissionMenu.includes(route.menu)
                 : true)) && (
               <MobileMenuOption to={route.path} key={route.name}>
-                <li key={route.name}>{route.name}</li>
+                <li key={route.name} onClick={() => setIsMobileMenuOpen(false)}>
+                  {route.name}
+                </li>
               </MobileMenuOption>
             ),
         )}
