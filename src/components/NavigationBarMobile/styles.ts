@@ -36,7 +36,7 @@ export const MobileOptions = styled.ul<MobileOptionsProps>`
   display: flex;
   flex-direction: column;
 
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(195, 195, 195, 0.23);
   backdrop-filter: blur(2px);
 
   align-items: center;
