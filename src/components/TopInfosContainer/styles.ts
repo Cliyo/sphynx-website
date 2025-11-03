@@ -36,6 +36,10 @@ export const Title = styled.h2`
     font-size: ${theme.FONT_SIZE.REGULAR}px;
     color: ${theme.COLORS.PRIMARY_DARKER};
     font-weight: ${theme.FONT_WEIGHT.SEMI_BOLD};
+
+    @media (max-width: 920px) {
+      font-size: ${theme.FONT_SIZE.SMALL}px;
+    }
   `}
 
   width: 100%;
@@ -47,6 +51,10 @@ export const Text = styled.h2`
     font-size: ${theme.FONT_SIZE.XLARGE}px;
     color: ${theme.COLORS.NEUTRAL_900};
     font-weight: ${theme.FONT_WEIGHT.SEMI_BOLD};
+
+    @media (max-width: 920px) {
+      font-size: ${theme.FONT_SIZE.LARGE}px;
+    }
   `}
 
   width: 100%;

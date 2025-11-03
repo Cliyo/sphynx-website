@@ -33,6 +33,10 @@ export const Title = styled.h1`
     color: ${theme.COLORS.NEUTRAL_900};
     font-weight: ${theme.FONT_WEIGHT.SEMI_BOLD};
     font-size: ${theme.FONT_SIZE.XXLARGE}px;
+
+    @media (max-width: 920px) {
+      font-size: ${theme.FONT_SIZE.XLARGE}px;
+    }
   `}
   width: 100%;
   text-align: left;
@@ -42,6 +46,10 @@ export const ContainerFormMain = styled.div`
   display: flex;
 
   gap: 64px;
+
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
 `
 
 export const ContainerFormAbout = styled.div`
@@ -51,6 +59,10 @@ export const ContainerFormAbout = styled.div`
   width: 40%;
 
   gap: 8px;
+
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `
 
 export const FormTitle = styled.h2`
@@ -76,6 +88,10 @@ export const ContainerForm = styled.form`
   width: 60%;
 
   gap: 16px;
+
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `
 
 export const SocketInput = styled.div`
