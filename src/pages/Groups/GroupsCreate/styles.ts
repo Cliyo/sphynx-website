@@ -20,6 +20,11 @@ export const ContainerHeader = styled.div`
 
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 920px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `
 
 export const ButtonActions = styled.div`
