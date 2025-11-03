@@ -7,28 +7,31 @@ import { RouteApp } from 'Routes'
 
 import { AlertContextProvider } from 'contexts/AlertContext'
 import { AuthContextProvider } from 'contexts/AuthContext'
+import { ResizeContextProvider } from 'contexts/ResizeContext'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <AlertContextProvider>
-        <AuthContextProvider>
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover={false}
-            theme="light"
-            transition={Bounce}
-          />
-          <RouteApp />
-        </AuthContextProvider>
-      </AlertContextProvider>
+      <ResizeContextProvider>
+        <AlertContextProvider>
+          <AuthContextProvider>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover={false}
+              theme="light"
+              transition={Bounce}
+            />
+            <RouteApp />
+          </AuthContextProvider>
+        </AlertContextProvider>
+      </ResizeContextProvider>
     </ThemeProvider>
   )
 }
