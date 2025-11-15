@@ -10,9 +10,14 @@ export const useAccess = () => {
 
   const [accessTableData, setAccessTableData] = useState<AccessItemDTO[]>([])
 
-  const fetchGetAllAccess = useCallback(async () => {
+  const fetchGetAllAccess = useCallback(async (unitId?: number) => {
     setIsLoading(true)
-    const request = await api.get('/accessRegisters')
+    let request
+    if (unitId) {
+      request = await api.get(`/accessRegisters?unitId=${unitId}`)
+    } else {
+      request = await api.get('/accessRegisters')
+    }
     setAccessTableData(request.data.data)
     setIsLoading(false)
   }, [])

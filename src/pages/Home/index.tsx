@@ -12,15 +12,30 @@ import { useAccess } from 'hooks/useAccess'
 import { ChartAccessStatus } from './components/ChartAccessStatus'
 import { ChartAccessTime } from './components/ChartAccessTime'
 import { ChartAccessDate } from './components/ChartAccessDate'
+import { Select } from 'components/Select'
+import { useUnit } from 'hooks/useUnit'
 
 export const Home = () => {
   const { user } = useContext(AuthContext)
 
   const { accessTableData, fetchGetAllAccess } = useAccess()
+  const { fetchGetAllUnits, unitPageData } = useUnit()
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleUnitChange = (selectedUnitId: any) => {
+    const selectedUnitIdNumber = Number(selectedUnitId)
+
+    if (selectedUnitIdNumber) {
+      fetchGetAllAccess(selectedUnitIdNumber)
+    } else {
+      fetchGetAllAccess()
+    }
+  }
 
   useEffect(() => {
     fetchGetAllAccess()
-  }, [fetchGetAllAccess])
+    fetchGetAllUnits()
+  }, [fetchGetAllAccess, fetchGetAllUnits])
 
   return (
     <Container>
@@ -29,10 +44,34 @@ export const Home = () => {
       </ContainerHeader>
       <ContainerContent>
         {accessTableData.length === 0 ? (
-          <p> Você ainda não possui registros de acesso. </p>
+          <>
+            <p> Você ainda não possui registros de acesso. </p>
+
+            {user.isAdmin && (
+              <Select
+                label="FIltrar por unidade"
+                options={unitPageData.map((unit) => ({
+                  label: unit.name,
+                  value: unit.id,
+                }))}
+                onChange={(selectedUnitId) => handleUnitChange(selectedUnitId)}
+              />
+            )}
+          </>
         ) : (
           <>
             <p> Abaixo veja suas metricas de acessos para o mes atual </p>
+
+            {user.isAdmin && (
+              <Select
+                label="FIltrar por unidade"
+                options={unitPageData.map((unit) => ({
+                  label: unit.name,
+                  value: unit.id,
+                }))}
+                onChange={(selectedUnitId) => handleUnitChange(selectedUnitId)}
+              />
+            )}
 
             <ChartsContainer>
               <ChartItem>

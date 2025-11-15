@@ -46,6 +46,8 @@ export const ContainerContent = styled.div`
 
   height: 100%;
 
+  gap: 16px;
+
   p {
     width: 100%;
     text-align: left;
