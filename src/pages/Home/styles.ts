@@ -82,6 +82,8 @@ export const ChartItem = styled.div`
 
   padding: 16px 32px;
 
+  cursor: pointer;
+
   h2 {
     ${({ theme }) => css`
       color: ${theme.COLORS.NEUTRAL_900};

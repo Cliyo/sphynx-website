@@ -11,6 +11,7 @@ import {
 import { useAccess } from 'hooks/useAccess'
 import { ChartAccessStatus } from './components/ChartAccessStatus'
 import { ChartAccessTime } from './components/ChartAccessTime'
+import { ChartAccessDate } from './components/ChartAccessDate'
 
 export const Home = () => {
   const { user } = useContext(AuthContext)
@@ -37,6 +38,10 @@ export const Home = () => {
               <ChartItem>
                 <h2> Percentual de acessos </h2>
                 <ChartAccessStatus accessTableData={accessTableData} />
+              </ChartItem>
+              <ChartItem>
+                <h2> Dias de acesso </h2>
+                <ChartAccessDate accessTableData={accessTableData} />
               </ChartItem>
               <ChartItem>
                 <h2> Horarios de acesso </h2>

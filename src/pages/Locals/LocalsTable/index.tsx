@@ -47,6 +47,8 @@ export const Locals = () => {
     }
   }, [fetchGetAllLocals, fetchGetAllLocalByName, name])
 
+  console.log(localPageData)
+
   return (
     <Container>
       <ContainerHeader>
