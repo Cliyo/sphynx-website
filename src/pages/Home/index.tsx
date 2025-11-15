@@ -21,8 +21,7 @@ export const Home = () => {
   const { accessTableData, fetchGetAllAccess } = useAccess()
   const { fetchGetAllUnits, unitPageData } = useUnit()
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleUnitChange = (selectedUnitId: any) => {
+  const handleUnitChange = (selectedUnitId: number) => {
     const selectedUnitIdNumber = Number(selectedUnitId)
 
     if (selectedUnitIdNumber) {
@@ -34,8 +33,11 @@ export const Home = () => {
 
   useEffect(() => {
     fetchGetAllAccess()
-    fetchGetAllUnits()
-  }, [fetchGetAllAccess, fetchGetAllUnits])
+
+    if (user.isAdmin) {
+      fetchGetAllUnits()
+    }
+  }, [fetchGetAllAccess, fetchGetAllUnits, user])
 
   return (
     <Container>
@@ -54,7 +56,9 @@ export const Home = () => {
                   label: unit.name,
                   value: unit.id,
                 }))}
-                onChange={(selectedUnitId) => handleUnitChange(selectedUnitId)}
+                onChange={(selectedUnitId) =>
+                  handleUnitChange(selectedUnitId as number)
+                }
               />
             )}
           </>
@@ -69,7 +73,9 @@ export const Home = () => {
                   label: unit.name,
                   value: unit.id,
                 }))}
-                onChange={(selectedUnitId) => handleUnitChange(selectedUnitId)}
+                onChange={(selectedUnitId) =>
+                  handleUnitChange(selectedUnitId as number)
+                }
               />
             )}
 
