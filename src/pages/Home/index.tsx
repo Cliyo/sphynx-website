@@ -27,18 +27,24 @@ export const Home = () => {
         <Title> Bem vindo, {user.name} </Title>
       </ContainerHeader>
       <ContainerContent>
-        <p> Abaixo veja suas metricas de acessos para o mes atual </p>
+        {accessTableData.length === 0 ? (
+          <p> Você ainda não possui registros de acesso. </p>
+        ) : (
+          <>
+            <p> Abaixo veja suas metricas de acessos para o mes atual </p>
 
-        <ChartsContainer>
-          <ChartItem>
-            <h2> Percentual de acessos </h2>
-            <ChartAccessStatus accessTableData={accessTableData} />
-          </ChartItem>
-          <ChartItem>
-            <h2> Horarios de acesso </h2>
-            <ChartAccessTime accessTableData={accessTableData} />
-          </ChartItem>
-        </ChartsContainer>
+            <ChartsContainer>
+              <ChartItem>
+                <h2> Percentual de acessos </h2>
+                <ChartAccessStatus accessTableData={accessTableData} />
+              </ChartItem>
+              <ChartItem>
+                <h2> Horarios de acesso </h2>
+                <ChartAccessTime accessTableData={accessTableData} />
+              </ChartItem>
+            </ChartsContainer>
+          </>
+        )}
       </ContainerContent>
     </Container>
   )
