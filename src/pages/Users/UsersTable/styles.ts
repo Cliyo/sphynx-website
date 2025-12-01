@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  flex: 1;
+  width: 100%;
   height: 100%;
 
   gap: 28px;
@@ -48,4 +48,13 @@ export const NoRegisterText = styled.p`
   @media (max-width: 920px) {
     font-size: ${({ theme }) => theme.FONT_SIZE.XSMALL}px;
   }
+`
+
+export const TableFather = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 `

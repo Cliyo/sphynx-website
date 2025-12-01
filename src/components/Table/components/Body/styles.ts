@@ -15,6 +15,7 @@ export const BodyItem = styled.div`
   display: flex;
 
   flex: 1;
+  min-width: 260px;
   height: 100%;
 
   align-items: center;
@@ -24,12 +25,14 @@ export const BodyItem = styled.div`
   color: ${({ theme }) => theme.COLORS.NEUTRAL_900};
 
   text-align: center;
+
+  border-bottom: 1px solid ${({ theme }) => theme.COLORS.NEUTRAL_300};
 `
 
 export const BodyLine = styled.div`
   display: flex;
 
-  flex: 1;
+  width: 100%;
   min-height: 40px;
 
   justify-content: space-between;
@@ -37,8 +40,6 @@ export const BodyLine = styled.div`
   cursor: pointer;
 
   transition: 0.5s;
-
-  border-bottom: 1px solid ${({ theme }) => theme.COLORS.NEUTRAL_300};
 
   > :last-child {
     justify-content: center;

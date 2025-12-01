@@ -22,10 +22,6 @@ export const Users = () => {
     fetchGetAllUsers()
   }, [fetchGetAllUsers])
 
-  useEffect(() => {
-    fetchGetAllUsers()
-  }, [fetchGetAllUsers])
-
   return (
     <Container>
       <ContainerHeader>

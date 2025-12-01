@@ -15,6 +15,7 @@ export const HeaderItem = styled.div`
   display: flex;
 
   flex: 1;
+  min-width: 260px;
   height: 100%;
 
   align-items: center;

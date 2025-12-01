@@ -40,6 +40,10 @@ export const Title = styled.h2`
     @media (max-width: 920px) {
       font-size: ${theme.FONT_SIZE.SMALL}px;
     }
+
+    @media (max-width: 530px) {
+      font-size: ${theme.FONT_SIZE.XSMALL}px;
+    }
   `}
 
   width: 100%;
@@ -54,6 +58,10 @@ export const Text = styled.h2`
 
     @media (max-width: 920px) {
       font-size: ${theme.FONT_SIZE.LARGE}px;
+    }
+
+    @media (max-width: 530px) {
+      font-size: ${theme.FONT_SIZE.REGULAR}px;
     }
   `}
 

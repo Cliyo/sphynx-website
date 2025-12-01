@@ -46,6 +46,7 @@ export const Groups = () => {
       fetchGetAllGroups()
     }
   }, [fetchGetAllGroups, fetchGetAllGroupsByName, name])
+  console.log(groupPageData)
 
   return (
     <Container>
@@ -98,7 +99,9 @@ export const Groups = () => {
       ) : (
         <Table
           headers={groupsTableHeaders}
-          content={groupPageData.map((obj) => Object.values(obj))}
+          content={groupPageData.map((obj) => {
+            return [obj.id, obj.name]
+          })}
         />
       )}
     </Container>

@@ -19,8 +19,6 @@ export const ChartAccessDate = ({
 
   const timeRangeData = Array(7).fill(0)
 
-  console.log(accessTableData)
-
   accessTableData.forEach((access) => {
     const [year, month, day] = access.date.toString().split('-').map(Number)
     const date = new Date(year, month - 1, day)
@@ -33,7 +31,6 @@ export const ChartAccessDate = ({
 
   return (
     <BarChart
-      width={400}
       height={200}
       series={[
         {
