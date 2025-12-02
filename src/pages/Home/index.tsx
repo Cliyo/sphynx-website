@@ -81,7 +81,7 @@ export const Home = () => {
 
             <ChartsContainer>
               <ChartItem>
-                <h2> Percentual de acessos </h2>
+                <h2> Percentual de acessos autorizados </h2>
                 <ChartAccessStatus accessTableData={accessTableData} />
               </ChartItem>
               <ChartItem>
