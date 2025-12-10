@@ -21,6 +21,8 @@ export const Access = () => {
     fetchGetAllAccess()
   }, [fetchGetAllAccess])
 
+  const reversedAccessData = [...accessTableData].reverse()
+
   return (
     <Container>
       <ContainerHeader>
@@ -35,15 +37,15 @@ export const Access = () => {
             topInfos={[
               {
                 title: 'Último local',
-                text: accessTableData[0].local.name,
+                text: reversedAccessData[0].local.name,
               },
               {
                 title: 'Último usuário',
-                text: accessTableData[0].user.name,
+                text: reversedAccessData[0].user.name,
               },
               {
                 title: 'Situação',
-                text: accessTableData[0].status ? 'Aprovado' : 'Negado',
+                text: reversedAccessData[0].status ? 'Aprovado' : 'Negado',
               },
             ]}
           />
@@ -61,7 +63,7 @@ export const Access = () => {
       ) : (
         <Table
           headers={accessTableHeaders}
-          content={accessTableData.map((obj) => [
+          content={reversedAccessData.map((obj) => [
             obj.id,
             obj.user.name,
             obj.local.name,
